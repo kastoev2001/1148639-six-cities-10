@@ -92,11 +92,11 @@ function MainScreen(): JSX.Element {
               </form>
               <div className="cities__places-list places__list tabs__content">
 
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
-              <Card/>
+              <Card />
+              <Card />
+              <Card />
+              <Card />
+              <Card />
 
               </div>
             </section>
