@@ -7,8 +7,8 @@ type AppScreenProps = {
 
 function App({countRooms}: AppScreenProps): JSX.Element {
   return (
-		<MainScreen countRooms={countRooms}/>
-	);
+    <MainScreen countRooms={countRooms}/>
+  );
 }
 
 export default App;
