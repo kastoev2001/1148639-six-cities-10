@@ -1,8 +1,8 @@
 import MainScreen from '../../pages/main/main-screen';
 
 type AppScreenProps = {
-  countRooms: number
-}
+  countRooms: number,
+};
 
 
 function App({countRooms}: AppScreenProps): JSX.Element {

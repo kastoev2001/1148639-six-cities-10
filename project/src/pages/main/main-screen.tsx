@@ -1,4 +1,4 @@
-import Card from '../../components/card';
+import CardRoom from '../../components/card/card-room';
 
 type MainScreenProps = {
   countRooms: number
@@ -96,11 +96,11 @@ function MainScreen({ countRooms }: MainScreenProps): JSX.Element {
               </form>
               <div className="cities__places-list places__list tabs__content">
 
-                <Card />
-                <Card />
-                <Card />
-                <Card />
-                <Card />
+                <CardRoom />
+                <CardRoom />
+                <CardRoom />
+                <CardRoom />
+                <CardRoom />
 
               </div>
             </section>
