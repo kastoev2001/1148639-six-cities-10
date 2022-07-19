@@ -1,5 +1,18 @@
-function RoomScreen(): JSX.Element {
-  return (
+import { useParams } from "react-router-dom";
+import NotPage from "../not-page/not-page";
+
+type Params = {
+	id?: string,
+};
+type RoomProps = {
+	rooms: [],
+};
+
+
+function Room({rooms}: RoomProps): JSX.Element {
+	const params: Params = useParams();
+
+  return (Boolean(rooms.length) ?
     <div className="page">
       <header className="header">
         <div className="container">
@@ -336,8 +349,9 @@ function RoomScreen(): JSX.Element {
           </section>
         </div>
       </main>
-    </div>
+    </div> :
+		<NotPage />
   );
 }
 
-export default RoomScreen;
+export default Room;
