@@ -1,4 +1,4 @@
-function NotPageScreen(): JSX.Element {
+function NotPage(): JSX.Element {
   return (
     <div className="not-page">
       <div className="not-page__content">
@@ -8,4 +8,4 @@ function NotPageScreen(): JSX.Element {
   );
 }
 
-export default NotPageScreen;
+export default NotPage;
