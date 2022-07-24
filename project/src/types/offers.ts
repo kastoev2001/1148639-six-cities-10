@@ -1,4 +1,4 @@
-type Offer = {
+export type Offer = {
 	id: number,
 	title: string,
 	isFavorite: boolean,

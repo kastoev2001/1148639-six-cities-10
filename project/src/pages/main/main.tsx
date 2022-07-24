@@ -1,10 +1,15 @@
-import CardRoom from '../../components/card/card-room';
+import ListRooms from '../../components/list-rooms/list-rooms';
+
+import { Offers } from '../../types/offers';
 
 type MainProps = {
-  countRooms: number
-}
+  countRooms: number,
+	offers: Offers,
+};
 
-function Main({ countRooms }: MainProps): JSX.Element {
+function Main(props: MainProps): JSX.Element {
+	const {countRooms, offers} = props
+
   return (
     <div className="page page--gray page--main">
       <header className="header">
@@ -94,16 +99,10 @@ function Main({ countRooms }: MainProps): JSX.Element {
                   <li className="places__option" tabIndex={0}>Top rated first</li>
                 </ul>
               </form>
-              <div className="cities__places-list places__list tabs__content">
 
-                <CardRoom />
-                <CardRoom />
-                <CardRoom />
-                <CardRoom />
-                <CardRoom />
-
-              </div>
-            </section>
+							<ListRooms offers={offers} />
+            
+						</section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
             </div>
