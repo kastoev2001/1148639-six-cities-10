@@ -54,7 +54,7 @@ function CardRoom({ offer }: CardRoomProps): JSX.Element {
 		isPremium,
 		typeRoom,
 		rating,
-		image,
+		previewImage,
 	} = offer;
 
 	const definedRating = defineRating(rating)
@@ -64,7 +64,7 @@ function CardRoom({ offer }: CardRoomProps): JSX.Element {
 			<StatusRoom isPremium={isPremium} />
 			<div className="cities__image-wrapper place-card__image-wrapper">
 				<a href="#">
-					<img className="place-card__image" src={image} width="260" height="200" alt="Place image" />
+					<img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
 				</a>
 			</div>
 			<div className="place-card__info">
