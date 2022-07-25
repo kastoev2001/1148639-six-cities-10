@@ -26,7 +26,7 @@ function App(props: AppScreenProps): JSX.Element {
         <Route path={AppRoute.Root}>
           <Route index element={<Main countRooms={countRooms} offers={offers} />} />
           <Route path={AppRoute.Login} element={<Login />} />
-          <Route path={AppRoute.Favorite} element={ <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}><Favorite /></PrivateRoute>} />
+          <Route path={AppRoute.Favorite} element={ <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}><Favorite offers={offers} /></PrivateRoute>} />
           <Route path={AppRoute.Offer}>
             <Route path=':id' element={<Room rooms={rooms} />} />
           </Route>

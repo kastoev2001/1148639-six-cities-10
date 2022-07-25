@@ -11,7 +11,7 @@ export const offers: Offers = [
 		typeRoom: 'Apartment',
 		rating: 4,
 		city: {
-			name: 'Paris',
+			name: 'Amsterdam',
 			location: {
 				latitude: 43.36266826708066,
 				longitude: 44.06520836645309,
@@ -47,7 +47,7 @@ export const offers: Offers = [
 		typeRoom: 'Private room',
 		rating: 4,
 		city: {
-			name: 'Paris',
+			name: 'Amsterdam',
 			location: {
 				latitude: 123.36266826708066,
 				longitude: 66.06520836645309,

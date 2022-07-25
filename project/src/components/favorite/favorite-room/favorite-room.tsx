@@ -1,21 +1,12 @@
-import ButtonFavorite from '../button-favorite/button-favorite';
+import ButtonFavorite from '../../button-favorite/button-favorite';
 
-import { CardStatus } from '../../const';
-import { Offer } from '../../types/offers';
-import { StatusRoomProps } from '../../types/premium';
+import { Room } from '../../../types/cities';
+import { StatusRoomProps } from '../../../types/premium';
+import { defineRating } from '../../../utils/commands';
 
-type CardRoomProps = {
-	offer: Offer,
-	cardActive?: boolean,
+type FavoriteRoomProps = {
+	room: Room,
 };
-
-type DefineRating = (rating: number) => number;
-
-const defineRating: DefineRating = (rating) => {
-	const definedRating = (rating / 5) * 100;
-
-	return definedRating;
-}
 
 function StatusRoom({ isPremium }: StatusRoomProps): JSX.Element {
 	return (
@@ -27,30 +18,29 @@ function StatusRoom({ isPremium }: StatusRoomProps): JSX.Element {
 	)
 }
 
-function CardRoom(props: CardRoomProps): JSX.Element {
-	const { offer, cardActive } = props;
+function FavoriteRoom({ room }: FavoriteRoomProps): JSX.Element {
 	const {
 		id,
 		title,
-		isFavorite,
 		price,
+		isFavorite,
 		isPremium,
 		typeRoom,
-		rating,
 		previewImage,
-	} = offer;
+		rating,
+	} = room;
 
-	const definedRating = defineRating(rating)
+	const definedRating = defineRating(rating);
 
 	return (
-		<article className="cities__card place-card" key={id} style={{opacity: `${cardActive ? CardStatus.ACTIVE : CardStatus.NO_ACTIVE}`}}>
+		<article className="favorites__card place-card" key={id}>
 			{isPremium ? <StatusRoom isPremium /> : <StatusRoom />}
-			<div className="cities__image-wrapper place-card__image-wrapper">
+			<div className="favorites__image-wrapper place-card__image-wrapper">
 				<a href="#">
-					<img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
+					<img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image" />
 				</a>
 			</div>
-			<div className="place-card__info">
+			<div className="favorites__card-info place-card__info">
 				<div className="place-card__price-wrapper">
 					<div className="place-card__price">
 						<b className="place-card__price-value">&euro;{price}</b>
@@ -73,4 +63,4 @@ function CardRoom(props: CardRoomProps): JSX.Element {
 	);
 }
 
-export default CardRoom;
+export default FavoriteRoom;
