@@ -1,4 +1,4 @@
-import CardRoom from '../card/card-room';
+import CardRoom from '../main/card-room/card-room';
 
 import { Offers } from '../../types/offers';
 
@@ -9,7 +9,7 @@ function ListRooms({offers}: ListRoomsPorps): JSX.Element {
 	
 	return (
 		<div className="cities__places-list places__list tabs__content">
-			{offers.map((offer, index) => {
+			{offers.map((offer, index): JSX.Element => {
 				if (index === 0) {
 					return <CardRoom offer={offer} cardActive />
 					

@@ -18,7 +18,8 @@ export type City = {
 
 export type Offer = {
 	id: number,
-	title: string,
+		bedrooms: number,
+		title: string,
 	isFavorite: boolean,
 	price: number,
 	isPremium: boolean,
@@ -30,6 +31,7 @@ export type Offer = {
 	owner: Owner,
 	maxAdults: number,
 	previewImage: string,
+	description: string,
 };
 
 export type Offers = Offer[];

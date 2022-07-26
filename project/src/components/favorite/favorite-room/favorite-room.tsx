@@ -1,22 +1,16 @@
 import ButtonFavorite from '../../button-favorite/button-favorite';
+import StatusRoom from '../status-room/status-room';
 
+import { NavLink } from 'react-router-dom';
+import { AppRoute } from '../../../const';
 import { Room } from '../../../types/cities';
-import { StatusRoomProps } from '../../../types/premium';
 import { defineRating } from '../../../utils/commands';
 
 type FavoriteRoomProps = {
 	room: Room,
 };
 
-function StatusRoom({ isPremium }: StatusRoomProps): JSX.Element {
-	return (
-		<>
-			{isPremium ? <div className="place-card__mark">
-				<span>Premium</span>
-			</div> : null}
-		</>
-	)
-}
+
 
 function FavoriteRoom({ room }: FavoriteRoomProps): JSX.Element {
 	const {
@@ -30,15 +24,16 @@ function FavoriteRoom({ room }: FavoriteRoomProps): JSX.Element {
 		rating,
 	} = room;
 
+	const pathnameRoom = `${AppRoute.Offer}/${id}`;
 	const definedRating = defineRating(rating);
 
 	return (
 		<article className="favorites__card place-card" key={id}>
 			{isPremium ? <StatusRoom isPremium /> : <StatusRoom />}
 			<div className="favorites__image-wrapper place-card__image-wrapper">
-				<a href="#">
+				<NavLink to={pathnameRoom}>
 					<img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image" />
-				</a>
+				</NavLink>
 			</div>
 			<div className="favorites__card-info place-card__info">
 				<div className="place-card__price-wrapper">
@@ -55,7 +50,7 @@ function FavoriteRoom({ room }: FavoriteRoomProps): JSX.Element {
 					</div>
 				</div>
 				<h2 className="place-card__name">
-					<a href="#">{title}</a>
+					<NavLink to={pathnameRoom}>{title}</NavLink>
 				</h2>
 				<p className="place-card__type">{typeRoom}</p>
 			</div>

@@ -9,9 +9,15 @@ type ListFavoriteProps = {
 
 type DivideRoomsOnCities = (offers: Offers) => Cities;
 
-const divideRoomsOnCities: DivideRoomsOnCities = (offers: Offers): Cities => {
-	const citiesName = offers.map((offer: Offer): string => offer.city.name)
-		.filter((cityName: string, index: number, arr: string[]): boolean => arr.indexOf(cityName) === index);
+const divideRoomsOnCities: DivideRoomsOnCities = (offers: Offers): Cities | [] => {
+	const offersFiltred = offers.filter((offer: Offer, index: number): true | false => offer.isFavorite);
+
+	if (!offersFiltred.length) {
+		return [];
+	}
+
+	const citiesName = offersFiltred.map((offer: Offer): string => offer.city.name)
+	citiesName.filter((cityName: string, index: number, arr: string[]): boolean => arr.indexOf(cityName) === index);
 
 	const cities = citiesName.map((cityName: string): City => ({
 		name: cityName[0].toUpperCase() + cityName.substring(1),
@@ -36,9 +42,12 @@ function ListFavorite({ offers }: ListFavoriteProps): JSX.Element {
 	const cities = divideRoomsOnCities(offers)
 
 	return (
-		<ul className="favorites__list">
-			{cities.map((city) => <ListFavoriteRoomsCity city={city} />)}
-		</ul>
+		<>
+			{cities.length ? <ul className="favorites__list">
+				{cities.map((city) => <ListFavoriteRoomsCity city={city} />)}
+			</ul> : null} 
+			{/* В строке 48 вмето null подставить страницу которое указывает что не исбранных предложении */}
+		</>
 	);
 }
 

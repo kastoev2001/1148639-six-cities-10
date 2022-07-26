@@ -29,7 +29,7 @@ function App(props: AppScreenProps): JSX.Element {
           <Route path={AppRoute.Favorite} element={ <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}><Favorite offers={offers} /></PrivateRoute>} />
           <Route path={AppRoute.Offer}>
 						<Route index element={<NotPage />} />
-            <Route path=':id' element={<Room rooms={rooms} />} />
+            <Route path=':id' element={<Room offers={offers} />} />
           </Route>
           <Route path='*' element={<NotPage />} />
         </Route>

@@ -1,13 +1,16 @@
-function Login(): JSX.Element {
+import { AppRoute } from '../../const';
+import { NavLink } from 'react-router-dom';
+
+function LoginScreen(): JSX.Element {
   return (
     <div className="page page--gray page--login">
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <a className="header__logo-link" href="main.html">
+              <NavLink to={AppRoute.Root} className="header__logo-link">
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </a>
+              </NavLink>
             </div>
           </div>
         </div>
@@ -31,9 +34,9 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
+              <NavLink to={AppRoute.Root} className="locations__item-link">
                 <span>Amsterdam</span>
-              </a>
+              </NavLink>
             </div>
           </section>
         </div>
@@ -42,4 +45,4 @@ function Login(): JSX.Element {
   );
 }
 
-export default Login;
+export default LoginScreen;

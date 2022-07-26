@@ -1,5 +1,7 @@
 import FavoriteRoom from '../favorite-room/favorite-room';
 
+import { NavLink } from 'react-router-dom';
+import { AppRoute } from '../../../const';
 import { City } from '../../../types/cities';
 
 type ListFavoriteRoomsCityProps = {
@@ -16,13 +18,13 @@ function ListFavoriteRoomsCity({ city }: ListFavoriteRoomsCityProps): JSX.Elemen
 		<li className="favorites__locations-items" key={name}>
 <div className="favorites__locations locations locations--current">
 	<div className="locations__item">
-		<a className="locations__item-link" href="#">
+		<NavLink to={AppRoute.Root} className="locations__item-link">
 			<span>{name}</span>
-		</a>
+		</NavLink>
 	</div>
 </div>
 <div className="favorites__places">
-	{rooms.map((room) => <FavoriteRoom room={room} />)}
+	{rooms.map((room): JSX.Element => <FavoriteRoom room={room} />)}
 </div>
 </li>
 	);
