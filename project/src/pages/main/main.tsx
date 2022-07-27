@@ -1,17 +1,16 @@
-import ListRooms from '../../components/list-rooms/list-rooms';
+import ListRooms from '../../components/main/list-rooms/list-rooms';
 
 import { AppRoute } from '../../const';
 import { NavLink } from 'react-router-dom';
 import { Offers } from '../../types/offers';
-import App from '../../components/app/app';
 
 type MainProps = {
   countRooms: number,
-	offers: Offers,
+  offers: Offers,
 };
 
 function Main(props: MainProps): JSX.Element {
-	const {countRooms, offers} = props
+  const { countRooms, offers } = props;
 
   return (
     <div className="page page--gray page--main">
@@ -26,7 +25,7 @@ function Main(props: MainProps): JSX.Element {
             <nav className="header__nav">
               <ul className="header__nav-list">
                 <li className="header__nav-item user">
-                  <NavLink to={AppRoute.Favorite} className="header__nav-link header__nav-link--profile">
+                  <NavLink to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
                     <div className="header__avatar-wrapper user__avatar-wrapper">
                     </div>
                     <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
@@ -42,7 +41,7 @@ function Main(props: MainProps): JSX.Element {
             </nav>
           </div>
         </div>
-      </header>
+      </header >
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
@@ -103,16 +102,16 @@ function Main(props: MainProps): JSX.Element {
                 </ul>
               </form>
 
-							<ListRooms offers={offers} />
-            
-						</section>
+              <ListRooms offers={offers} />
+
+            </section>
             <div className="cities__right-section">
               <section className="cities__map map"></section>
             </div>
           </div>
         </div>
       </main>
-    </div>
+    </div >
   );
 }
 

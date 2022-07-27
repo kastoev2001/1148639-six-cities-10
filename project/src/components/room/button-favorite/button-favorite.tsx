@@ -4,13 +4,13 @@ type ButtonFavoriteProps = {
 
 function ButtonFavorite({ isFavorite }: ButtonFavoriteProps): JSX.Element {
   const favoriteActiveClass = isFavorite
-    ? 'place-card__bookmark-button button place-card__bookmark-button--active button'
-    : 'place-card__bookmark-button button';
+    ? 'property__bookmark-button button button property__bookmark-button button--active button'
+    : 'property__bookmark-button button button';
 
   return (
     <button className={favoriteActiveClass} type="button">
-      <svg className="place-card__bookmark-icon" width="18" height="19">
-        <use xlinkHref="/#icon-bookmark"></use>
+      <svg className="property__bookmark-icon" width="31" height="33">
+        <use xlinkHref="#icon-bookmark"></use>
       </svg>
       <span className="visually-hidden">To bookmarks</span>
     </button>

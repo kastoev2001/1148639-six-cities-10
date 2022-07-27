@@ -1,15 +1,15 @@
 type UserDescriptionProps = {
-	description: string,
+  description: string,
 }
 
-function UserDescription({description}: UserDescriptionProps): JSX.Element {
-	return (
-		<div className="property__description">
-			<p className="property__text">
-				{description}
-			</p>
-		</div>
-	);
+function UserDescription({ description }: UserDescriptionProps): JSX.Element {
+  return (
+    <div className="property__description">
+      <p className="property__text">
+        {description}
+      </p>
+    </div>
+  );
 }
 
 export default UserDescription;
