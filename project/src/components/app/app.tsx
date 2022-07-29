@@ -4,28 +4,31 @@ import Favorite from '../../pages/favorites/favorites';
 import Room from '../../pages/room/room';
 import NotPage from '../../pages/not-page/not-page';
 import PrivateRoute from '../private-route/private-route';
+import NotFavorites from '../../pages/not-favorites/not-favorites';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import { AppRoute, AuthorizationStatus } from '../../const';
+import { Offers } from '../../types/offers';
 
 type AppScreenProps = {
   countRooms: number,
+  offers: Offers,
 };
-type Rooms = [];
 
-const rooms: Rooms = [];
+function App(props: AppScreenProps): JSX.Element {
+  const { countRooms, offers } = props;
 
-function App({ countRooms }: AppScreenProps): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Root}>
-          <Route index element={<Main countRooms={countRooms} />} />
+          <Route index element={<Main countRooms={countRooms} offers={offers} />} />
           <Route path={AppRoute.Login} element={<Login />} />
-          <Route path={AppRoute.Favorite} element={ <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}><Favorite /></PrivateRoute>} />
+          <Route path={AppRoute.Favorites} element={<PrivateRoute authorizationStatus={AuthorizationStatus.Auth}><Favorite offers={offers} /></PrivateRoute>} />
+          <Route path={AppRoute.NotFavorites} element={<NotFavorites />} />
           <Route path={AppRoute.Offer}>
-            <Route path=':id' element={<Room rooms={rooms} />} />
+            <Route index element={<NotPage />} />
+            <Route path=':id' element={<Room offers={offers} />} />
           </Route>
           <Route path='*' element={<NotPage />} />
         </Route>
