@@ -9,9 +9,9 @@ type ListFavoriteProps = {
   offers: Offers,
 };
 
-type DivideRoomsOnCities = (offers: Offers) => Cities;
+type DivideRoomsByCityName = (offers: Offers) => Cities;
 
-const divideRoomsOnCities: DivideRoomsOnCities = (offers: Offers): Cities | [] => {
+const divideRoomsByCityName: DivideRoomsByCityName = (offers: Offers): Cities => {
   const offersFiltred = offers.filter((offer: Offer): true | false => offer.isFavorite);
 
   if (!offersFiltred.length) {
@@ -42,7 +42,7 @@ const divideRoomsOnCities: DivideRoomsOnCities = (offers: Offers): Cities | [] =
 
 function ListFavorite({ offers }: ListFavoriteProps): JSX.Element {
 
-  const cities = divideRoomsOnCities(offers);
+  const cities = divideRoomsByCityName(offers);
 
   return (
     cities.length ?
