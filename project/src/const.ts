@@ -1,3 +1,5 @@
+import { City } from './types/offers';
+
 export enum AppRoute {
 	Root = '/',
 	Favorites = '/favorites',
@@ -26,3 +28,12 @@ export enum RatingStatus {
 }
 
 export const FIRST_STATE_RATING = 0;
+
+export const locationCity: City = {
+	location: {
+		latitude: 52.36862421982035,
+		longitude: 4.903369107744523,
+		zoom: 10,
+	},
+	name: 'Amsterdam',
+};
