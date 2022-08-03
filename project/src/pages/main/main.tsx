@@ -106,7 +106,12 @@ function Main(props: MainProps): JSX.Element {
               <ListRooms offers={offers} />
 
             </section>
-            <MainMap offers={offers} />
+            <div className="cities__right-section">
+              <section className="cities__map map">
+                <MainMap offers={offers} />
+              </section>
+            </div>
+
           </div>
         </div>
       </main>

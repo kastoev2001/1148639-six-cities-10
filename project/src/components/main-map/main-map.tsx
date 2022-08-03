@@ -34,9 +34,7 @@ function MainMap({ offers }: MainMapProps): JSX.Element {
   });
 
   return (
-    <div className="cities__right-section">
-      <section ref={mapRef} className="cities__map map"></section>
-    </div>
+    <div ref={mapRef} style={{width: '100%', height: '100%'}}></div>
   );
 }
 
