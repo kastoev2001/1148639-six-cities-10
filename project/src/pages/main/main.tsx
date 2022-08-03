@@ -1,4 +1,5 @@
 import ListRooms from '../../components/main/list-rooms/list-rooms';
+import MainMap from '../../components/main-map/main-map';
 
 import { AppRoute } from '../../const';
 import { NavLink } from 'react-router-dom';
@@ -106,8 +107,11 @@ function Main(props: MainProps): JSX.Element {
 
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"></section>
+              <section className="cities__map map">
+                <MainMap offers={offers} />
+              </section>
             </div>
+
           </div>
         </div>
       </main>
