@@ -1,3 +1,5 @@
+import { Offers, Offer } from '../types/offers';
+
 type DefineRating = (rating: number) => number;
 
 export const defineRating: DefineRating = (rating): number => {
@@ -5,3 +7,8 @@ export const defineRating: DefineRating = (rating): number => {
 
   return definedRating;
 };
+
+
+export const filterOffersOnCity = (city: string, offers: Offers): Offer[] =>  (
+	offers.filter((offer: Offer): boolean => offer.city.name === city)
+);
