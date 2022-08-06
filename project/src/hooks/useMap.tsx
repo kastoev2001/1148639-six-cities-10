@@ -1,10 +1,10 @@
 import { useEffect, useState, MutableRefObject } from 'react';
 import { Map, TileLayer, MapOptions, LayerOptions } from 'leaflet';
-import { City } from '../types/offers';
+import { LocationCity } from '../types/offers';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
-  city: City
+  city: LocationCity
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
 
