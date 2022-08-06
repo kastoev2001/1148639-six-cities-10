@@ -1,17 +1,18 @@
 import ListRooms from '../../components/main/list-rooms/list-rooms';
 import MainMap from '../../components/main-map/main-map';
+import ListCities from '../../components/main/list-cities/list-cities';
 
-import { AppRoute } from '../../const';
+import { AppRoute, City } from '../../const';
 import { NavLink } from 'react-router-dom';
-import { Offers } from '../../types/offers';
+import  { useAppSelector } from '../../hooks/index';
 
 type MainProps = {
   countRooms: number,
-  offers: Offers,
 };
 
 function Main(props: MainProps): JSX.Element {
-  const { countRooms, offers } = props;
+  const { countRooms } = props;
+	const {offers, activeCity} = useAppSelector((state) => state);
 
   return (
     <div className="page page--gray page--main">
@@ -48,38 +49,9 @@ function Main(props: MainProps): JSX.Element {
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
           <section className="locations container">
-            <ul className="locations__list tabs__list">
-              <li className="locations__item">
-                <NavLink to={AppRoute.Root} className="locations__item-link tabs__item">
-                  <span>Paris</span>
-                </NavLink>
-              </li>
-              <li className="locations__item">
-                <NavLink to={AppRoute.Root} className="locations__item-link tabs__item">
-                  <span>Cologne</span>
-                </NavLink>
-              </li>
-              <li className="locations__item">
-                <NavLink to={AppRoute.Root} className="locations__item-link tabs__item">
-                  <span>Brussels</span>
-                </NavLink>
-              </li>
-              <li className="locations__item">
-                <NavLink to={AppRoute.Root} className="locations__item-link tabs__item tabs__item--active">
-                  <span>Amsterdam</span>
-                </NavLink>
-              </li>
-              <li className="locations__item">
-                <NavLink to={AppRoute.Root} className="locations__item-link tabs__item">
-                  <span>Hamburg</span>
-                </NavLink>
-              </li>
-              <li className="locations__item">
-                <NavLink to={AppRoute.Root} className="locations__item-link tabs__item">
-                  <span>Dusseldorf</span>
-                </NavLink>
-              </li>
-            </ul>
+
+					<ListCities city={City} activeCity={activeCity}/>
+
           </section>
         </div>
         <div className="cities">
@@ -103,12 +75,12 @@ function Main(props: MainProps): JSX.Element {
                 </ul>
               </form>
 
-              <ListRooms offers={offers} />
+              <ListRooms offers={offers}/>
 
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <MainMap offers={offers} />
+                <MainMap/>
               </section>
             </div>
 
