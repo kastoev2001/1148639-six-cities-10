@@ -1,16 +1,16 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { offers } from '../mocks/offers';
 import { Offers } from '../types/offers';
+import { FIRST_CITY } from '../const';
 
 type InitialState = {
-	city: string,
+	activeCity: string,
 	offers: Offers
 }
 
-const FIRST_CITY = offers[0].city.name;
 const initialState: InitialState = {
-	city: FIRST_CITY,
+	activeCity: FIRST_CITY,
 	offers: offers
 }
 
-export const reducer = createReducer(initialState, (builder) => {});
+export const reducer = createReducer(initialState, (builder) => { });
