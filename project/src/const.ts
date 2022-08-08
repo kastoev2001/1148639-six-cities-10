@@ -36,7 +36,7 @@ export const locationCity: LocationCity = {
 		longitude: 4.903369107744523,
 		zoom: 10,
 	},
-	name: 'Amsterdam',
+	name: 'Paris',
 };
 
 export const currentCustomIcon = new Icon({
@@ -52,5 +52,3 @@ export enum City {
 	HAMBURG = 'Hamburg',
 	DUSSELDORF = 'Dusseldorf',
 };
-
-export const FIRST_CITY = 'Amsterdam';

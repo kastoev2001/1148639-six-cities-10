@@ -1,16 +1,18 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { offers } from '../mocks/offers';
-import { Offers } from '../types/offers';
-import { FIRST_CITY } from '../const';
+import { changeCity } from './action';
+import { State } from '../types/state';
+import  { LocationCity } from '../types/offers';
 
-type InitialState = {
-	activeCity: string,
-	offers: Offers
-}
+export const FIRST_CITY: LocationCity = offers[0].city;
 
-const initialState: InitialState = {
+const initialState: State = {
 	activeCity: FIRST_CITY,
 	offers: offers
 }
 
-export const reducer = createReducer(initialState, (builder) => { });
+export const reducer = createReducer(initialState, (builder) => {
+	builder.addCase(changeCity, (state, action) => {
+		state.activeCity = action.payload.city;
+	});
+});

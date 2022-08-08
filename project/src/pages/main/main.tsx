@@ -4,15 +4,22 @@ import ListCities from '../../components/main/list-cities/list-cities';
 
 import { AppRoute, City } from '../../const';
 import { NavLink } from 'react-router-dom';
-import  { useAppSelector } from '../../hooks/index';
+import  { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { selectorFilterOffers } from '../../store/selector';
+import { changeCity } from '../../store/action';
+import { Offers, Offer } from '../../types/offers';
 
-type MainProps = {
-  countRooms: number,
-};
-
-function Main(props: MainProps): JSX.Element {
-  const { countRooms } = props;
+function Main(): JSX.Element {
 	const {offers, activeCity} = useAppSelector((state) => state);
+	const offersFilterd = useAppSelector(selectorFilterOffers);
+	const countRooms = offersFilterd.length;
+	const displatch = useAppDispatch()
+
+	const onChangeCity = (city: string): void => {
+		cnst findedCity = offers.find((offer: Offer): boolean => offer.city.name === city);
+		const selectedCity = findedCity ? findedCity.city : activeCity
+		displatch(changeCity({city: selectedCity}));
+	}
 
   return (
     <div className="page page--gray page--main">
@@ -50,7 +57,7 @@ function Main(props: MainProps): JSX.Element {
         <div className="tabs">
           <section className="locations container">
 
-					<ListCities city={City} activeCity={activeCity}/>
+					<ListCities onCity={onChangeCity} city={City} activeCity={activeCity}/>
 
           </section>
         </div>
@@ -75,12 +82,12 @@ function Main(props: MainProps): JSX.Element {
                 </ul>
               </form>
 
-              <ListRooms offers={offers}/>
+              <ListRooms offersFiltred={offersFilterd} />
 
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <MainMap/>
+                <MainMap offersFiltred={offersFilterd} activeCity={activeCity} />
               </section>
             </div>
 
