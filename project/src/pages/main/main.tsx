@@ -2,24 +2,24 @@ import ListRooms from '../../components/main/list-rooms/list-rooms';
 import MainMap from '../../components/main-map/main-map';
 import ListCities from '../../components/main/list-cities/list-cities';
 
-import { AppRoute, City } from '../../const';
+import { AppRoute } from '../../const';
 import { NavLink } from 'react-router-dom';
-import  { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { selectorFilterOffers } from '../../store/selector';
 import { changeCity } from '../../store/action';
-import { Offers, Offer } from '../../types/offers';
+import { Offer } from '../../types/offers';
 
 function Main(): JSX.Element {
-	const {offers, activeCity} = useAppSelector((state) => state);
-	const offersFilterd = useAppSelector(selectorFilterOffers);
-	const countRooms = offersFilterd.length;
-	const displatch = useAppDispatch()
+  const { offers, activeCity } = useAppSelector((state) => state);
+  const offersFilterd = useAppSelector(selectorFilterOffers);
+  const countRooms = offersFilterd.length;
+  const displatch = useAppDispatch();
 
-	const onChangeCity = (city: string): void => {
-		cnst findedCity = offers.find((offer: Offer): boolean => offer.city.name === city);
-		const selectedCity = findedCity ? findedCity.city : activeCity
-		displatch(changeCity({city: selectedCity}));
-	}
+  const onChangeCity = (city: string): void => {
+    const findedCity = offers.find((offer: Offer): boolean => offer.city.name === city);
+    const selectedCity = findedCity ? findedCity.city : activeCity;
+    displatch(changeCity({ city: selectedCity }));
+  };
 
   return (
     <div className="page page--gray page--main">
@@ -57,7 +57,7 @@ function Main(): JSX.Element {
         <div className="tabs">
           <section className="locations container">
 
-					<ListCities onCity={onChangeCity} city={City} activeCity={activeCity}/>
+            <ListCities onCity={onChangeCity} activeCity={activeCity} />
 
           </section>
         </div>

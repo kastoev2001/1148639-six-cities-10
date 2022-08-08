@@ -1,3 +1,5 @@
+import { Map, Layer } from 'leaflet';
+
 type DefineRating = (rating: number) => number;
 
 export const defineRating: DefineRating = (rating): number => {
@@ -5,3 +7,9 @@ export const defineRating: DefineRating = (rating): number => {
 
   return definedRating;
 };
+
+export const removeMarkers = (map: Map, markers: Layer[]): void => (
+  markers.forEach((layer: Layer): void => {
+    map.removeLayer(layer);
+  })
+);

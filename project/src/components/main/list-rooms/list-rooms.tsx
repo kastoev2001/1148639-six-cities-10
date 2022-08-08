@@ -1,9 +1,9 @@
 import CardRoom from '../card-room/card-room';
 
-import { Offers, Offer, LocationCity } from '../../../types/offers';
+import { Offers, Offer } from '../../../types/offers';
 
 type ListRoomsProps = {
-	offersFiltred: Offers,
+  offersFiltred: Offers,
 };
 
 function ListRooms({ offersFiltred }: ListRoomsProps): JSX.Element {
