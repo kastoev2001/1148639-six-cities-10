@@ -1,41 +1,55 @@
 import useMap from '../../hooks/useMap';
 
 import { useRef, useEffect } from 'react';
-import { Marker, LatLngLiteral } from 'leaflet';
-import { locationCity } from '../../const';
-import { Offers, Offer, Location } from '../../types/offers';
-import { currentCustomIcon } from '../../const';
+import { Marker, LatLngLiteral, Layer } from 'leaflet';
+import { Offer, Location } from '../../types/offers';
+import { CURRENT_CUSTOM_ICON } from '../../const';
+import { removeMarkers } from '../../utils/commands';
 
 import 'leaflet/dist/leaflet.css';
+import { Offers, LocationCity } from '../../types/offers';
 
 type MainMapProps = {
-  offers: Offers,
+	offersFiltred: Offers,
+	activeCity: LocationCity,
 };
 
-function MainMap({ offers }: MainMapProps): JSX.Element {
-  const mapRef = useRef(null);
-  const map = useMap(mapRef, locationCity);
+function MainMap({ offersFiltred, activeCity }: MainMapProps): JSX.Element {
+	const mapRef = useRef(null);
+	const map = useMap(mapRef, activeCity);
 
-  useEffect(() => {
-    if (map) {
-      offers.forEach((offer: Offer) => {
-        const location: Location = offer.location;
-        const markerOptions: LatLngLiteral = {
-          lat: location.latitude,
-          lng: location.longitude,
-        };
-        const marker = new Marker(markerOptions);
+	useEffect(() => {
+		const markers: Layer[] = [];
+		if (map) {
+			offersFiltred.forEach((offer: Offer) => {
+				const { latitude, longitude, zoom } = activeCity.location;
+				const location: Location = offer.location;
+				const markerOptions: LatLngLiteral = {
+					lat: location.latitude,
+					lng: location.longitude,
+				};
+				const marker = new Marker(markerOptions);
 
-        marker.setIcon(currentCustomIcon);
 
-        marker.addTo(map);
-      });
-    }
-  });
+				markers.push(marker);
 
-  return (
-    <div ref={mapRef} style={{width: '100%', height: '100%'}}></div>
-  );
+				marker.setIcon(CURRENT_CUSTOM_ICON);
+
+				map.flyTo({ lat: latitude, lng: longitude }, zoom);
+				marker.addTo(map);
+			});
+		}
+
+		return () => {
+			if (map) {
+				removeMarkers(map, markers);
+			}
+		};
+	});
+
+	return (
+		<div ref={mapRef} style={{ width: '100%', height: '100%' }}></div>
+	);
 }
 
 export default MainMap;

@@ -1,10 +1,10 @@
 import { useEffect, useState, MutableRefObject } from 'react';
 import { Map, TileLayer, MapOptions, LayerOptions } from 'leaflet';
-import { City } from '../types/offers';
+import { LocationCity } from '../types/offers';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
-  city: City
+  city: LocationCity
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
 
@@ -26,7 +26,6 @@ function useMap(
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
     };
 
-
     if (element !== null && map === null && !isChidren) {
       const instanceMap = new Map(element, mapOptions);
       const layer = new TileLayer(templateUrlLayer, layerOptions);
@@ -35,7 +34,6 @@ function useMap(
 
       setMap(instanceMap);
     }
-
   }, [map, mapRef, city]);
 
   return map;

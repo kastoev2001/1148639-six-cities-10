@@ -1,15 +1,17 @@
 import CardRoom from '../card-room/card-room';
 
-import { Offers } from '../../../types/offers';
+import { Offers, Offer } from '../../../types/offers';
 
-type ListRoomsPorps = {
-  offers: Offers,
-}
-function ListRooms({ offers }: ListRoomsPorps): JSX.Element {
+type ListRoomsProps = {
+  offersFiltred: Offers,
+};
+
+function ListRooms({ offersFiltred }: ListRoomsProps): JSX.Element {
+
 
   return (
     <div className="cities__places-list places__list tabs__content">
-      {offers.map((offer, index): JSX.Element => {
+      {offersFiltred.map((offer: Offer, index: number): JSX.Element => {
         if (index === 0) {
           return (
             <CardRoom key={offer.id} offer={offer} cardActive />

@@ -11,18 +11,17 @@ import { AppRoute, AuthorizationStatus } from '../../const';
 import { Offers } from '../../types/offers';
 
 type AppScreenProps = {
-  countRooms: number,
   offers: Offers,
 };
 
 function App(props: AppScreenProps): JSX.Element {
-  const { countRooms, offers } = props;
+  const { offers } = props;
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path={AppRoute.Root}>
-          <Route index element={<Main countRooms={countRooms} offers={offers} />} />
+          <Route index element={<Main />} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route path={AppRoute.Favorites} element={<PrivateRoute authorizationStatus={AuthorizationStatus.Auth}><Favorite offers={offers} /></PrivateRoute>} />
           <Route path={AppRoute.NotFavorites} element={<NotFavorites />} />
