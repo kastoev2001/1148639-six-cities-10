@@ -1,7 +1,7 @@
 import NotPage from '../not-page/not-page';
 import ListNearestRooms from '../../components/room/list-nearest-rooms/list-nearest-rooms';
 import RoomGallery from '../../room/room-gallery/room-gallery';
-import OwnerRoom from '../../components/room/owner-room/owner-room';
+import HostRoom from '../../components/room/host-room/host-room';
 import ButtomFavorite from '../../components/room/button-favorite/button-favorite';
 import StatusRoom from '../../components/room/status-room/status-room';
 
@@ -33,10 +33,10 @@ function Room({ offers }: RoomProps): JSX.Element {
       isFavorite,
       price,
       isPremium,
-      typeRoom,
+      type,
       rating,
       images,
-      owner,
+      host,
       maxAdults,
       description,
     } = room;
@@ -99,7 +99,7 @@ function Room({ offers }: RoomProps): JSX.Element {
                 </div>
                 <ul className="property__features">
                   <li className="property__feature property__feature--entire">
-                    {typeRoom}
+                    {type}
                   </li>
                   <li className="property__feature property__feature--bedrooms">
                     {bedrooms} Bedrooms
@@ -148,7 +148,7 @@ function Room({ offers }: RoomProps): JSX.Element {
                   </ul>
                 </div>
 
-                < OwnerRoom owner={owner} description={description} />
+                < HostRoom host={host} description={description} />
 
                 <section className="property__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
