@@ -21,7 +21,7 @@ function CardRoom(props: CardRoomProps): JSX.Element {
     isFavorite,
     price,
     isPremium,
-    typeRoom,
+    type,
     rating,
     previewImage,
   } = offer;
@@ -32,7 +32,7 @@ function CardRoom(props: CardRoomProps): JSX.Element {
 
   return (
     <article className="cities__card place-card" style={{ opacity: `${cardActive ? CardStatus.ACTIVE : CardStatus.NO_ACTIVE}` }}>
-      {isPremium ? <StatusRoom/> : null}
+      {isPremium ? <StatusRoom /> : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <NavLink to={pathnameRoom}>
           <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
@@ -55,7 +55,7 @@ function CardRoom(props: CardRoomProps): JSX.Element {
         <h2 className="place-card__name">
           <NavLink to={pathnameRoom}>{title}</NavLink>
         </h2>
-        <p className="place-card__type">{typeRoom}</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );

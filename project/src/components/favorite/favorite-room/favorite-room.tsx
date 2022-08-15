@@ -17,7 +17,7 @@ function FavoriteRoom({ room }: FavoriteRoomProps): JSX.Element {
     price,
     isFavorite,
     isPremium,
-    typeRoom,
+    type,
     previewImage,
     rating,
   } = room;
@@ -50,7 +50,7 @@ function FavoriteRoom({ room }: FavoriteRoomProps): JSX.Element {
         <h2 className="place-card__name">
           <NavLink to={pathnameRoom}>{title}</NavLink>
         </h2>
-        <p className="place-card__type">{typeRoom}</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );

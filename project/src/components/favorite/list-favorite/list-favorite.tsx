@@ -31,7 +31,7 @@ const divideRoomsByCityName: DivideRoomsByCityName = (offers: Offers): Cities =>
         price: offer.price,
         isFavorite: offer.isFavorite,
         isPremium: offer.isPremium,
-        typeRoom: offer.typeRoom,
+        type: offer.type,
         previewImage: offer.previewImage,
         rating: offer.rating,
       }))
@@ -41,7 +41,6 @@ const divideRoomsByCityName: DivideRoomsByCityName = (offers: Offers): Cities =>
 };
 
 function ListFavorite({ offers }: ListFavoriteProps): JSX.Element {
-
   const cities = divideRoomsByCityName(offers);
 
   return (
