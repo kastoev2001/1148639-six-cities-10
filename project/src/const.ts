@@ -43,3 +43,7 @@ export const CITIES = [
 	'Hamburg',
 	'Dusseldorf',
 ];
+
+export enum APIRoute {
+	Hotels = '/hotels',
+}
