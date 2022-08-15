@@ -5,10 +5,13 @@ import App from './components/app/app';
 import { offers } from './mocks/offers';
 import { Provider } from 'react-redux';
 import { store } from './store';
+import { fetchOffers } from './services/api-action';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
+
+store.dispatch(fetchOffers());
 
 root.render(
   <React.StrictMode>

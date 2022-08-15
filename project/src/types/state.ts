@@ -4,7 +4,7 @@ import { LocationCity, Offers } from '../types/offers';
 
 export type State = {
 	activeCity: LocationCity,
-	offers: Offers
-}
+	offers: Offers,
+};
 
 export type AppDispatch = typeof store.dispatch;
