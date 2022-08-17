@@ -10,11 +10,12 @@ import Loading from '../../pages/loading/loading';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { useAppSelector } from '../../hooks/index';
+import { isCheckedAuth } from '../../utils/commands';
 
 function App(): JSX.Element {
-  const { offers, isDataLoaded } = useAppSelector((state) => state);
+  const { offers, isDataLoaded, authorizationStatus } = useAppSelector((state) => state);
 
-  if (isDataLoaded) {
+  if (isCheckedAuth(authorizationStatus) || isDataLoaded) {
     return <Loading />;
   }
 

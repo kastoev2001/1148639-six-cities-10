@@ -1,4 +1,5 @@
 import { Map, Layer } from 'leaflet';
+import { AuthorizationStatus } from '../const';
 
 type DefineRating = (rating: number) => number;
 
@@ -13,3 +14,6 @@ export const removeMarkers = (map: Map, markers: Layer[]): void => (
     map.removeLayer(layer);
   })
 );
+
+export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean => 
+  authorizationStatus === AuthorizationStatus.Unknown;

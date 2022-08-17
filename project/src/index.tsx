@@ -4,13 +4,14 @@ import App from './components/app/app';
 
 import { Provider } from 'react-redux';
 import { store } from './store';
-import { fetchOffers } from './services/api-action';
+import { checkAuthAction, fetchOffersAction } from './services/api-action';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
 
-store.dispatch(fetchOffers());
+store.dispatch(fetchOffersAction());
+store.dispatch(checkAuthAction());
 
 root.render(
   <React.StrictMode>
