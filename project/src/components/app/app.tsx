@@ -8,7 +8,7 @@ import NotFavorites from '../../pages/not-favorites/not-favorites';
 import Loading from '../../pages/loading/loading';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 import { isCheckedAuth } from '../../utils/commands';
 
@@ -25,7 +25,7 @@ function App(): JSX.Element {
         <Route path={AppRoute.Root}>
           <Route index element={<Main />} />
           <Route path={AppRoute.Login} element={<Login />} />
-          <Route path={AppRoute.Favorites} element={<PrivateRoute authorizationStatus={AuthorizationStatus.Auth}><Favorite offers={offers} /></PrivateRoute>} />
+          <Route path={AppRoute.Favorites} element={<PrivateRoute><Favorite offers={offers} /></PrivateRoute>} />
           <Route path={AppRoute.NotFavorites} element={<NotFavorites />} />
           <Route path={AppRoute.Offer}>
             <Route index element={<NotPage />} />
