@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { changeCity, loadOffers, setDataLoadedStatus } from './action';
+import { changeCity, loadOffers, requireAuthorization, setDataLoadedStatus } from './action';
 import { State } from '../types/state';
 import { FIRST_CITY, AuthorizationStatus } from '../const';
 
@@ -20,5 +20,8 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setDataLoadedStatus, (state, action) => {
       state.isDataLoaded = action.payload;
+    })
+    .addCase(requireAuthorization, (state, action) => {
+      state.authorizationStatus = action.payload;
     });
 });
