@@ -1,12 +1,13 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { changeCity, loadOffers, setDataLoadedStatus } from './action';
 import { State } from '../types/state';
-import { FIRST_CITY } from '../const';
+import { FIRST_CITY, AuthorizationStatus } from '../const';
 
 const initialState: State = {
   activeCity: FIRST_CITY,
   offers: [],
   isDataLoaded: false,
+  authorizationStatus: AuthorizationStatus.Unknown,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
