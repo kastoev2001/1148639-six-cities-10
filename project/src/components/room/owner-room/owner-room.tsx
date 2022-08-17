@@ -1,19 +1,19 @@
 import UserStatus from '../user-status/user-status';
 import UserDescription from '../user-description/user-description';
 
-import { Owner } from '../../../types/offers';
+import { Host } from '../../../types/offers';
 
-type OwnerRoomProps = {
-  owner: Owner,
+type HostRoomProps = {
+  host: Host,
   description: string,
 };
 
-function OwnerRoom({ owner, description }: OwnerRoomProps): JSX.Element {
+function OwnerRoom({ host, description }: HostRoomProps): JSX.Element {
   const {
     avatarUrl,
     isPro,
     name,
-  } = owner;
+  } = host;
 
   return (
     <div className="property__host">

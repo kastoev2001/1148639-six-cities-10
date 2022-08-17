@@ -1,8 +1,10 @@
 import ListRooms from '../../components/main/list-rooms/list-rooms';
 import MainMap from '../../components/main-map/main-map';
 import ListCities from '../../components/main/list-cities/list-cities';
+import SignIn from '../../components/sign-in/sign-in';
+import SignOut from '../../components/sign-out/sign-out';
 
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { selectorFilterOffers } from '../../store/selector';
@@ -10,7 +12,7 @@ import { changeCity } from '../../store/action';
 import { Offer } from '../../types/offers';
 
 function Main(): JSX.Element {
-  const { offers, activeCity } = useAppSelector((state) => state);
+  const { offers, activeCity, authorizationStatus } = useAppSelector((state) => state);
   const offersFilterd = useAppSelector(selectorFilterOffers);
   const countRooms = offersFilterd.length;
 
@@ -32,23 +34,7 @@ function Main(): JSX.Element {
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
               </NavLink>
             </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <NavLink to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </NavLink>
-                </li>
-                <li className="header__nav-item">
-                  <NavLink to={AppRoute.Login} className="header__nav-link">
-                    <span className="header__signout">Sign out</span>
-                  </NavLink>
-                </li>
-              </ul>
-            </nav>
+            {authorizationStatus === AuthorizationStatus.Auth ? <SignOut /> : <SignIn />}
           </div>
         </div>
       </header >

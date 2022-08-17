@@ -1,6 +1,6 @@
 import axios, {AxiosError, AxiosInstance, AxiosResponse} from 'axios';
 import {StatusCodes} from 'http-status-codes';
-import {toast} from 'react-toastify'
+import {toast} from 'react-toastify';
 
 const StateCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
@@ -27,6 +27,8 @@ export const createAPI = (): AxiosInstance => {
 
         toast.warn(errorMessage);
       }
+
+			throw error;
     }
   )
 
