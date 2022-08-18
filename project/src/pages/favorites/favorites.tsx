@@ -1,4 +1,5 @@
 import ListFavorite from '../../components/favorite/list-favorite/list-favorite';
+import Auth from '../../components/auth/auth';
 
 import { AppRoute } from '../../const';
 import { NavLink } from 'react-router-dom';
@@ -19,23 +20,7 @@ function Favorite({ offers }: FavoriteProps): JSX.Element {
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
               </NavLink>
             </div>
-            <nav className="header__nav">
-              <ul className="header__nav-list">
-                <li className="header__nav-item user">
-                  <NavLink to={AppRoute.Favorites} className="header__nav-link header__nav-link--profile">
-                    <div className="header__avatar-wrapper user__avatar-wrapper">
-                    </div>
-                    <span className="header__user-name user__name">Oliver.conner@gmail.com</span>
-                    <span className="header__favorite-count">3</span>
-                  </NavLink>
-                </li>
-                <li className="header__nav-item">
-                  <NavLink to={AppRoute.Login} className="header__nav-link">
-                    <span className="header__signout">Sign out</span>
-                  </NavLink>
-                </li>
-              </ul>
-            </nav>
+            <Auth />
           </div>
         </div>
       </header >

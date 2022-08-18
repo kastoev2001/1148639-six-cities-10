@@ -1,10 +1,9 @@
 import ListRooms from '../../components/main/list-rooms/list-rooms';
 import MainMap from '../../components/main-map/main-map';
 import ListCities from '../../components/main/list-cities/list-cities';
-import SignIn from '../../components/sign-in/sign-in';
-import SignOut from '../../components/sign-out/sign-out';
+import Auth from '../../components/auth/auth';
 
-import { AppRoute, AuthorizationStatus } from '../../const';
+import { AppRoute } from '../../const';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { selectorFilterOffers } from '../../store/selector';
@@ -12,7 +11,7 @@ import { changeCity } from '../../store/action';
 import { Offer } from '../../types/offers';
 
 function Main(): JSX.Element {
-  const { offers, activeCity, authorizationStatus } = useAppSelector((state) => state);
+  const { offers, activeCity, } = useAppSelector((state) => state);
   const offersFilterd = useAppSelector(selectorFilterOffers);
   const countRooms = offersFilterd.length;
 
@@ -34,7 +33,7 @@ function Main(): JSX.Element {
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
               </NavLink>
             </div>
-            {authorizationStatus === AuthorizationStatus.Auth ? <SignOut /> : <SignIn />}
+            <Auth />
           </div>
         </div>
       </header >

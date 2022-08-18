@@ -1,12 +1,13 @@
-import axios, {AxiosError, AxiosInstance, AxiosResponse} from 'axios';
+import axios, {AxiosError, AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import {StatusCodes} from 'http-status-codes';
 import {toast} from 'react-toastify';
+import { getToken } from './token';
 
 const StateCodeMapping: Record<number, boolean> = {
   [StatusCodes.BAD_REQUEST]: true,
   [StatusCodes.UNAUTHORIZED]: true,
   [StatusCodes.NOT_FOUND]: true,
-}
+};
 
 const chouldDisplayError = (response: AxiosResponse): boolean => Boolean(StateCodeMapping[response.status]);
 
@@ -28,9 +29,21 @@ export const createAPI = (): AxiosInstance => {
         toast.warn(errorMessage);
       }
 
-			throw error;
+      throw error;
     }
-  )
+  );
+
+  api.interceptors.request.use(
+    (config: AxiosRequestConfig) => {
+      const token = getToken();
+
+      if (token) {
+        config.headers['x-token'] = token;
+      }
+
+      return config;
+    },
+  );
 
   return api;
 };
