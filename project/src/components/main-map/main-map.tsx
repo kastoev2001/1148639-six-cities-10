@@ -10,46 +10,46 @@ import 'leaflet/dist/leaflet.css';
 import { Offers, LocationCity } from '../../types/offers';
 
 type MainMapProps = {
-	offersFiltred: Offers,
-	activeCity: LocationCity,
+  offersFiltred: Offers,
+  activeCity: LocationCity,
 };
 
 function MainMap({ offersFiltred, activeCity }: MainMapProps): JSX.Element {
-	const mapRef = useRef(null);
-	const map = useMap(mapRef, activeCity);
+  const mapRef = useRef(null);
+  const map = useMap(mapRef, activeCity);
 
-	useEffect(() => {
-		const markers: Layer[] = [];
-		if (map) {
-			offersFiltred.forEach((offer: Offer) => {
-				const { latitude, longitude, zoom } = activeCity.location;
-				const location: Location = offer.location;
-				const markerOptions: LatLngLiteral = {
-					lat: location.latitude,
-					lng: location.longitude,
-				};
-				const marker = new Marker(markerOptions);
+  useEffect(() => {
+    const markers: Layer[] = [];
+    if (map) {
+      offersFiltred.forEach((offer: Offer) => {
+        const { latitude, longitude, zoom } = activeCity.location;
+        const location: Location = offer.location;
+        const markerOptions: LatLngLiteral = {
+          lat: location.latitude,
+          lng: location.longitude,
+        };
+        const marker = new Marker(markerOptions);
 
 
-				markers.push(marker);
+        markers.push(marker);
 
-				marker.setIcon(CURRENT_CUSTOM_ICON);
+        marker.setIcon(CURRENT_CUSTOM_ICON);
 
-				map.flyTo({ lat: latitude, lng: longitude }, zoom);
-				marker.addTo(map);
-			});
-		}
+        map.flyTo({ lat: latitude, lng: longitude }, zoom);
+        marker.addTo(map);
+      });
+    }
 
-		return () => {
-			if (map) {
-				removeMarkers(map, markers);
-			}
-		};
-	});
+    return () => {
+      if (map) {
+        removeMarkers(map, markers);
+      }
+    };
+  });
 
-	return (
-		<div ref={mapRef} style={{ width: '100%', height: '100%' }}></div>
-	);
+  return (
+    <div ref={mapRef} style={{ width: '100%', height: '100%' }}></div>
+  );
 }
 
 export default MainMap;

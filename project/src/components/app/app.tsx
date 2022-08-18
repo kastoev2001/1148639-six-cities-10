@@ -5,17 +5,18 @@ import Room from '../../pages/room/room';
 import NotPage from '../../pages/not-page/not-page';
 import PrivateRoute from '../private-route/private-route';
 import NotFavorites from '../../pages/not-favorites/not-favorites';
+import Loading from '../../pages/loading/loading';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { Offers } from '../../types/offers';
+import { useAppSelector } from '../../hooks/index';
 
-type AppScreenProps = {
-  offers: Offers,
-};
+function App(): JSX.Element {
+  const { offers, isDataLoaded } = useAppSelector((state) => state);
 
-function App(props: AppScreenProps): JSX.Element {
-  const { offers } = props;
+  if (isDataLoaded) {
+    return <Loading />;
+  }
 
   return (
     <BrowserRouter>
