@@ -46,6 +46,8 @@ export const CITIES = [
 
 export enum APIRoute {
   Hotels = '/hotels',
+  Login = '/login',
+	Logout = '/logout',
 }
 
 export const FIRST_CITY: LocationCity = {
