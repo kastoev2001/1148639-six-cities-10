@@ -133,7 +133,7 @@ function Room({ offers }: RoomProps): JSX.Element {
                   </ul>
                 </div>
 
-                < HostRoom host={host} description={description} />
+                <HostRoom host={host} description={description} />
 
                 <section className="property__reviews reviews">
                   <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
