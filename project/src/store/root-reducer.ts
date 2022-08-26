@@ -5,7 +5,6 @@ import { offerProcess } from './offer-process/offer-process';
 import { offersProcess } from './offers-process/offers-process';
 import { commentsProcess } from './comments-process/comments-process';
 import { userProcess } from './user-process/user-process';
-import { nearbyOffersProcess } from './nearby-offers-process/nearby-offers-process';
 
 export const rootReducer = combineReducers({
   [NameSpace.Offers]: offersProcess.reducer,
@@ -13,5 +12,4 @@ export const rootReducer = combineReducers({
   [NameSpace.Comments]: commentsProcess.reducer,
   [NameSpace.Offer]: offerProcess.reducer,
   [NameSpace.User]: userProcess.reducer,
-	[NameSpace.NearbyOffers]: nearbyOffersProcess.reducer,
 });

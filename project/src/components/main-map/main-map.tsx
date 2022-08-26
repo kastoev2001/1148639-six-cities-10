@@ -10,18 +10,18 @@ import 'leaflet/dist/leaflet.css';
 import { Offers, LocationCity } from '../../types/offers';
 
 type MainMapProps = {
-  offersFiltred: Offers,
+  offers: Offers,
   activeCity: LocationCity,
 };
 
-function MainMap({ offersFiltred, activeCity }: MainMapProps): JSX.Element {
+function MainMap({ offers, activeCity }: MainMapProps): JSX.Element {
   const mapRef = useRef(null);
   const map = useMap(mapRef, activeCity);
 
   useEffect(() => {
     const markers: Layer[] = [];
     if (map) {
-      offersFiltred.forEach((offer: Offer) => {
+      offers.forEach((offer: Offer) => {
         const { latitude, longitude, zoom } = activeCity.location;
         const location: Location = offer.location;
         const markerOptions: LatLngLiteral = {

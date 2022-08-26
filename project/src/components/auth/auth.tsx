@@ -3,9 +3,10 @@ import SignIn from '../sign-in/sign-in';
 
 import { useAppSelector } from '../../hooks';
 import { AuthorizationStatus } from '../../const';
+import { getAuthorizationStatus } from '../../store/user-process/user-selector';
 
 function Auth(): JSX.Element {
-  const {authorizationStatus} = useAppSelector((state) => state);
+	const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return authorizationStatus === AuthorizationStatus.Auth ? <SignOut /> : <SignIn />;
 }
