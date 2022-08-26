@@ -47,7 +47,8 @@ export const CITIES = [
 export enum APIRoute {
   Hotels = '/hotels',
   Login = '/login',
-	Logout = '/logout',
+  Logout = '/logout',
+  Comments = '/comments',
 }
 
 export const FIRST_CITY: LocationCity = {
@@ -58,3 +59,11 @@ export const FIRST_CITY: LocationCity = {
     zoom: 13
   }
 };
+
+export enum NameSpace {
+	Comments = 'comments',
+	Offer = 'offer',
+	Offers = 'offers',
+	City = 'city',
+	User = 'user',
+}

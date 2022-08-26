@@ -1,3 +1,3 @@
 export type StatusRoomProps = {
-	isPremium?: boolean,
+  isPremium?: boolean,
 };
