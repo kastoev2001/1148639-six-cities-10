@@ -29,6 +29,7 @@ export enum RatingStatus {
 }
 
 export const FIRST_STATE_RATING = 0;
+export const MAX_GALLERY_IMAGES = 6;
 
 export const CURRENT_CUSTOM_ICON = new Icon({
   iconUrl: './img/pin.svg',
@@ -66,4 +67,5 @@ export enum NameSpace {
 	Offers = 'offers',
 	City = 'city',
 	User = 'user',
+	NearbyOffers = 'nearbyOffers',
 }

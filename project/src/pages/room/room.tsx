@@ -1,33 +1,53 @@
 import NotPage from '../not-page/not-page';
 import ListNearestRooms from '../../components/room/list-nearest-rooms/list-nearest-rooms';
-import RoomGallery from '../../room/room-gallery/room-gallery';
+import RoomGallery from '../../components/room/room-gallery/room-gallery';
 import HostRoom from '../../components/room/host-room/host-room';
 import ButtomFavorite from '../../components/room/button-favorite/button-favorite';
 import StatusRoom from '../../components/room/status-room/status-room';
 import Auth from '../../components/auth/auth';
+import ListReviews from '../../components/room/list-reviews/list-reviews';
+import Loading from '../loading/loading';
+import MainMap from '../../components/main-map/main-map';
 
 import { AppRoute } from '../../const';
 import { NavLink, useParams } from 'react-router-dom';
-import { Offers, Offer } from '../../types/offers';
 import { defineRating } from '../../utils/commands';
 import FormComment from '../../components/room/form-comment/form-comment';
+import { useEffect } from 'react';
+import { fetchOfferAction } from '../../store/offer-process/offer-async-action';
+import { fetchCommentsAction } from '../../store/comments-process/comments-async-action';
+import { useAppSelector, useAppDispatch } from '../../hooks/index';
+import { getComments, getIsCommentsLoaded } from '../../store/comments-process/comments-selector';
+import { getActiveOffer } from '../../store/offer-process/offer-selector';
+import { getIsOfferLoaded } from '../../store/offer-process/offer-selector';
+import { getIsNearbyOffersLoaded, getNearbyOffers } from '../../store/nearby-offers-process/nearby-offers-selector';
+import { getActiveCity } from '../../store/city-data/city-selector';
+import { fetchNearbyOffersAction } from '../../store/nearby-offers-process/nearby-offers-async-action';
 
-type RoomProps = {
-  offers: Offers,
-};
+function Room(): JSX.Element {
+  const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const comments = useAppSelector(getComments);
+  const activeOffer = useAppSelector(getActiveOffer);
+  const isOfferLoaded = useAppSelector(getIsOfferLoaded);
+  const isCommentsLoaded = useAppSelector(getIsCommentsLoaded);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const isNearbyOffersLoaded = useAppSelector(getIsNearbyOffersLoaded);
+  const activeCity = useAppSelector(getActiveCity);
 
-type Params = {
-  id?: string,
-};
+  useEffect(() => {
+    if (id) {
+      dispatch(fetchOfferAction(id));
+      dispatch(fetchCommentsAction(id));
+      dispatch(fetchNearbyOffersAction(id));
+    }
+  }, [id]);
 
-function Room({ offers }: RoomProps): JSX.Element {
-  const params: Params = useParams();
+  if (isOfferLoaded && isCommentsLoaded && isNearbyOffersLoaded) {
+    return <Loading />;
+  }
 
-  const paramsId = Number(params.id);
-
-  const room = offers.find((offer: Offer): boolean => offer.id === paramsId);
-
-  if (room) {
+  if (activeOffer) {
     const {
       title,
       bedrooms,
@@ -40,9 +60,10 @@ function Room({ offers }: RoomProps): JSX.Element {
       host,
       maxAdults,
       description,
-    } = room;
+    } = activeOffer;
 
     const definedRating = defineRating(rating);
+    const commentCount = comments.length;
 
     return (
       <div className="page">
@@ -133,46 +154,26 @@ function Room({ offers }: RoomProps): JSX.Element {
                   </ul>
                 </div>
 
-                <HostRoom host={host} description={description} />
+                < HostRoom host={host} description={description} />
 
                 <section className="property__reviews reviews">
-                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">1</span></h2>
-                  <ul className="reviews__list">
-                    <li className="reviews__item">
-                      <div className="reviews__user user">
-                        <div className="reviews__avatar-wrapper user__avatar-wrapper">
-                          <img className="reviews__avatar user__avatar" src="img/avatar-max.jpg" width="54" height="54" alt="Reviews avatar" />
-                        </div>
-                        <span className="reviews__user-name">
-                          Max
-                        </span>
-                      </div>
-                      <div className="reviews__info">
-                        <div className="reviews__rating rating">
-                          <div className="reviews__stars rating__stars">
-                            <span style={{ width: '80%' }}></span>
-                            <span className="visually-hidden">Rating</span>
-                          </div>
-                        </div>
-                        <p className="reviews__text">
-                          A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The
-                          building is green and from 18th century.
-                        </p>
-                        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
-                      </div>
-                    </li>
-                  </ul>
+                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{commentCount}</span></h2>
+
+                  <ListReviews comments={comments} />
+
                   < FormComment />
                 </section>
               </div>
             </div>
-            <section className="property__map map"></section>
+            <section className="property__map map">
+              <MainMap offers={nearbyOffers} activeCity={activeCity} />
+            </section>
           </section>
           <div className="container">
             <section className="near-places places">
               <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-              <ListNearestRooms />
+              <ListNearestRooms nearbyOffers={nearbyOffers} />
 
             </section>
           </div>
@@ -181,9 +182,7 @@ function Room({ offers }: RoomProps): JSX.Element {
     );
   }
 
-  return (
-    <NotPage />
-  );
+  return <NotPage />;
 }
 
 export default Room;

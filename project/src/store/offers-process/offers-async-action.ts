@@ -12,7 +12,7 @@ export const fetchOffersAction = createAsyncThunk<Offers, undefined, {
 }>(
   'data/fetchOffers',
   async (_arg, {extra: api}) => {
-    const { data }  = await api.get<Offers>(APIRoute.Hotels);
+    const { data } = await api.get<Offers>(APIRoute.Hotels);
 
     return data;
   }

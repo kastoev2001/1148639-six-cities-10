@@ -15,13 +15,10 @@ import { getOffers, getIsOffersLoaded } from '../../store/offers-process/offers-
 import { getAuthorizationStatus } from '../../store/user-process/user-selector';
 
 function App(): JSX.Element {
-	const offers = useAppSelector(getOffers);
-	const isOffersLoaded = useAppSelector(getIsOffersLoaded);
-	const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const offers = useAppSelector(getOffers);
+  const isOffersLoaded = useAppSelector(getIsOffersLoaded);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-
-	console.log(isOffersLoaded)
-	console.log(authorizationStatus)
   if (isCheckedAuth(authorizationStatus) || isOffersLoaded) {
     return <Loading />;
   }
@@ -36,7 +33,7 @@ function App(): JSX.Element {
           <Route path={AppRoute.NotFavorites} element={<NotFavorites />} />
           <Route path={AppRoute.Offer}>
             <Route index element={<NotPage />} />
-            <Route path=':id' element={<Room offers={offers} />} />
+            <Route path=':id' element={<Room />} />
           </Route>
           <Route path='*' element={<NotPage />} />
         </Route>

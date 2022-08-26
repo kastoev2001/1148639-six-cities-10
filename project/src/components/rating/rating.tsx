@@ -9,7 +9,6 @@ function Rating({ rating }: RatingProps): JSX.Element {
 
   return (
     <span style={{ width: `${definedRating}%` }}></span>
-
   );
 }
 

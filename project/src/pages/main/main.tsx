@@ -13,8 +13,8 @@ import { getOffers } from '../../store/offers-process/offers-selector';
 import { getActiveCity } from '../../store/city-data/city-selector';
 
 function Main(): JSX.Element {
-	const offers = useAppSelector(getOffers);
-	const activeCity = useAppSelector(getActiveCity);
+  const offers = useAppSelector(getOffers);
+  const activeCity = useAppSelector(getActiveCity);
   const offersFilterd = useAppSelector(selectorFilterOffers);
   const countRooms = offersFilterd.length;
 

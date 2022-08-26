@@ -28,7 +28,7 @@ export const offerProcess = createSlice({
         const offer = action.payload;
 
         state.activeOffer = offer;
-				state.isOfferLoaded = false;
+        state.isOfferLoaded = false;
       })
       .addCase(fetchOfferAction.rejected, (state) => {
         state.activeOffer = null;

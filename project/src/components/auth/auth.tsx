@@ -6,7 +6,7 @@ import { AuthorizationStatus } from '../../const';
 import { getAuthorizationStatus } from '../../store/user-process/user-selector';
 
 function Auth(): JSX.Element {
-	const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   return authorizationStatus === AuthorizationStatus.Auth ? <SignOut /> : <SignIn />;
 }

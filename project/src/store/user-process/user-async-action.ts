@@ -29,7 +29,7 @@ AuthData,
     dispatch: AppDispatch,
     state: State,
     extra: AxiosInstance,
-  }  
+  }
 >(
   'user/login',
   async ({login: email, password}, {extra: api}) => {

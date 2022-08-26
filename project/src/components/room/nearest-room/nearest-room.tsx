@@ -1,37 +1,55 @@
+import ButtonFavorite from '../../../components/button-favorite/button-favorite';
+import Rating from '../../rating/rating';
+import StatusRoom from '../../status-room/status-room';
+
 import { NavLink } from 'react-router-dom';
 import { AppRoute } from '../../../const';
+import { Offer } from '../../../types/offers';
 
-function NearestRoom(): JSX.Element {
+type NearestRoomProps = {
+  nearbyOffer: Offer,
+}
+
+function NearestRoom({ nearbyOffer }: NearestRoomProps): JSX.Element {
+  const {
+    id,
+    title,
+    isFavorite,
+    price,
+    isPremium,
+    type,
+    rating,
+    previewImage,
+  } = nearbyOffer;
+
+  const pathnameRoom = `${AppRoute.Offer}/${id}`;
+
   return (
     <article className="near-places__card place-card">
+      {isPremium ? <StatusRoom /> : null}
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <NavLink to={AppRoute.Root}>
-          <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image" />
+        <NavLink to={pathnameRoom}>
+          <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
         </NavLink>
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;80</b>
-            <span className="place-card__price-text">&#47;&nbsp;night</span>
+            <b className="place-card__price-value">€{price}</b>
+            <span className="place-card__price-text">/&nbsp;night</span>
           </div>
-          <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+          {isFavorite ? <ButtonFavorite isFavorite /> : <ButtonFavorite />}
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <Rating rating={rating} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
         <h2 className="place-card__name">
-          <NavLink to={AppRoute.Root}>Wood and stone place</NavLink>
+          <NavLink to={pathnameRoom}>{title}</NavLink>
         </h2>
-        <p className="place-card__type">Private room</p>
+        <p className="place-card__type">{type}</p>
       </div>
     </article>
   );
