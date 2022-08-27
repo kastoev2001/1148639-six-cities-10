@@ -13,10 +13,9 @@ function Review({ comment }: ReviewProps): JSX.Element {
     user,
     rating,
   } = comment;
-  const {
-    avatarUrl,
-    name,
-  } = user;
+  const { avatarUrl } = user;
+  const name = user.name.split('@');
+
   const dateFormated = dayjs(date).format('MMM YYYY');
   const dateFormatedForAttribute = dayjs(date).format('MMM YYYY');
 

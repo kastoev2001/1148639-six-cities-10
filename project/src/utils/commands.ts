@@ -3,6 +3,7 @@ import { AuthorizationStatus } from '../const';
 import { toast } from 'react-toastify';
 import { SortType } from '../const';
 import { Offers, Offer, LocationCity } from '../types/offers';
+import { CommentLength } from '../const';
 
 type DefineRating = (rating: number) => number;
 
@@ -36,23 +37,23 @@ export const removeMarkers = (map: Map, markers: Layer[]): void => (
 export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
 
-export const isFormCheck = (loginElement: HTMLInputElement, passwordElement: HTMLInputElement): boolean => {
+export const checkLoginFormValidity = (loginElement: HTMLInputElement, passwordElement: HTMLInputElement): boolean => {
   const isCheckedLogin = isLoginCheck(loginElement);
   const isPasswordLogin = isPasswordCheck(passwordElement);
   let errorCount = 0;
 
   if (!isCheckedLogin) {
-    const loginError = 'Wrong login!';
+    const loginErrorMessage = 'Wrong login!';
 
-    toast.error(loginError);
+    toast.error(loginErrorMessage);
 
     errorCount++;
   }
 
   if (!isPasswordLogin) {
-    const passwordError = 'Wrong password!';
+    const passwordErrorMessage = 'Wrong password!';
 
-    toast.error(passwordError);
+    toast.error(passwordErrorMessage);
 
     errorCount++;
   }
@@ -75,4 +76,18 @@ export const sortOffers = (sortType: SortType, offers: Offers): Offers => {
     default:
       return offers;
   }
+};
+
+export const checkNewCommentValidity = (commentText: string, rating: number): number => {
+  let errorCount = 0;
+
+  if (commentText.length < CommentLength.MIN || commentText.length > CommentLength.MAX) {
+    errorCount++;
+  }
+
+  if (!rating) {
+    errorCount++;
+  }
+
+  return errorCount;
 };

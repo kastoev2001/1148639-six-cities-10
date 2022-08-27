@@ -4,7 +4,7 @@ import { AuthData } from '../../types/auth-data';
 import { FormEvent, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { loginAction } from '../../store/user-process/user-async-action';
-import { isFormCheck } from '../../utils/commands';
+import { checkLoginFormValidity } from '../../utils/commands';
 import { useNavigate } from 'react-router-dom';
 import { getAuthorizationStatus } from '../../store/user-process/user-selector';
 
@@ -29,9 +29,9 @@ function LoginScreen(): JSX.Element {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      const ischeckedForm = isFormCheck(loginRef.current, passwordRef.current);
+      const isCheckedLoginForm = checkLoginFormValidity(loginRef.current, passwordRef.current);
 
-      if (ischeckedForm) {
+      if (isCheckedLoginForm) {
         const login = loginRef.current.value;
         const password = passwordRef.current.value;
 
