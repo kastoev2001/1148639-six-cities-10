@@ -1,11 +1,21 @@
+import { Offers, Offer } from '../../../types/offers';
 import NearestRoom from '../nearest-room/nearest-room';
 
-function ListNearestRooms(): JSX.Element {
+type ListNearestRoomsProps = {
+  nearbyOffers: Offers,
+};
+
+function ListNearestRooms({ nearbyOffers }: ListNearestRoomsProps): JSX.Element {
+
   return (
     <div className="near-places__list places__list">
-      <NearestRoom />
-      <NearestRoom />
-      <NearestRoom />
+      {
+        nearbyOffers.map((nearbyOffer: Offer) => {
+          const key = nearbyOffer.id;
+
+          return <NearestRoom key={key} nearbyOffer={nearbyOffer} />;
+        })
+      }
     </div>
   );
 }

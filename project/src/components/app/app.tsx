@@ -11,11 +11,15 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 import { isCheckedAuth } from '../../utils/commands';
+import { getOffers, getIsOffersLoaded } from '../../store/offers-process/offers-selector';
+import { getAuthorizationStatus } from '../../store/user-process/user-selector';
 
 function App(): JSX.Element {
-  const { offers, isDataLoaded, authorizationStatus } = useAppSelector((state) => state);
+  const offers = useAppSelector(getOffers);
+  const isOffersLoaded = useAppSelector(getIsOffersLoaded);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-  if (isCheckedAuth(authorizationStatus) || isDataLoaded) {
+  if (isCheckedAuth(authorizationStatus) || isOffersLoaded) {
     return <Loading />;
   }
 
@@ -29,7 +33,7 @@ function App(): JSX.Element {
           <Route path={AppRoute.NotFavorites} element={<NotFavorites />} />
           <Route path={AppRoute.Offer}>
             <Route index element={<NotPage />} />
-            <Route path=':id' element={<Room offers={offers} />} />
+            <Route path=':id' element={<Room />} />
           </Route>
           <Route path='*' element={<NotPage />} />
         </Route>

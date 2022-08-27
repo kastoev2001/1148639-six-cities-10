@@ -8,5 +8,5 @@ const filterOffersByCity = (city: LocationCity, offers: Offers): Offers => (
 
 export const selectorFilterOffers = createSelector(
   (state: State) => state,
-  (state: State): Offers => filterOffersByCity(state.activeCity, state.offers)
+  (state: State): Offers => filterOffersByCity(state.city.activeCity, state.offers.offers)
 );

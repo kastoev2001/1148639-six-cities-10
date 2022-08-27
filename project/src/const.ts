@@ -29,6 +29,7 @@ export enum RatingStatus {
 }
 
 export const FIRST_STATE_RATING = 0;
+export const MAX_GALLERY_IMAGES = 6;
 
 export const CURRENT_CUSTOM_ICON = new Icon({
   iconUrl: './img/pin.svg',
@@ -47,7 +48,8 @@ export const CITIES = [
 export enum APIRoute {
   Hotels = '/hotels',
   Login = '/login',
-	Logout = '/logout',
+  Logout = '/logout',
+  Comments = '/comments',
 }
 
 export const FIRST_CITY: LocationCity = {
@@ -58,3 +60,12 @@ export const FIRST_CITY: LocationCity = {
     zoom: 13
   }
 };
+
+export enum NameSpace {
+	Comments = 'comments',
+	Offer = 'offer',
+	Offers = 'offers',
+	City = 'city',
+	User = 'user',
+	NearbyOffers = 'nearbyOffers',
+}

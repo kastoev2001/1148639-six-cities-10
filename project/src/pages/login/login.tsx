@@ -3,12 +3,13 @@ import { NavLink } from 'react-router-dom';
 import { AuthData } from '../../types/auth-data';
 import { FormEvent, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { loginAction } from '../../services/api-action';
+import { loginAction } from '../../store/user-process/user-async-action';
 import { isFormCheck } from '../../utils/commands';
 import { useNavigate } from 'react-router-dom';
+import { getAuthorizationStatus } from '../../store/user-process/user-selector';
 
 function LoginScreen(): JSX.Element {
-  const {authorizationStatus} = useAppSelector((state) => state);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const navigate = useNavigate();
 
   if (authorizationStatus === AuthorizationStatus.Auth) {

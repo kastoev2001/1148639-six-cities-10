@@ -2,10 +2,11 @@ import { MouseEvent } from 'react';
 import { AppRoute } from '../../const';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
-import { logoutAction } from '../../services/api-action';
+import { logoutAction } from '../../store/user-process/user-async-action';
+import { getUserEmail } from '../../store/user-process/user-selector';
 
 function SignOut(): JSX.Element {
-  const { userEmail } = useAppSelector((state) => state);
+  const userEmail = useAppSelector(getUserEmail);
 
   const dispatch = useAppDispatch();
 

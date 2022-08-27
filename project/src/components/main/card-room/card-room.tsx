@@ -1,11 +1,11 @@
 import ButtonFavorite from '../../button-favorite/button-favorite';
-import StatusRoom from '../status-room/status-room';
+import StatusRoom from '../../status-room/status-room';
+import Rating from '../../rating/rating';
 
 import { NavLink } from 'react-router-dom';
 import { AppRoute } from '../../../const';
 import { CardStatus } from '../../../const';
 import { Offer } from '../../../types/offers';
-import { defineRating } from '../../../utils/commands';
 
 type CardRoomProps = {
   offer: Offer,
@@ -28,8 +28,6 @@ function CardRoom(props: CardRoomProps): JSX.Element {
 
   const pathnameRoom = `${AppRoute.Offer}/${id}`;
 
-  const definedRating = defineRating(rating);
-
   return (
     <article className="cities__card place-card" style={{ opacity: `${cardActive ? CardStatus.ACTIVE : CardStatus.NO_ACTIVE}` }}>
       {isPremium ? <StatusRoom /> : null}
@@ -48,7 +46,7 @@ function CardRoom(props: CardRoomProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: `${definedRating}%` }}></span>
+            <Rating rating={rating} />
             <span className="visually-hidden">Rating</span>
           </div>
         </div>

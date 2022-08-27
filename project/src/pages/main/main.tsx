@@ -7,11 +7,14 @@ import { AppRoute } from '../../const';
 import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { selectorFilterOffers } from '../../store/selector';
-import { changeCity } from '../../store/action';
 import { Offer } from '../../types/offers';
+import { changeCity } from '../../store/city-data/city-data';
+import { getOffers } from '../../store/offers-process/offers-selector';
+import { getActiveCity } from '../../store/city-data/city-selector';
 
 function Main(): JSX.Element {
-  const { offers, activeCity, } = useAppSelector((state) => state);
+  const offers = useAppSelector(getOffers);
+  const activeCity = useAppSelector(getActiveCity);
   const offersFilterd = useAppSelector(selectorFilterOffers);
   const countRooms = offersFilterd.length;
 
@@ -20,7 +23,7 @@ function Main(): JSX.Element {
   const onChangeCity = (city: string): void => {
     const findedCity = offers.find((offer: Offer): boolean => offer.city.name === city);
     const selectedCity = findedCity ? findedCity.city : activeCity;
-    displatch(changeCity({ city: selectedCity }));
+    displatch(changeCity(selectedCity));
   };
 
   return (
@@ -73,7 +76,7 @@ function Main(): JSX.Element {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <MainMap offersFiltred={offersFilterd} activeCity={activeCity} />
+                <MainMap offers={offersFilterd} activeCity={activeCity} />
               </section>
             </div>
 
