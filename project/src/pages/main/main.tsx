@@ -23,12 +23,16 @@ function Main(): JSX.Element {
   const countRooms = offersSorted.length;
 
   const displatch = useAppDispatch();
-	const [activeCardRoomId, setActiveCardRoomId] = useState<ActiveCardRoomId>(null);
+  const [activeCardRoomId, setActiveCardRoomId] = useState<ActiveCardRoomId>(null);
 
   const onChangeCity = (city: string): void => {
     const findedCity = offers.find((offer: Offer): boolean => offer.city.name === city);
     const selectedCity = findedCity ? findedCity.city : activeCity;
     displatch(changeCity(selectedCity));
+  };
+
+  const onCarRoomActive = (id: ActiveCardRoomId) => {
+    setActiveCardRoomId(id);
   };
 
   return (
@@ -62,12 +66,12 @@ function Main(): JSX.Element {
               <b className="places__found">{countRooms} {countRooms > 1 ? 'places' : 'place'} to stay in {activeCity.name}</b>
               <SortForm />
 
-              <ListRooms offersFiltred={offersSorted} />
+              <ListRooms offersFiltred={offersSorted} onCarRoomActive={onCarRoomActive} />
 
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <MainMap offers={offersSorted} activeCity={activeCity} />
+                <MainMap offers={offersSorted} activeCity={activeCity} activeCardRoomId={activeCardRoomId} />
               </section>
             </div>
 

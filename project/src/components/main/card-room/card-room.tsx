@@ -4,17 +4,17 @@ import Rating from '../../rating/rating';
 
 import { NavLink } from 'react-router-dom';
 import { AppRoute } from '../../../const';
-import { CardStatus } from '../../../const';
 import { Offer } from '../../../types/offers';
+import { ActiveCardRoomId } from '../../../types/main';
 
 type CardRoomProps = {
   offer: Offer,
-  cardActive?: boolean,
+  onCarRoomActive: (id: ActiveCardRoomId) => void,
 };
 
 
 function CardRoom(props: CardRoomProps): JSX.Element {
-  const { offer, cardActive } = props;
+  const { offer, onCarRoomActive } = props;
   const {
     id,
     title,
@@ -27,9 +27,19 @@ function CardRoom(props: CardRoomProps): JSX.Element {
   } = offer;
 
   const pathnameRoom = `${AppRoute.Offer}/${id}`;
+  const handlerCardRoomMouseOver = () => {
+    onCarRoomActive(id);
+  };
+  const handlerCardRoomMouseLeave = () => {
+    onCarRoomActive(null);
+  };
 
   return (
-    <article className="cities__card place-card" style={{ opacity: `${cardActive ? CardStatus.ACTIVE : CardStatus.NO_ACTIVE}` }}>
+    <article
+      className="cities__card place-card"
+      onMouseOver={handlerCardRoomMouseOver}
+      onMouseLeave={handlerCardRoomMouseLeave}
+    >
       {isPremium ? <StatusRoom /> : null}
       <div className="cities__image-wrapper place-card__image-wrapper">
         <NavLink to={pathnameRoom}>

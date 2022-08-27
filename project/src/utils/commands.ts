@@ -19,13 +19,13 @@ export const defineRating: DefineRating = (rating): number => {
 };
 
 const sortHighTolow = (offerA: Offer, offerB: Offer): number =>
-	offerB.price - offerA.price;
+  offerB.price - offerA.price;
 
 const sortLowToHigh = (offerA: Offer, offerB: Offer): number =>
-	offerA.price - offerB.price;
+  offerA.price - offerB.price;
 
 const sortTopRatedFirst = (offerA: Offer, offerB: Offer): number =>
-	offerB.rating - offerA.rating;
+  offerB.rating - offerA.rating;
 
 export const removeMarkers = (map: Map, markers: Layer[]): void => (
   markers.forEach((layer: Layer): void => {
@@ -65,14 +65,14 @@ export const filterOffersByCity = (city: LocationCity, offers: Offers): Offers =
 );
 
 export const sortOffers = (sortType: SortType, offers: Offers): Offers => {
-	switch (sortType) {
-		case SortType.PriceHighToLow:
-			return offers.sort(sortHighTolow);
-		case SortType.PriceLowToHigh:
-			return offers.sort(sortLowToHigh);
-		case SortType.TopRatedFirst:
-			return offers.sort(sortTopRatedFirst);
-		default:
-			return offers;
-	}
+  switch (sortType) {
+    case SortType.PriceHighToLow:
+      return offers.sort(sortHighTolow);
+    case SortType.PriceLowToHigh:
+      return offers.sort(sortLowToHigh);
+    case SortType.TopRatedFirst:
+      return offers.sort(sortTopRatedFirst);
+    default:
+      return offers;
+  }
 };

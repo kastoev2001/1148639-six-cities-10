@@ -36,6 +36,11 @@ export const CURRENT_CUSTOM_ICON = new Icon({
   iconSize: [27, 39],
 });
 
+export const ACTIVE_CUSTOM_ICON = new Icon({
+  iconUrl: './img/pin-active.svg',
+  iconSize: [27, 39],
+});
+
 export const CITIES = [
   'Paris',
   'Cologne',

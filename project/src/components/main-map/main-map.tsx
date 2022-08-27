@@ -3,18 +3,21 @@ import useMap from '../../hooks/useMap';
 import { useRef, useEffect } from 'react';
 import { Marker, LatLngLiteral, Layer } from 'leaflet';
 import { Offer, Location } from '../../types/offers';
-import { CURRENT_CUSTOM_ICON } from '../../const';
+import { CURRENT_CUSTOM_ICON, ACTIVE_CUSTOM_ICON } from '../../const';
 import { removeMarkers } from '../../utils/commands';
 
 import 'leaflet/dist/leaflet.css';
 import { Offers, LocationCity } from '../../types/offers';
+import { ActiveCardRoomId } from '../../types/main';
 
 type MainMapProps = {
   offers: Offers,
   activeCity: LocationCity,
+  activeCardRoomId?: ActiveCardRoomId,
 };
 
-function MainMap({ offers, activeCity }: MainMapProps): JSX.Element {
+function MainMap(props: MainMapProps): JSX.Element {
+  const { offers, activeCity, activeCardRoomId } = props;
   const mapRef = useRef(null);
   const map = useMap(mapRef, activeCity);
 
@@ -29,11 +32,13 @@ function MainMap({ offers, activeCity }: MainMapProps): JSX.Element {
           lng: location.longitude,
         };
         const marker = new Marker(markerOptions);
-
+        const customIcon = offer.id === activeCardRoomId
+          ? ACTIVE_CUSTOM_ICON
+          : CURRENT_CUSTOM_ICON;
 
         markers.push(marker);
 
-        marker.setIcon(CURRENT_CUSTOM_ICON);
+        marker.setIcon(customIcon);
 
         map.flyTo({ lat: latitude, lng: longitude }, zoom);
         marker.addTo(map);
