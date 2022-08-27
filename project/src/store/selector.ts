@@ -1,12 +1,18 @@
 import { createSelector } from 'reselect';
 import { State } from '../types/state';
-import { Offers, Offer, LocationCity } from '../types/offers';
+import { Offers } from '../types/offers';
+import { filterOffersByCity, sortOffers } from '../utils/commands';
 
-const filterOffersByCity = (city: LocationCity, offers: Offers): Offers => (
-  offers.filter((offer: Offer): boolean => offer.city.name === city.name)
-);
-
-export const selectorFilterOffers = createSelector(
+export const selectorSortOffers = createSelector(
   (state: State) => state,
-  (state: State): Offers => filterOffersByCity(state.city.activeCity, state.offers.offers)
+  (state: State): Offers => {
+    const currentSortType = state.main.currentSortType;
+    const offers = state.offers.offers;
+    const activeCity = state.city.activeCity;
+
+    const offersFiltred = filterOffersByCity(activeCity, offers);
+    const offersSorted = sortOffers(currentSortType, offersFiltred);
+
+    return offersSorted;
+  }
 );

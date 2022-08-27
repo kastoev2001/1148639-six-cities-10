@@ -1,6 +1,8 @@
 import { Map, Layer } from 'leaflet';
 import { AuthorizationStatus } from '../const';
 import { toast } from 'react-toastify';
+import { SortType } from '../const';
+import { Offers, Offer, LocationCity } from '../types/offers';
 
 type DefineRating = (rating: number) => number;
 
@@ -15,6 +17,15 @@ export const defineRating: DefineRating = (rating): number => {
 
   return definedRating;
 };
+
+const sortHighTolow = (offerA: Offer, offerB: Offer): number =>
+  offerB.price - offerA.price;
+
+const sortLowToHigh = (offerA: Offer, offerB: Offer): number =>
+  offerA.price - offerB.price;
+
+const sortTopRatedFirst = (offerA: Offer, offerB: Offer): number =>
+  offerB.rating - offerA.rating;
 
 export const removeMarkers = (map: Map, markers: Layer[]): void => (
   markers.forEach((layer: Layer): void => {
@@ -47,4 +58,21 @@ export const isFormCheck = (loginElement: HTMLInputElement, passwordElement: HTM
   }
 
   return !errorCount;
+};
+
+export const filterOffersByCity = (city: LocationCity, offers: Offers): Offers => (
+  offers.filter((offer: Offer): boolean => offer.city.name === city.name)
+);
+
+export const sortOffers = (sortType: SortType, offers: Offers): Offers => {
+  switch (sortType) {
+    case SortType.PriceHighToLow:
+      return offers.sort(sortHighTolow);
+    case SortType.PriceLowToHigh:
+      return offers.sort(sortLowToHigh);
+    case SortType.TopRatedFirst:
+      return offers.sort(sortTopRatedFirst);
+    default:
+      return offers;
+  }
 };

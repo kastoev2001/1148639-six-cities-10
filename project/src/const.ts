@@ -36,6 +36,11 @@ export const CURRENT_CUSTOM_ICON = new Icon({
   iconSize: [27, 39],
 });
 
+export const ACTIVE_CUSTOM_ICON = new Icon({
+  iconUrl: './img/pin-active.svg',
+  iconSize: [27, 39],
+});
+
 export const CITIES = [
   'Paris',
   'Cologne',
@@ -68,4 +73,12 @@ export enum NameSpace {
 	City = 'city',
 	User = 'user',
 	NearbyOffers = 'nearbyOffers',
+	Main = 'main',
+}
+
+export enum SortType {
+  Popular = 'Popular',
+  PriceLowToHigh = 'Price: low to high',
+  PriceHighToLow = 'Price: high to low',
+  TopRatedFirst = 'Top rated first',
 }
