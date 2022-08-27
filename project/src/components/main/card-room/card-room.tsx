@@ -9,12 +9,12 @@ import { ActiveCardRoomId } from '../../../types/main';
 
 type CardRoomProps = {
   offer: Offer,
-  onCarRoomActive: (id: ActiveCardRoomId) => void,
+  onCardRoomActive: (id: ActiveCardRoomId) => void,
 };
 
 
 function CardRoom(props: CardRoomProps): JSX.Element {
-  const { offer, onCarRoomActive } = props;
+  const { offer, onCardRoomActive } = props;
   const {
     id,
     title,
@@ -28,10 +28,10 @@ function CardRoom(props: CardRoomProps): JSX.Element {
 
   const pathnameRoom = `${AppRoute.Offer}/${id}`;
   const handlerCardRoomMouseOver = () => {
-    onCarRoomActive(id);
+    onCardRoomActive(id);
   };
   const handlerCardRoomMouseLeave = () => {
-    onCarRoomActive(null);
+    onCardRoomActive(null);
   };
 
   return (

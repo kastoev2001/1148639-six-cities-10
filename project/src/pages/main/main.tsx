@@ -31,7 +31,7 @@ function Main(): JSX.Element {
     displatch(changeCity(selectedCity));
   };
 
-  const onCarRoomActive = (id: ActiveCardRoomId) => {
+  const onCardRoomActive = (id: ActiveCardRoomId) => {
     setActiveCardRoomId(id);
   };
 
@@ -66,7 +66,7 @@ function Main(): JSX.Element {
               <b className="places__found">{countRooms} {countRooms > 1 ? 'places' : 'place'} to stay in {activeCity.name}</b>
               <SortForm />
 
-              <ListRooms offersFiltred={offersSorted} onCarRoomActive={onCarRoomActive} />
+              <ListRooms offersFiltred={offersSorted} onCardRoomActive={onCardRoomActive} />
 
             </section>
             <div className="cities__right-section">
