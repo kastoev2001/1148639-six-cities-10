@@ -9,7 +9,7 @@ import ListReviews from '../../components/room/list-reviews/list-reviews';
 import Loading from '../loading/loading';
 import MainMap from '../../components/main-map/main-map';
 
-import { AppRoute } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { NavLink, useParams } from 'react-router-dom';
 import { defineRating } from '../../utils/commands';
 import FormComment from '../../components/room/form-comment/form-comment';
@@ -23,6 +23,7 @@ import { getIsOfferLoaded } from '../../store/offer-process/offer-selector';
 import { getIsNearbyOffersLoaded, getNearbyOffers } from '../../store/nearby-offers-process/nearby-offers-selector';
 import { getActiveCity } from '../../store/city-data/city-selector';
 import { fetchNearbyOffersAction } from '../../store/nearby-offers-process/nearby-offers-async-action';
+import { getAuthorizationStatus } from '../../store/user-process/user-selector';
 
 function Room(): JSX.Element {
   const { id } = useParams();
@@ -34,6 +35,7 @@ function Room(): JSX.Element {
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const isNearbyOffersLoaded = useAppSelector(getIsNearbyOffersLoaded);
   const activeCity = useAppSelector(getActiveCity);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
     if (id) {
@@ -161,7 +163,8 @@ function Room(): JSX.Element {
 
                   <ListReviews comments={comments} />
 
-                  < FormComment />
+                  {authorizationStatus === AuthorizationStatus.Auth && <FormComment offerId={activeOffer.id}/>}
+
                 </section>
               </div>
             </div>

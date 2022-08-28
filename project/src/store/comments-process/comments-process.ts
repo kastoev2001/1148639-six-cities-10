@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { Comments } from '../../types/comments';
 import { fetchCommentsAction } from './comments-async-action';
+import { postNewCommentAction } from '../new-comment-process/new-comment-async-aciton';
 
 type CommentsState = {
   comments: Comments,
@@ -29,6 +30,11 @@ export const commentsProcess = createSlice({
       .addCase(fetchCommentsAction.rejected, (state) => {
         state.comments = [];
         state.isCommentsLoaded = false;
+      })
+      .addCase(postNewCommentAction.fulfilled, (state, action) => {
+        const newComments = action.payload;
+
+        state.comments = newComments;
       });
   },
 });

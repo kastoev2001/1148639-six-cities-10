@@ -20,13 +20,13 @@ export enum CardStatus {
   NO_ACTIVE = '1',
 }
 
-export enum RatingStatus {
-  PERFECT = 5,
-  GOOD = 4,
-  NOT_BAD = 3,
-  BADLY = 2,
-  TERRIBLY = 1,
-}
+export const RatingStatus = {
+  1: 'terribly',
+  2: 'badly',
+  3: 'not bad',
+  4: 'good',
+  5: 'perfect',
+};
 
 export const FIRST_STATE_RATING = 0;
 export const MAX_GALLERY_IMAGES = 6;
@@ -67,13 +67,14 @@ export const FIRST_CITY: LocationCity = {
 };
 
 export enum NameSpace {
-	Comments = 'comments',
-	Offer = 'offer',
-	Offers = 'offers',
-	City = 'city',
-	User = 'user',
-	NearbyOffers = 'nearbyOffers',
-	Main = 'main',
+  Comments = 'comments',
+  Offer = 'offer',
+  Offers = 'offers',
+  City = 'city',
+  User = 'user',
+  NearbyOffers = 'nearbyOffers',
+  Main = 'main',
+  NewComment = 'newComment',
 }
 
 export enum SortType {
@@ -82,3 +83,8 @@ export enum SortType {
   PriceHighToLow = 'Price: high to low',
   TopRatedFirst = 'Top rated first',
 }
+
+export const CommentLength = {
+  MAX: 300,
+  MIN: 50,
+};
