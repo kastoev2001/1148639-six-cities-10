@@ -4,13 +4,13 @@ import RoomGallery from '../../components/room/room-gallery/room-gallery';
 import HostRoom from '../../components/room/host-room/host-room';
 import ButtomFavorite from '../../components/room/button-favorite/button-favorite';
 import StatusRoom from '../../components/room/status-room/status-room';
-import Auth from '../../components/auth/auth';
 import ListReviews from '../../components/room/list-reviews/list-reviews';
 import Loading from '../loading/loading';
 import MainMap from '../../components/main-map/main-map';
+import Header from '../../components/header/header';
 
-import { AppRoute, AuthorizationStatus } from '../../const';
-import { NavLink, useParams } from 'react-router-dom';
+import { AuthorizationStatus } from '../../const';
+import { useParams } from 'react-router-dom';
 import { defineRating } from '../../utils/commands';
 import FormComment from '../../components/room/form-comment/form-comment';
 import { useEffect } from 'react';
@@ -69,18 +69,7 @@ function Room(): JSX.Element {
 
     return (
       <div className="page">
-        <header className="header">
-          <div className="container">
-            <div className="header__wrapper">
-              <div className="header__left">
-                <NavLink to={AppRoute.Root} className="header__logo-link">
-                  <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-                </NavLink>
-              </div>
-              <Auth />
-            </div>
-          </div>
-        </header >
+        <Header />
 
         <main className="page__main page__main--property">
           <section className="property">
@@ -163,7 +152,7 @@ function Room(): JSX.Element {
 
                   <ListReviews comments={comments} />
 
-                  {authorizationStatus === AuthorizationStatus.Auth && <FormComment offerId={activeOffer.id}/>}
+                  {authorizationStatus === AuthorizationStatus.Auth && <FormComment offerId={activeOffer.id} />}
 
                 </section>
               </div>

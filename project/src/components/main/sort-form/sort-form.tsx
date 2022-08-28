@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import { SortType } from '../../../const';
 import { changeSortType } from '../../../store/main-process/main-process';
 import { getCurrentSortType } from '../../../store/main-process/main-selector';
@@ -41,4 +41,4 @@ function SortForm(): JSX.Element {
   );
 }
 
-export default SortForm;
+export default memo(SortForm);
