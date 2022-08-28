@@ -1,6 +1,6 @@
 import useMap from '../../hooks/useMap';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, memo } from 'react';
 import { Marker, LatLngLiteral, Layer } from 'leaflet';
 import { Offer, Location } from '../../types/offers';
 import { CURRENT_CUSTOM_ICON, ACTIVE_CUSTOM_ICON } from '../../const';
@@ -57,4 +57,4 @@ function MainMap(props: MainMapProps): JSX.Element {
   );
 }
 
-export default MainMap;
+export default memo(MainMap);

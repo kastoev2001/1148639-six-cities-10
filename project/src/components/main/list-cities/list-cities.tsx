@@ -1,4 +1,5 @@
-import { MouseEvent } from 'react';
+import { MouseEvent, memo } from 'react';
+
 import { NavLink } from 'react-router-dom';
 import { AppRoute } from '../../../const';
 import { CITIES } from '../../../const';
@@ -31,4 +32,4 @@ function ListCities(props: ListCitiesProps): JSX.Element {
   );
 }
 
-export default ListCities;
+export default memo(ListCities);

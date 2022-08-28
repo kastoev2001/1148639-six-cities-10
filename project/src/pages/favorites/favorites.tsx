@@ -1,5 +1,5 @@
 import ListFavorite from '../../components/favorite/list-favorite/list-favorite';
-import Auth from '../../components/auth/auth';
+import Header from '../../components/header/header';
 
 import { AppRoute } from '../../const';
 import { NavLink } from 'react-router-dom';
@@ -12,18 +12,7 @@ type FavoriteProps = {
 function Favorite({ offers }: FavoriteProps): JSX.Element {
   return (
     <div className="page">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <NavLink to={AppRoute.Root} className="header__logo-link">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </NavLink>
-            </div>
-            <Auth />
-          </div>
-        </div>
-      </header >
+      <Header />
 
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">

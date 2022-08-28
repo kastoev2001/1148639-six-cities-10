@@ -2,6 +2,7 @@ import ButtonFavorite from '../../button-favorite/button-favorite';
 import StatusRoom from '../../status-room/status-room';
 import Rating from '../../rating/rating';
 
+import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
 import { AppRoute } from '../../../const';
 import { Offer } from '../../../types/offers';
@@ -69,4 +70,4 @@ function CardRoom(props: CardRoomProps): JSX.Element {
   );
 }
 
-export default CardRoom;
+export default memo(CardRoom);

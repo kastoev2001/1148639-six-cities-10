@@ -1,11 +1,10 @@
 import ListRooms from '../../components/main/list-rooms/list-rooms';
 import MainMap from '../../components/main-map/main-map';
 import ListCities from '../../components/main/list-cities/list-cities';
-import Auth from '../../components/auth/auth';
 import SortForm from '../../components/main/sort-form/sort-form';
+import Header from '../../components/header/header';
 
-import { AppRoute } from '../../const';
-import { NavLink } from 'react-router-dom';
+import { useCallback } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { selectorSortOffers } from '../../store/selector';
 import { Offer } from '../../types/offers';
@@ -25,30 +24,19 @@ function Main(): JSX.Element {
   const displatch = useAppDispatch();
   const [activeCardRoomId, setActiveCardRoomId] = useState<ActiveCardRoomId>(null);
 
-  const onChangeCity = (city: string): void => {
+  const onChangeCity = useCallback((city: string): void => {
     const findedCity = offers.find((offer: Offer): boolean => offer.city.name === city);
     const selectedCity = findedCity ? findedCity.city : activeCity;
     displatch(changeCity(selectedCity));
-  };
+  }, []);
 
-  const onCardRoomActive = (id: ActiveCardRoomId) => {
+  const onCardRoomActive = useCallback((id: ActiveCardRoomId) => {
     setActiveCardRoomId(id);
-  };
+  }, []);
 
   return (
     <div className="page page--gray page--main">
-      <header className="header">
-        <div className="container">
-          <div className="header__wrapper">
-            <div className="header__left">
-              <NavLink to={AppRoute.Root} className="header__logo-link header__logo-link--active">
-                <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
-              </NavLink>
-            </div>
-            <Auth />
-          </div>
-        </div>
-      </header >
+      <Header />
 
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>

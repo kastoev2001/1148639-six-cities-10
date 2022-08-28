@@ -1,5 +1,6 @@
 import CardRoom from '../card-room/card-room';
 
+import { memo } from 'react';
 import { Offers, Offer } from '../../../types/offers';
 import { ActiveCardRoomId } from '../../../types/main';
 
@@ -23,4 +24,4 @@ function ListRooms({ offersFiltred, onCardRoomActive }: ListRoomsProps): JSX.Ele
   );
 }
 
-export default ListRooms;
+export default memo(ListRooms);
