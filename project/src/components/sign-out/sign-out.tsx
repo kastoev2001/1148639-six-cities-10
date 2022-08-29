@@ -8,8 +8,8 @@ import { selectorGetFavoriteCount } from '../../store/selector';
 
 function SignOut(): JSX.Element {
   const userEmail = useAppSelector(getUserEmail);
-	const favoritesCount = useAppSelector(selectorGetFavoriteCount);
-	
+  const favoritesCount = useAppSelector(selectorGetFavoriteCount);
+
   const dispatch = useAppDispatch();
 
   const handlerAnchorClick = (evt: MouseEvent<HTMLAnchorElement>): void => {

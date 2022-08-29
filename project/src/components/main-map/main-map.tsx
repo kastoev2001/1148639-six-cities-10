@@ -8,7 +8,7 @@ import { removeMarkers } from '../../utils/commands';
 import { selectorGetLocationCity } from '../../store/selector';
 
 import 'leaflet/dist/leaflet.css';
-import { Offers, LocationCity } from '../../types/offers';
+import { Offers } from '../../types/offers';
 import { ActiveCardRoomId } from '../../types/main';
 import { useAppSelector } from '../../hooks';
 
@@ -19,7 +19,7 @@ type MainMapProps = {
 
 function MainMap(props: MainMapProps): JSX.Element {
   const { offers, activeCardRoomId } = props;
-	const locationCity = useAppSelector(selectorGetLocationCity);
+  const locationCity = useAppSelector(selectorGetLocationCity);
   const mapRef = useRef(null);
   const map = useMap(mapRef, locationCity);
 

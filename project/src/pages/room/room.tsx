@@ -21,162 +21,161 @@ import { getComments, getIsCommentsLoaded } from '../../store/comments-process/c
 import { getActiveOffer } from '../../store/offer-process/offer-selector';
 import { getIsOfferLoaded } from '../../store/offer-process/offer-selector';
 import { getIsNearbyOffersLoaded, getNearbyOffers } from '../../store/nearby-offers-process/nearby-offers-selector';
-import { getActiveCity } from '../../store/city-data/city-selector';
 import { fetchNearbyOffersAction } from '../../store/nearby-offers-process/nearby-offers-async-action';
 import { getAuthorizationStatus } from '../../store/user-process/user-selector';
 
 function Room(): JSX.Element {
-	const { id: paramsId } = useParams();
-	const dispatch = useAppDispatch();
-	const comments = useAppSelector(getComments);
-	const activeOffer = useAppSelector(getActiveOffer);
-	const isOfferLoaded = useAppSelector(getIsOfferLoaded);
-	const isCommentsLoaded = useAppSelector(getIsCommentsLoaded);
-	const nearbyOffers = useAppSelector(getNearbyOffers);
-	const isNearbyOffersLoaded = useAppSelector(getIsNearbyOffersLoaded);
-	const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const { id: paramsId } = useParams();
+  const dispatch = useAppDispatch();
+  const comments = useAppSelector(getComments);
+  const activeOffer = useAppSelector(getActiveOffer);
+  const isOfferLoaded = useAppSelector(getIsOfferLoaded);
+  const isCommentsLoaded = useAppSelector(getIsCommentsLoaded);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const isNearbyOffersLoaded = useAppSelector(getIsNearbyOffersLoaded);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
-	useEffect(() => {
-		if (paramsId) {
-			dispatch(fetchOfferAction(paramsId));
-			dispatch(fetchCommentsAction(paramsId));
-			dispatch(fetchNearbyOffersAction(paramsId));
-		}
-	}, [paramsId]);
+  useEffect(() => {
+    if (paramsId) {
+      dispatch(fetchOfferAction(paramsId));
+      dispatch(fetchCommentsAction(paramsId));
+      dispatch(fetchNearbyOffersAction(paramsId));
+    }
+  }, [dispatch, paramsId]);
 
-	if (isOfferLoaded && isCommentsLoaded && isNearbyOffersLoaded) {
-		return <Loading />;
-	}
+  if (isOfferLoaded && isCommentsLoaded && isNearbyOffersLoaded) {
+    return <Loading />;
+  }
 
-	if (activeOffer) {
-		const {
-			id,
-			title,
-			bedrooms,
-			isFavorite,
-			price,
-			isPremium,
-			type,
-			rating,
-			images,
-			host,
-			maxAdults,
-			description,
-		} = activeOffer;
+  if (activeOffer) {
+    const {
+      id,
+      title,
+      bedrooms,
+      isFavorite,
+      price,
+      isPremium,
+      type,
+      rating,
+      images,
+      host,
+      maxAdults,
+      description,
+    } = activeOffer;
 
-		const definedRating = defineRating(rating);
-		const commentCount = comments.length;
+    const definedRating = defineRating(rating);
+    const commentCount = comments.length;
 
-		return (
-			<div className="page">
-				<Header />
+    return (
+      <div className="page">
+        <Header />
 
-				<main className="page__main page__main--property">
-					<section className="property">
+        <main className="page__main page__main--property">
+          <section className="property">
 
-						<RoomGallery images={images} />
+            <RoomGallery images={images} />
 
-						<div className="property__container container">
-							<div className="property__wrapper">
+            <div className="property__container container">
+              <div className="property__wrapper">
 
-								{isPremium ? <StatusRoom /> : null}
+                {isPremium ? <StatusRoom /> : null}
 
-								<div className="property__name-wrapper">
-									<h1 className="property__name">
-										{title}
-									</h1>
-									
-									{isFavorite ? <ButtomFavorite id={id} isFavorite /> : <ButtomFavorite id={id} isFavorite={false} />}
+                <div className="property__name-wrapper">
+                  <h1 className="property__name">
+                    {title}
+                  </h1>
 
-								</div>
-								<div className="property__rating rating">
-									<div className="property__stars rating__stars">
-										<span style={{ width: `${definedRating}%` }}></span>
-										<span className="visually-hidden">Rating</span>
-									</div>
-									<span className="property__rating-value rating__value">{rating}</span>
-								</div>
-								<ul className="property__features">
-									<li className="property__feature property__feature--entire">
-										{type}
-									</li>
-									<li className="property__feature property__feature--bedrooms">
-										{bedrooms} Bedrooms
-									</li>
-									<li className="property__feature property__feature--adults">
-										Max {maxAdults} adults
-									</li>
-								</ul>
-								<div className="property__price">
-									<b className="property__price-value">&euro;{price}</b>
-									<span className="property__price-text">&nbsp;night</span>
-								</div>
-								<div className="property__inside">
-									<h2 className="property__inside-title">What&apos;s inside</h2>
-									<ul className="property__inside-list">
-										<li className="property__inside-item">
-											Wi-Fi
-										</li>
-										<li className="property__inside-item">
-											Washing machine
-										</li>
-										<li className="property__inside-item">
-											Towels
-										</li>
-										<li className="property__inside-item">
-											Heating
-										</li>
-										<li className="property__inside-item">
-											Coffee machine
-										</li>
-										<li className="property__inside-item">
-											Baby seat
-										</li>
-										<li className="property__inside-item">
-											Kitchen
-										</li>
-										<li className="property__inside-item">
-											Dishwasher
-										</li>
-										<li className="property__inside-item">
-											Cabel TV
-										</li>
-										<li className="property__inside-item">
-											Fridge
-										</li>
-									</ul>
-								</div>
+                  {isFavorite ? <ButtomFavorite id={id} isFavorite /> : <ButtomFavorite id={id} isFavorite={false} />}
 
-								< HostRoom host={host} description={description} />
+                </div>
+                <div className="property__rating rating">
+                  <div className="property__stars rating__stars">
+                    <span style={{ width: `${definedRating}%` }}></span>
+                    <span className="visually-hidden">Rating</span>
+                  </div>
+                  <span className="property__rating-value rating__value">{rating}</span>
+                </div>
+                <ul className="property__features">
+                  <li className="property__feature property__feature--entire">
+                    {type}
+                  </li>
+                  <li className="property__feature property__feature--bedrooms">
+                    {bedrooms} Bedrooms
+                  </li>
+                  <li className="property__feature property__feature--adults">
+                    Max {maxAdults} adults
+                  </li>
+                </ul>
+                <div className="property__price">
+                  <b className="property__price-value">&euro;{price}</b>
+                  <span className="property__price-text">&nbsp;night</span>
+                </div>
+                <div className="property__inside">
+                  <h2 className="property__inside-title">What&apos;s inside</h2>
+                  <ul className="property__inside-list">
+                    <li className="property__inside-item">
+                      Wi-Fi
+                    </li>
+                    <li className="property__inside-item">
+                      Washing machine
+                    </li>
+                    <li className="property__inside-item">
+                      Towels
+                    </li>
+                    <li className="property__inside-item">
+                      Heating
+                    </li>
+                    <li className="property__inside-item">
+                      Coffee machine
+                    </li>
+                    <li className="property__inside-item">
+                      Baby seat
+                    </li>
+                    <li className="property__inside-item">
+                      Kitchen
+                    </li>
+                    <li className="property__inside-item">
+                      Dishwasher
+                    </li>
+                    <li className="property__inside-item">
+                      Cabel TV
+                    </li>
+                    <li className="property__inside-item">
+                      Fridge
+                    </li>
+                  </ul>
+                </div>
 
-								<section className="property__reviews reviews">
-									<h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{commentCount}</span></h2>
+                < HostRoom host={host} description={description} />
 
-									<ListReviews comments={comments} />
+                <section className="property__reviews reviews">
+                  <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{commentCount}</span></h2>
 
-									{authorizationStatus === AuthorizationStatus.Auth && <FormComment offerId={activeOffer.id} />}
+                  <ListReviews comments={comments} />
 
-								</section>
-							</div>
-						</div>
-						<section className="property__map map">
-							<MainMap offers={nearbyOffers} />
-						</section>
-					</section>
-					<div className="container">
-						<section className="near-places places">
-							<h2 className="near-places__title">Other places in the neighbourhood</h2>
+                  {authorizationStatus === AuthorizationStatus.Auth && <FormComment offerId={activeOffer.id} />}
 
-							<ListNearestRooms nearbyOffers={nearbyOffers} />
+                </section>
+              </div>
+            </div>
+            <section className="property__map map">
+              <MainMap offers={nearbyOffers} />
+            </section>
+          </section>
+          <div className="container">
+            <section className="near-places places">
+              <h2 className="near-places__title">Other places in the neighbourhood</h2>
 
-						</section>
-					</div>
-				</main>
-			</div >
-		);
-	}
+              <ListNearestRooms nearbyOffers={nearbyOffers} />
 
-	return <NotPage />;
+            </section>
+          </div>
+        </main>
+      </div >
+    );
+  }
+
+  return <NotPage />;
 }
 
 export default Room;

@@ -39,7 +39,7 @@ function NearestRoom({ nearbyOffer }: NearestRoomProps): JSX.Element {
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
 
-					{isFavorite ? <ButtonFavorite id={id} isFavorite /> : <ButtonFavorite id={id} isFavorite={false} />}
+          {isFavorite ? <ButtonFavorite id={id} isFavorite /> : <ButtonFavorite id={id} isFavorite={false} />}
 
         </div>
         <div className="place-card__rating rating">

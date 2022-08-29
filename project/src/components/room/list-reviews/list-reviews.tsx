@@ -1,5 +1,6 @@
 import Review from '../review/review';
 import { Comments, Comment } from '../../../types/comments';
+import { memo } from 'react';
 
 type ListReviewsPros = {
   comments: Comments,
@@ -18,4 +19,4 @@ function ListReviews({ comments }: ListReviewsPros): JSX.Element {
   );
 }
 
-export default ListReviews;
+export default memo(ListReviews);

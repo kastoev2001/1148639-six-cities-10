@@ -2,6 +2,7 @@ import UserStatus from '../user-status/user-status';
 import UserDescription from '../user-description/user-description';
 
 import { Host } from '../../../types/offers';
+import { memo } from 'react';
 
 type HostRoomProps = {
   host: Host,
@@ -32,4 +33,4 @@ function HostRoom({ host, description }: HostRoomProps): JSX.Element {
   );
 }
 
-export default HostRoom;
+export default memo(HostRoom);

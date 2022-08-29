@@ -34,15 +34,15 @@ function FavoriteRoom({ room }: FavoriteRoomProps): JSX.Element {
         </NavLink>
       </div>
       <div className="favorites__card-info place-card__info">
-        <div className="place-card__price-wrapper">
-          <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{price}</b>
-            <span className="place-card__price-text">&#47;&nbsp;night</span>
+        <div className="place-  -wrapper">
+          <div className="place-  ">
+            <b className="place-  -value">&euro;{price}</b>
+            <span className="place-  -text">&#47;&nbsp;night</span>
           </div>
 
-					{isFavorite ? <ButtonFavorite id={id} isFavorite /> : <ButtonFavorite id={id} isFavorite={false} />}
+          {isFavorite ? <ButtonFavorite id={id} isFavorite /> : <ButtonFavorite id={id} isFavorite={false} />}
         </div>
-				
+
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
             <span style={{ width: `${definedRating}%` }}></span>

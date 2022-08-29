@@ -19,7 +19,15 @@ const initialState: InitialState = {
 export const offerProcess = createSlice({
   name: NameSpace.Offer,
   initialState,
-  reducers: {},
+  reducers: {
+    resetOffer: (state) => {
+      const { activeOffer } = state;
+
+      if (activeOffer) {
+        activeOffer.isFavorite = false;
+      }
+    },
+  },
   extraReducers: (buidler) => {
     buidler
       .addCase(fetchOfferAction.pending, (state) => {
@@ -35,14 +43,17 @@ export const offerProcess = createSlice({
         state.activeOffer = null;
         state.isOfferLoaded = false;
       })
-			.addCase(toggleFavoriteAction.fulfilled, (state) => {
-				const activeOffer = state.activeOffer;
+      .addCase(toggleFavoriteAction.fulfilled, (state) => {
+        const activeOffer = state.activeOffer;
 
-				if (activeOffer) {
-					const {isFavorite} = activeOffer;
+        if (activeOffer) {
+          const {isFavorite} = activeOffer;
 
-					activeOffer.isFavorite = !isFavorite;
-				}
-			});
+          activeOffer.isFavorite = !isFavorite;
+        }
+
+      });
   },
 });
+
+export const { resetOffer } = offerProcess.actions;

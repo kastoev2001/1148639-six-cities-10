@@ -21,7 +21,7 @@ export const userProcess = createSlice({
     changeUserEmail: (state, action) => {
       const userEmail: UserEmail = action.payload;
       state.userEmail = userEmail;
-    }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -42,6 +42,7 @@ export const userProcess = createSlice({
       })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
+        state.userEmail = '';
       });
   }
 });

@@ -6,19 +6,19 @@ import { AxiosInstance } from 'axios';
 import { APIRoute } from '../../const';
 
 export const fetchCommentsAction = createAsyncThunk<Comments, string, {
-	dispatch: AppDispatch,
-	state: State,
-	extra: AxiosInstance,
+  dispatch: AppDispatch,
+  state: State,
+  extra: AxiosInstance,
 }>(
-	'data/fetchComments',
-	async (
-		offerId,
-		{ extra: api }) => {
+  'data/fetchComments',
+  async (
+    offerId,
+    { extra: api }) => {
 
-		const requestComments = `${APIRoute.Comments}/${offerId}`;
-		const { data } = await api.get<Comments>(requestComments);
+    const requestComments = `${APIRoute.Comments}/${offerId}`;
+    const { data } = await api.get<Comments>(requestComments);
 
-		return data;
+    return data;
 
-	}
+  }
 );

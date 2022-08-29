@@ -53,9 +53,9 @@ function CardRoom(props: CardRoomProps): JSX.Element {
             <b className="place-card__price-value">&euro;{price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-					
-					{isFavorite ? <ButtonFavorite id={id} isFavorite /> : <ButtonFavorite id={id} isFavorite={false} />}
-					
+
+          {isFavorite ? <ButtonFavorite id={id} isFavorite /> : <ButtonFavorite id={id} isFavorite={false} />}
+
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

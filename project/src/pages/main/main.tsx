@@ -3,26 +3,21 @@ import MainMap from '../../components/main-map/main-map';
 import ListCities from '../../components/main/list-cities/list-cities';
 import SortForm from '../../components/main/sort-form/sort-form';
 import Header from '../../components/header/header';
+import MainEmpty from '../main-empty/main-empty';
 
-import { AppRoute } from '../../const';
-import { useCallback, useEffect , useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useCallback, useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { selectorSortOffers } from '../../store/selector';
-import { Offer } from '../../types/offers';
 import { changeCity } from '../../store/city-data/city-data';
-import { getOffers } from '../../store/offers-process/offers-selector';
 import { getActiveCity } from '../../store/city-data/city-selector';
 import { ActiveCardRoomId } from '../../types/main';
 
 
 function Main(): JSX.Element {
-  const offers = useAppSelector(getOffers);
   const activeCity = useAppSelector(getActiveCity);
   const offersSorted = useAppSelector(selectorSortOffers);
   const countRooms = offersSorted.length;
-	const offersSortedCount = offersSorted.length;
-	const navigate = useNavigate();
+  const offersSortedCount = offersSorted.length;
 
   const displatch = useAppDispatch();
   const [activeCardRoomId, setActiveCardRoomId] = useState<ActiveCardRoomId>(null);
@@ -35,15 +30,13 @@ function Main(): JSX.Element {
     setActiveCardRoomId(id);
   }, []);
 
-	useEffect(() => {
-		if (!offersSortedCount) {
-		navigate(AppRoute.MainEmpty);
-		}
-	}, [])
+  if (!offersSortedCount) {
+    return <MainEmpty />;
+  }
 
   return (
     <div className="page page--gray page--main">
-			
+
       <Header />
 
       <main className="page__main page__main--index">
@@ -69,7 +62,7 @@ function Main(): JSX.Element {
             <div className="cities__right-section">
               <section className="cities__map map">
 
-							<MainMap offers={offersSorted} activeCardRoomId={activeCardRoomId} />
+                <MainMap offers={offersSorted} activeCardRoomId={activeCardRoomId} />
 
               </section>
             </div>

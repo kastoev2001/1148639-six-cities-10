@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { FIRST_CITY } from '../../const';
-import { Location } from '../../types/offers';
 import { NameSpace } from '../../const';
 
 type InitialState = {

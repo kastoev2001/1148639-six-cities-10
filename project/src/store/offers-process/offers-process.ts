@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Offers } from '../../types/offers';
+import { Offer, Offers } from '../../types/offers';
 import { NameSpace } from '../../const';
 import { fetchOffersAction } from './offers-async-action';
 import { toggleFavoriteAction } from '../favorites-process/favorites-async-action';
@@ -18,7 +18,13 @@ const initialState: InitialState = {
 export const offersProcess = createSlice({
   name: NameSpace.Offers,
   initialState,
-  reducers: {},
+  reducers: {
+    resetOffers: (state) => {
+      state.offers.forEach((offer: Offer) => {
+        offer.isFavorite = false;
+      });
+    },
+  },
   extraReducers: (buidler) => {
     buidler
       .addCase(fetchOffersAction.pending, (state) => {
@@ -30,16 +36,18 @@ export const offersProcess = createSlice({
         state.offers = offers;
         state.isOffersLoaded = false;
       })
-			.addCase(fetchOffersAction.rejected, (state) => {
-				state.offers = [];
-				state.isOffersLoaded = false;
-			})
-			.addCase(toggleFavoriteAction.fulfilled, (state, action) => {
-				const offers = state.offers;
-				const replaceableOffer = action.payload;
-				const replacedesOffers = replaceOffer(offers, replaceableOffer);
-				
-				state.offers = replacedesOffers;
-			});
+      .addCase(fetchOffersAction.rejected, (state) => {
+        state.offers = [];
+        state.isOffersLoaded = false;
+      })
+      .addCase(toggleFavoriteAction.fulfilled, (state, action) => {
+        const { offers } = state;
+        const replaceableOffer = action.payload;
+        const replacedesOffers = replaceOffer(offers, replaceableOffer);
+
+        state.offers = replacedesOffers;
+      });
   },
 });
+
+export const { resetOffers } = offersProcess.actions;

@@ -6,6 +6,10 @@ import { APIRoute } from '../../const';
 import { UserData } from '../../types/user-data';
 import { AuthData } from '../../types/auth-data';
 import { dropToken, saveToken } from '../../services/token';
+import { resetOffers } from '../offers-process/offers-process';
+import { resetOffer } from '../offer-process/offer-process';
+import { resetFavoriteOffers } from '../favorites-process/favorites-process';
+import { resetNearbyOffers } from '../nearby-offers-process/nearby-offers-process';
 
 export const checkAuthAction = createAsyncThunk<
   string, undefined,
@@ -47,9 +51,13 @@ export const logoutAction = createAsyncThunk<void, undefined, {
   extra: AxiosInstance,
 }>(
   'user/logout',
-  async (_arg, {extra: api}) => {
+  async (_arg, {dispatch, extra: api}) => {
     await api.delete(APIRoute.Logout);
 
     dropToken();
+    dispatch(resetOffers());
+    dispatch(resetOffer());
+    dispatch(resetFavoriteOffers());
+    dispatch(resetNearbyOffers());
   }
 );
