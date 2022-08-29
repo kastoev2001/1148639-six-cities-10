@@ -2,7 +2,7 @@ import { Map, Layer } from 'leaflet';
 import { AuthorizationStatus } from '../const';
 import { toast } from 'react-toastify';
 import { SortType } from '../const';
-import { Offers, Offer, LocationCity } from '../types/offers';
+import { Offers, Offer } from '../types/offers';
 import { CommentLength } from '../const';
 
 type DefineRating = (rating: number) => number;
@@ -61,8 +61,8 @@ export const checkLoginFormValidity = (loginElement: HTMLInputElement, passwordE
   return !errorCount;
 };
 
-export const filterOffersByCity = (city: LocationCity, offers: Offers): Offers => (
-  offers.filter((offer: Offer): boolean => offer.city.name === city.name)
+export const filterOffersByCity = (city: string, offers: Offers): Offers => (
+  offers.filter((offer: Offer): boolean => offer.city.name === city)
 );
 
 export const sortOffers = (sortType: SortType, offers: Offers): Offers => {
@@ -90,4 +90,18 @@ export const checkNewCommentValidity = (commentText: string, rating: number): nu
   }
 
   return errorCount;
+};
+
+export const replaceOffer = (offers: Offers, replaceableOffer: Offer): Offers => {
+	const index = offers.findIndex((offer: Offer) => offer.id === replaceableOffer.id);
+	const changedOffers = [...offers.slice(0, index), replaceableOffer, ...offers.slice(index + 1)];
+
+	return changedOffers;
+};
+
+export const removeOffer = (offers: Offers, removableOffer: Offer): Offers => {
+	const index = offers.findIndex((offer: Offer) => offer.id === removableOffer.id);
+	const removedOffers = [...offers.slice(0, index), ...offers.slice(index + 1)];
+
+	return removedOffers;
 };

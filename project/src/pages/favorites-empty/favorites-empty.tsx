@@ -1,6 +1,6 @@
 import Header from '../../components/header/header';
 
-function NotFavorites(): JSX.Element {
+function FavoritesEmpty(): JSX.Element {
   return (
     <div className="page page--favorites-empty">
       <Header />
@@ -25,4 +25,4 @@ function NotFavorites(): JSX.Element {
   );
 }
 
-export default NotFavorites;
+export default FavoritesEmpty;

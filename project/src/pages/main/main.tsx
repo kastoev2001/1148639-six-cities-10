@@ -4,14 +4,15 @@ import ListCities from '../../components/main/list-cities/list-cities';
 import SortForm from '../../components/main/sort-form/sort-form';
 import Header from '../../components/header/header';
 
-import { useCallback } from 'react';
+import { AppRoute } from '../../const';
+import { useCallback, useEffect , useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { selectorSortOffers } from '../../store/selector';
 import { Offer } from '../../types/offers';
 import { changeCity } from '../../store/city-data/city-data';
 import { getOffers } from '../../store/offers-process/offers-selector';
 import { getActiveCity } from '../../store/city-data/city-selector';
-import { useState } from 'react';
 import { ActiveCardRoomId } from '../../types/main';
 
 
@@ -20,22 +21,29 @@ function Main(): JSX.Element {
   const activeCity = useAppSelector(getActiveCity);
   const offersSorted = useAppSelector(selectorSortOffers);
   const countRooms = offersSorted.length;
+	const offersSortedCount = offersSorted.length;
+	const navigate = useNavigate();
 
   const displatch = useAppDispatch();
   const [activeCardRoomId, setActiveCardRoomId] = useState<ActiveCardRoomId>(null);
 
   const onChangeCity = useCallback((city: string): void => {
-    const findedCity = offers.find((offer: Offer): boolean => offer.city.name === city);
-    const selectedCity = findedCity ? findedCity.city : activeCity;
-    displatch(changeCity(selectedCity));
+    displatch(changeCity(city));
   }, []);
 
   const onCardRoomActive = useCallback((id: ActiveCardRoomId) => {
     setActiveCardRoomId(id);
   }, []);
 
+	useEffect(() => {
+		if (!offersSortedCount) {
+		navigate(AppRoute.MainEmpty);
+		}
+	}, [])
+
   return (
     <div className="page page--gray page--main">
+			
       <Header />
 
       <main className="page__main page__main--index">
@@ -51,7 +59,8 @@ function Main(): JSX.Element {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{countRooms} {countRooms > 1 ? 'places' : 'place'} to stay in {activeCity.name}</b>
+              <b className="places__found">{countRooms} {countRooms > 1 ? 'places' : 'place'} to stay in {activeCity}</b>
+
               <SortForm />
 
               <ListRooms offersFiltred={offersSorted} onCardRoomActive={onCardRoomActive} />
@@ -59,7 +68,9 @@ function Main(): JSX.Element {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <MainMap offers={offersSorted} activeCity={activeCity} activeCardRoomId={activeCardRoomId} />
+
+							<MainMap offers={offersSorted} activeCardRoomId={activeCardRoomId} />
+
               </section>
             </div>
 

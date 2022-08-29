@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { Offers } from '../../types/offers';
 import { fetchNearbyOffersAction } from './nearby-offers-async-action';
+import { toggleFavoriteAction } from '../favorites-process/favorites-async-action';
+import { replaceOffer } from '../../utils/commands';
 
 type InitialState = {
   nearbyOffers: Offers,
@@ -31,6 +33,13 @@ export const nearbyOffersProcess = createSlice({
       .addCase(fetchNearbyOffersAction.rejected, (state) => {
         state.nearbyOffers = [];
         state.isNearbyOffersLoaded = false;
-      });
+      })
+			.addCase(toggleFavoriteAction.fulfilled, (state, action) => {
+				const { nearbyOffers } = state;
+				const replaceableOffer = action.payload;
+				const replacedesOffers = replaceOffer(nearbyOffers, replaceableOffer);
+				
+				state.nearbyOffers = replacedesOffers;
+			});
   },
 });
