@@ -14,7 +14,7 @@ import { useAppSelector } from '../../hooks';
 
 type MainMapProps = {
   offers: Offers,
-  activeCardRoomId?: ActiveCardRoomId,
+  activeCardRoomId: ActiveCardRoomId,
 };
 
 function MainMap(props: MainMapProps): JSX.Element {

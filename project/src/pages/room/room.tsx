@@ -159,7 +159,9 @@ function Room(): JSX.Element {
               </div>
             </div>
             <section className="property__map map">
-              <MainMap offers={nearbyOffers} />
+
+              <MainMap offers={[...nearbyOffers, activeOffer]} activeCardRoomId={id} />
+
             </section>
           </section>
           <div className="container">
