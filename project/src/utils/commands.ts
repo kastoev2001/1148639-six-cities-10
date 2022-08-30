@@ -7,6 +7,5 @@ export const isLoginCheck = (loginElement: HTMLInputElement): boolean =>
 export const isPasswordCheck = (passwordElement: HTMLInputElement): boolean =>
   /^[а-яА-ЯёЁa-zA-Z0-9]+$/.test(passwordElement.value);
 
-export const isAxiosError = (error: any): error is AxiosError => {
-  return typeof error.response.data.error === 'string';
-};
+export const isAxiosError = (error: any): error is AxiosError =>
+  typeof error.response.data.error === 'string';

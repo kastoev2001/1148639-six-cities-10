@@ -3,35 +3,35 @@ import { MAX_RATING, SortType } from '../const';
 import { Cities, Room, City } from '../types/cities';
 
 const offersSortHighTolow = (offerA: Offer, offerB: Offer): number =>
-	offerB.price - offerA.price;
+  offerB.price - offerA.price;
 
 const offersSortLowToHigh = (offerA: Offer, offerB: Offer): number =>
-	offerA.price - offerB.price;
+  offerA.price - offerB.price;
 
 const offersSortTopRatedFirst = (offerA: Offer, offerB: Offer): number =>
-	offerB.rating - offerA.rating;
+  offerB.rating - offerA.rating;
 
 export const defineRating = (rating: number): number => {
-	const definedRating = (rating / MAX_RATING) * 100;
+  const definedRating = (rating / MAX_RATING) * 100;
 
-	return definedRating;
+  return definedRating;
 };
 
 export const filterOffersByCity = (city: string, offers: Offers): Offers => (
-	offers.filter((offer: Offer): boolean => offer.city.name === city)
+  offers.filter((offer: Offer): boolean => offer.city.name === city)
 );
 
 export const sortOffers = (sortType: SortType, offers: Offers): Offers => {
-	switch (sortType) {
-		case SortType.PriceHighToLow:
-			return offers.sort(offersSortHighTolow);
-		case SortType.PriceLowToHigh:
-			return offers.sort(offersSortLowToHigh);
-		case SortType.TopRatedFirst:
-			return offers.sort(offersSortTopRatedFirst);
-		default:
-			return offers;
-	}
+  switch (sortType) {
+    case SortType.PriceHighToLow:
+      return offers.sort(offersSortHighTolow);
+    case SortType.PriceLowToHigh:
+      return offers.sort(offersSortLowToHigh);
+    case SortType.TopRatedFirst:
+      return offers.sort(offersSortTopRatedFirst);
+    default:
+      return offers;
+  }
 };
 
 export const replaceOffer = (offers: Offers, replaceableOffer: Offer): Offers => {

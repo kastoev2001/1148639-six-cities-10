@@ -4,6 +4,8 @@ import { NameSpace } from '../../const';
 import { fetchOffersAction } from './offers-async-action';
 import { toggleFavoriteAction } from '../favorites-process/favorites-async-action';
 import { replaceOffer } from '../../utils/offers';
+import { notifyUserOfAnError } from '../../utils/user';
+import { AxiosError } from 'axios';
 
 type InitialState = {
   offers: Offers,
@@ -31,18 +33,22 @@ export const offersProcess = createSlice({
         state.isOffersLoaded = true;
       })
       .addCase(fetchOffersAction.fulfilled, (state, action) => {
-        const offers = action.payload;
+        const offers = action.payload as Offers;
 
         state.offers = offers;
         state.isOffersLoaded = false;
       })
-      .addCase(fetchOffersAction.rejected, (state) => {
+      .addCase(fetchOffersAction.rejected, (state, action) => {
+        const error = action.payload as AxiosError;
+
         state.offers = [];
         state.isOffersLoaded = false;
+
+        notifyUserOfAnError(error);
       })
       .addCase(toggleFavoriteAction.fulfilled, (state, action) => {
         const { offers } = state;
-        const replaceableOffer = action.payload;
+        const replaceableOffer = action.payload as Offer;
         const replacedesOffers = replaceOffer(offers, replaceableOffer);
 
         state.offers = replacedesOffers;

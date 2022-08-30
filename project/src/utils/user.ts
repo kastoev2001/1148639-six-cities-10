@@ -4,8 +4,6 @@ import { AuthorizationStatus, CommentLength } from '../const';
 import { isLoginCheck, isPasswordCheck } from './commands';
 import { StateCodeMapping } from '../const';
 
-
-
 export const chouldDisplayError = (response: AxiosResponse): boolean => StateCodeMapping[response.status];
 
 export const notifyUserOfAnError = (error: AxiosError): void => {

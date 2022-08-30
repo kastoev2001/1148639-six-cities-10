@@ -4,9 +4,9 @@ import { StatusCodes } from 'http-status-codes';
 export const MAX_RATING = 5;
 
 export const StateCodeMapping: Record<number, boolean> = {
-	[StatusCodes.BAD_REQUEST]: true,
-	[StatusCodes.UNAUTHORIZED]: true,
-	[StatusCodes.NOT_FOUND]: true,
+  [StatusCodes.BAD_REQUEST]: true,
+  [StatusCodes.UNAUTHORIZED]: true,
+  [StatusCodes.NOT_FOUND]: true,
 };
 
 export const MAX_COMMENT = 10;

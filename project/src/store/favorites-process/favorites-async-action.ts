@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 import { APIRoute } from '../../const';
 import { Offer, Offers } from '../../types/offers';
 import { AppDispatch, State } from '../../types/state';
 
 
 export const toggleFavoriteAction = createAsyncThunk<
-  Offer,
+  Offer | AxiosError,
   {
     offerId: number,
     status: number,
@@ -18,17 +18,21 @@ export const toggleFavoriteAction = createAsyncThunk<
   }
 >(
   'favorite/toggleFavorite',
-  async ({ offerId, status }, { extra: api }) => {
+  async ({ offerId, status }, { extra: api, rejectWithValue }) => {
     const requestFavorite = `${APIRoute.Favorite}/${offerId}/${status}`;
 
-    const { data } = await api.post<Offer>(requestFavorite);
+    try {
+      const { data } = await api.post<Offer>(requestFavorite);
 
-    return data;
+      return data;
+    } catch(error) {
+      return rejectWithValue(error);
+    }
   }
 );
 
 export const fetchFavoriteOffersAction = createAsyncThunk<
-  Offers,
+  Offers | AxiosError,
   undefined,
   {
     dispatch: AppDispatch,
@@ -37,9 +41,14 @@ export const fetchFavoriteOffersAction = createAsyncThunk<
   }
 >(
   'favorite/fetchFavoriteOffers',
-  async (_arg, {extra: api}) => {
-    const { data } = await api.get<Offers>(APIRoute.Favorite);
+  async (_arg, {extra: api, rejectWithValue}) => {
 
-    return data;
+    try {
+      const { data } = await api.get<Offers>(APIRoute.Favorite);
+
+      return data;
+    } catch(error) {
+      return rejectWithValue(error);
+    }
   }
 );

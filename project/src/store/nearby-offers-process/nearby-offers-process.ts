@@ -4,6 +4,8 @@ import { Offers, Offer } from '../../types/offers';
 import { fetchNearbyOffersAction } from './nearby-offers-async-action';
 import { toggleFavoriteAction } from '../favorites-process/favorites-async-action';
 import { replaceOffer } from '../../utils/offers';
+import { AxiosError } from 'axios';
+import { notifyUserOfAnError } from '../../utils/user';
 
 type InitialState = {
   nearbyOffers: Offers,
@@ -30,19 +32,23 @@ export const nearbyOffersProcess = createSlice({
       .addCase(fetchNearbyOffersAction.fulfilled, (state, action) => {
         const nearbyOffers = action.payload;
 
-        state.nearbyOffers = nearbyOffers;
+        state.nearbyOffers = nearbyOffers as Offers;
         state.isNearbyOffersLoaded = false;
       })
       .addCase(fetchNearbyOffersAction.pending, (state) => {
         state.isNearbyOffersLoaded = true;
       })
-      .addCase(fetchNearbyOffersAction.rejected, (state) => {
+      .addCase(fetchNearbyOffersAction.rejected, (state, action) => {
+        const error = action.payload as AxiosError;
+
         state.nearbyOffers = [];
         state.isNearbyOffersLoaded = false;
+
+        notifyUserOfAnError(error);
       })
       .addCase(toggleFavoriteAction.fulfilled, (state, action) => {
         const { nearbyOffers } = state;
-        const replaceableOffer = action.payload;
+        const replaceableOffer = action.payload as Offer;
         const replacedesOffers = replaceOffer(nearbyOffers, replaceableOffer);
 
         state.nearbyOffers = replacedesOffers;
