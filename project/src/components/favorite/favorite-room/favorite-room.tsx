@@ -29,9 +29,7 @@ function FavoriteRoom({ room }: FavoriteRoomProps): JSX.Element {
     <article className="favorites__card place-card">
       {isPremium ? <StatusRoom /> : null}
       <div className="favorites__image-wrapper place-card__image-wrapper">
-        <NavLink to={pathnameRoom}>
-          <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image" />
-        </NavLink>
+        <img className="place-card__image" src={previewImage} width="150" height="110" alt="Place image" />
       </div>
       <div className="favorites__card-info place-card__info">
         <div className="place-card__price-wrapper">
