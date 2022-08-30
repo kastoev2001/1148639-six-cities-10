@@ -5,6 +5,7 @@ import { State } from '../../types/state';
 import { AxiosError, AxiosInstance } from 'axios';
 import { APIRoute } from '../../const';
 
+
 export const fetchOfferAction = createAsyncThunk<
   Offer | AxiosError,
   string, {
