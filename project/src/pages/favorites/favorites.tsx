@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { getFavoriteOffers, getFavoriteOffersStatus } from '../../store/favorites-process/favorites-selector';
 import { useAppSelector, useAppDispatch } from '../../hooks/index';
-import { divideRoomsByCityName } from '../../utils/commands';
+import { divideRoomsByCityName } from '../../utils/offers';
 import { useEffect } from 'react';
 import { fetchFavoriteOffersAction } from '../../store/favorites-process/favorites-async-action';
 

@@ -1,7 +1,7 @@
 import { ChangeEvent, useState, FormEvent, useEffect } from 'react';
 import { RatingStatus, FIRST_STATE_RATING, CommentLength } from '../../../const';
 import { NewComment } from '../../../types/new-comment-data';
-import { checkNewCommentValidity } from '../../../utils/commands';
+import { checkNewCommentValidity } from '../../../utils/user';
 import { postNewCommentAction } from '../../../store/new-comment-process/new-comment-async-aciton';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getNewCommentStatus } from '../../../store/new-comment-process/new-comment-selector';

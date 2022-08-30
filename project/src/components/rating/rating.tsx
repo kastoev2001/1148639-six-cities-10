@@ -1,4 +1,4 @@
-import { defineRating } from '../../utils/commands';
+import { defineRating } from '../../utils/offers';
 
 type RatingProps = {
   rating: number,

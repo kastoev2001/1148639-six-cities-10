@@ -3,7 +3,7 @@ import { NameSpace, MAX_COMMENT } from '../../const';
 import { Comments } from '../../types/comments';
 import { fetchCommentsAction } from './comments-async-action';
 import { postNewCommentAction } from '../new-comment-process/new-comment-async-aciton';
-import { commentsSortHighTolow } from '../../utils/commands';
+import { commentsSortHighTolow } from '../../utils/comments';
 
 type CommentsState = {
   comments: Comments,

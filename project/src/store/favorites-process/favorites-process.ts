@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
 import { Offers } from '../../types/offers';
 import { fetchFavoriteOffersAction, toggleFavoriteAction } from './favorites-async-action';
-import { removeOffer } from '../../utils/commands';
+import { removeOffer } from '../../utils/offers';
 
 
 type InitialState = {

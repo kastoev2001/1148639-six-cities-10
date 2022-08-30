@@ -10,7 +10,7 @@ import Loading from '../../pages/loading/loading';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/index';
-import { isCheckedAuth } from '../../utils/commands';
+import { isCheckedAuth } from '../../utils/user';
 import { getIsOffersLoaded } from '../../store/offers-process/offers-selector';
 import { getAuthorizationStatus } from '../../store/user-process/user-selector';
 
