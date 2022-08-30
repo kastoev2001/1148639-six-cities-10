@@ -5,23 +5,25 @@ import { State } from '../../types/state';
 import { AxiosError, AxiosInstance } from 'axios';
 import { APIRoute } from '../../const';
 
-export const fetchCommentsAction = createAsyncThunk<Comments | AxiosError, string, {
-  dispatch: AppDispatch,
-  state: State,
-  extra: AxiosInstance,
-}>(
-  'data/fetchComments',
-  async (
-    offerId,
-    { extra: api, rejectWithValue }) => {
-    const requestComments = `${APIRoute.Comments}/${offerId}`;
+export const fetchCommentsAction = createAsyncThunk<
+  Comments | AxiosError,
+  string, {
+    dispatch: AppDispatch,
+    state: State,
+    extra: AxiosInstance,
+  }>(
+    'data/fetchComments',
+    async (
+      offerId,
+      { extra: api, rejectWithValue }) => {
+      const requestComments = `${APIRoute.Comments}/${offerId}`;
 
-    try {
-      const { data } = await api.get<Comments>(requestComments);
+      try {
+        const { data } = await api.get<Comments>(requestComments);
 
-      return data;
-    } catch(error) {
-      return rejectWithValue(error);
+        return data;
+      } catch (error) {
+        return rejectWithValue(error);
+      }
     }
-  }
-);
+  );

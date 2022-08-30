@@ -50,7 +50,7 @@ AuthData,
   }
 );
 
-export const logoutAction = createAsyncThunk<void, AxiosError, {
+export const logoutAction = createAsyncThunk<void | AxiosError, undefined, {
   dispath: AppDispatch,
   state: State,
   extra: AxiosInstance,
