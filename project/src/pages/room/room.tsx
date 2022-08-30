@@ -2,14 +2,14 @@ import NotPage from '../not-page/not-page';
 import ListNearestRooms from '../../components/room/list-nearest-rooms/list-nearest-rooms';
 import RoomGallery from '../../components/room/room-gallery/room-gallery';
 import HostRoom from '../../components/room/host-room/host-room';
-import ButtomFavorite from '../../components/room/button-favorite/button-favorite';
+import ButtonFavorite from '../../components/button-favorite/button-favorite';
 import StatusRoom from '../../components/room/status-room/status-room';
 import ListReviews from '../../components/room/list-reviews/list-reviews';
 import Loading from '../loading/loading';
 import MainMap from '../../components/main-map/main-map';
 import Header from '../../components/header/header';
 
-import { AuthorizationStatus } from '../../const';
+import { AuthorizationStatus, ButtonFavoriteConfig } from '../../const';
 import { useParams } from 'react-router-dom';
 import { defineRating } from '../../utils/commands';
 import FormComment from '../../components/room/form-comment/form-comment';
@@ -85,7 +85,7 @@ function Room(): JSX.Element {
                     {title}
                   </h1>
 
-                  {isFavorite ? <ButtomFavorite id={id} isFavorite /> : <ButtomFavorite id={id} isFavorite={false} />}
+                  {isFavorite ? <ButtonFavorite id={id} isFavorite buttonFavorite={ButtonFavoriteConfig.Propety} /> : <ButtonFavorite id={id} isFavorite={false} buttonFavorite={ButtonFavoriteConfig.Propety} />}
 
                 </div>
                 <div className="property__rating rating">

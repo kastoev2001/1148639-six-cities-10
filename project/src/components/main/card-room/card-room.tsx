@@ -4,7 +4,7 @@ import Rating from '../../rating/rating';
 
 import { memo } from 'react';
 import { NavLink } from 'react-router-dom';
-import { AppRoute } from '../../../const';
+import { AppRoute, ButtonFavoriteConfig } from '../../../const';
 import { Offer } from '../../../types/offers';
 import { ActiveCardRoomId } from '../../../types/main';
 
@@ -54,7 +54,8 @@ function CardRoom(props: CardRoomProps): JSX.Element {
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          {isFavorite ? <ButtonFavorite id={id} isFavorite /> : <ButtonFavorite id={id} isFavorite={false} />}
+          {isFavorite ? <ButtonFavorite id={id} isFavorite buttonFavorite={ButtonFavoriteConfig.Card} /> : <ButtonFavorite id={id} isFavorite={false} buttonFavorite={ButtonFavoriteConfig.Card} />}
+
 
         </div>
         <div className="place-card__rating rating">

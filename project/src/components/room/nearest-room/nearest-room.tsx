@@ -3,7 +3,7 @@ import Rating from '../../rating/rating';
 import StatusRoom from '../../status-room/status-room';
 
 import { NavLink } from 'react-router-dom';
-import { AppRoute } from '../../../const';
+import { AppRoute, ButtonFavoriteConfig } from '../../../const';
 import { Offer } from '../../../types/offers';
 
 type NearestRoomProps = {
@@ -39,7 +39,7 @@ function NearestRoom({ nearbyOffer }: NearestRoomProps): JSX.Element {
             <span className="place-card__price-text">/&nbsp;night</span>
           </div>
 
-          {isFavorite ? <ButtonFavorite id={id} isFavorite /> : <ButtonFavorite id={id} isFavorite={false} />}
+          {isFavorite ? <ButtonFavorite id={id} isFavorite buttonFavorite={ButtonFavoriteConfig.Card} /> : <ButtonFavorite id={id} isFavorite={false} buttonFavorite={ButtonFavoriteConfig.Card} />}
 
         </div>
         <div className="place-card__rating rating">

@@ -2,7 +2,7 @@ import ButtonFavorite from '../../button-favorite/button-favorite';
 import StatusRoom from '../status-room/status-room';
 
 import { NavLink } from 'react-router-dom';
-import { AppRoute } from '../../../const';
+import { AppRoute, ButtonFavoriteConfig } from '../../../const';
 import { Room } from '../../../types/cities';
 import { defineRating } from '../../../utils/commands';
 
@@ -34,13 +34,14 @@ function FavoriteRoom({ room }: FavoriteRoomProps): JSX.Element {
         </NavLink>
       </div>
       <div className="favorites__card-info place-card__info">
-        <div className="place-  -wrapper">
-          <div className="place-  ">
-            <b className="place-  -value">&euro;{price}</b>
-            <span className="place-  -text">&#47;&nbsp;night</span>
+        <div className="place-card__price-wrapper">
+          <div className="place-card__price">
+            <b className="place-card__price-value">&euro;{price}</b>
+            <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
 
-          {isFavorite ? <ButtonFavorite id={id} isFavorite /> : <ButtonFavorite id={id} isFavorite={false} />}
+          {isFavorite ? <ButtonFavorite id={id} isFavorite buttonFavorite={ButtonFavoriteConfig.Card} /> : <ButtonFavorite id={id} isFavorite={false} buttonFavorite={ButtonFavoriteConfig.Card} />}
+
         </div>
 
         <div className="place-card__rating rating">

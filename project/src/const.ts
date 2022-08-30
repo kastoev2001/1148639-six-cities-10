@@ -1,5 +1,16 @@
 import { Icon } from 'leaflet';
 
+export const ButtonFavoriteConfig = {
+  Card: {
+    className: 'place-card__bookmark',
+    size: [18, 19],
+  },
+  Propety: {
+    className: 'property__bookmark',
+    size: [31, 33]
+  }
+} as const;
+
 export enum AppRoute {
   Root = '/',
   Favorites = '/favorites',
