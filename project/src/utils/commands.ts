@@ -1,11 +1,9 @@
 import dayjs from 'dayjs';
 
 import { Map, Layer } from 'leaflet';
-import { AuthorizationStatus } from '../const';
+import { AuthorizationStatus, CommentLength, SortType } from '../const';
 import { toast } from 'react-toastify';
-import { SortType } from '../const';
 import { Offers, Offer } from '../types/offers';
-import { CommentLength } from '../const';
 import { Cities, Room, City } from '../types/cities';
 import { Comment } from '../types/comments';
 

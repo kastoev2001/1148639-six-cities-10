@@ -1,5 +1,5 @@
 import { ChangeEvent, useState, FormEvent, useEffect } from 'react';
-import { RatingStatus, FIRST_STATE_RATING } from '../../../const';
+import { RatingStatus, FIRST_STATE_RATING, CommentLength } from '../../../const';
 import { NewComment } from '../../../types/new-comment-data';
 import { checkNewCommentValidity } from '../../../utils/commands';
 import { postNewCommentAction } from '../../../store/new-comment-process/new-comment-async-aciton';
@@ -95,7 +95,7 @@ function FormComment({ offerId }: FormCommentProps): JSX.Element {
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">
-          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
+          To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">{CommentLength.MIN} characters</b>.
         </p>
         <button className="reviews__submit form__submit button" type="submit" disabled={Boolean(isNewCommentFormChecked) || newCommentStatus.isLoaded}>Submit</button>
       </div>
