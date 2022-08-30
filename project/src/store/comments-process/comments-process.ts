@@ -1,8 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { NameSpace, MAX_COMMENT } from '../../const';
 import { Comments } from '../../types/comments';
 import { fetchCommentsAction } from './comments-async-action';
 import { postNewCommentAction } from '../new-comment-process/new-comment-async-aciton';
+import { commentsSortHighTolow } from '../../utils/commands';
 
 type CommentsState = {
   comments: Comments,
@@ -24,7 +25,9 @@ export const commentsProcess = createSlice({
         state.isCommentsLoaded = true;
       })
       .addCase(fetchCommentsAction.fulfilled, (state, action) => {
-        const comments = action.payload;
+				const commentsSorted = action.payload.sort(commentsSortHighTolow);
+        const comments = commentsSorted.slice(0, MAX_COMMENT);
+
         state.comments = comments;
       })
       .addCase(fetchCommentsAction.rejected, (state) => {
@@ -32,7 +35,8 @@ export const commentsProcess = createSlice({
         state.isCommentsLoaded = false;
       })
       .addCase(postNewCommentAction.fulfilled, (state, action) => {
-        const newComments = action.payload;
+				const newCommentsSorted = action.payload.sort(commentsSortHighTolow);
+        const newComments = newCommentsSorted.slice(0, MAX_COMMENT);
 
         state.comments = newComments;
       });

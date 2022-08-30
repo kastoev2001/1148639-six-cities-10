@@ -1,3 +1,5 @@
+import dayjs from 'dayjs';
+
 import { Map, Layer } from 'leaflet';
 import { AuthorizationStatus } from '../const';
 import { toast } from 'react-toastify';
@@ -5,6 +7,7 @@ import { SortType } from '../const';
 import { Offers, Offer } from '../types/offers';
 import { CommentLength } from '../const';
 import { Cities, Room, City } from '../types/cities';
+import { Comment } from '../types/comments';
 
 type DefineRating = (rating: number) => number;
 
@@ -14,26 +17,41 @@ const isLoginCheck = (loginElement: HTMLInputElement): boolean =>
 const isPasswordCheck = (passwordElement: HTMLInputElement): boolean =>
   /^[а-яА-ЯёЁa-zA-Z0-9]+$/.test(passwordElement.value);
 
-export const defineRating: DefineRating = (rating): number => {
-  const definedRating = (rating / 5) * 100;
+const offersSortHighTolow = (offerA: Offer, offerB: Offer): number =>
+	offerB.price - offerA.price;
 
-  return definedRating;
-};
+const offersSortLowToHigh = (offerA: Offer, offerB: Offer): number =>
+	offerA.price - offerB.price;
 
-const sortHighTolow = (offerA: Offer, offerB: Offer): number =>
-  offerB.price - offerA.price;
-
-const sortLowToHigh = (offerA: Offer, offerB: Offer): number =>
-  offerA.price - offerB.price;
-
-const sortTopRatedFirst = (offerA: Offer, offerB: Offer): number =>
-  offerB.rating - offerA.rating;
+const offersSortTopRatedFirst = (offerA: Offer, offerB: Offer): number =>
+	offerB.rating - offerA.rating;
 
 export const removeMarkers = (map: Map, markers: Layer[]): void => (
   markers.forEach((layer: Layer): void => {
     map.removeLayer(layer);
   })
 );
+
+export const commentsSortHighTolow = (commentA: Comment, commentB: Comment): number => {
+	const dateA = dayjs(commentA.date);
+	const dateb = dayjs(commentB.date);
+
+	if (dateb > dateA) {
+		return 1;
+	}
+
+	if (dateb < dateA) {
+		return -1
+	}
+
+	return 0;
+};
+
+export const defineRating: DefineRating = (rating): number => {
+  const definedRating = (rating / 5) * 100;
+
+  return definedRating;
+};
 
 export const isCheckedAuth = (authorizationStatus: AuthorizationStatus): boolean =>
   authorizationStatus === AuthorizationStatus.Unknown;
@@ -67,16 +85,16 @@ export const filterOffersByCity = (city: string, offers: Offers): Offers => (
 );
 
 export const sortOffers = (sortType: SortType, offers: Offers): Offers => {
-  switch (sortType) {
-    case SortType.PriceHighToLow:
-      return offers.sort(sortHighTolow);
-    case SortType.PriceLowToHigh:
-      return offers.sort(sortLowToHigh);
-    case SortType.TopRatedFirst:
-      return offers.sort(sortTopRatedFirst);
-    default:
-      return offers;
-  }
+	switch (sortType) {
+		case SortType.PriceHighToLow:
+			return offers.sort(offersSortHighTolow);
+		case SortType.PriceLowToHigh:
+			return offers.sort(offersSortLowToHigh);
+		case SortType.TopRatedFirst:
+			return offers.sort(offersSortTopRatedFirst);
+		default:
+			return offers;
+	}
 };
 
 export const checkNewCommentValidity = (commentText: string, rating: number): number => {

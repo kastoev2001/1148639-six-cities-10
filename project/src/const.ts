@@ -1,5 +1,7 @@
 import { Icon } from 'leaflet';
 
+export const MAX_COMMENT = 10;
+
 export const ButtonFavoriteConfig = {
   Card: {
     className: 'place-card__bookmark',
