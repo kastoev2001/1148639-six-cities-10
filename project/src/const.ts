@@ -25,7 +25,6 @@ export const ButtonFavoriteConfig = {
 export enum AppRoute {
   Root = '/',
   Favorites = '/favorites',
-  FavoritesEmpty = '/not-favorites',
   Login = '/login',
   Offer = '/offer',
 }

@@ -4,7 +4,6 @@ import Favorite from '../../pages/favorites/favorites';
 import Room from '../../pages/room/room';
 import NotPage from '../../pages/not-page/not-page';
 import PrivateRoute from '../private-route/private-route';
-import FavoritesEmpty from '../../pages/favorites-empty/favorites-empty';
 import Loading from '../../pages/loading/loading';
 
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
@@ -29,7 +28,6 @@ function App(): JSX.Element {
           <Route index element={<Main />} />
           <Route path={AppRoute.Login} element={<Login />} />
           <Route path={AppRoute.Favorites} element={<PrivateRoute><Favorite /></PrivateRoute>} />
-          <Route path={AppRoute.FavoritesEmpty} element={<FavoritesEmpty />} />
           <Route path={AppRoute.Offer}>
             <Route index element={<NotPage />} />
             <Route path=':id' element={<Room />} />
