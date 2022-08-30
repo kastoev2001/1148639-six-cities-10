@@ -6,7 +6,7 @@ import { AppDispatch } from '../../types/state';
 import { State } from '../../types/state';
 
 export const fetchNearbyOffersAction = createAsyncThunk<
-  Offers,
+  Offers | AxiosInstance,
   string,
   {
     dispatch: AppDispatch,
@@ -15,11 +15,15 @@ export const fetchNearbyOffersAction = createAsyncThunk<
   }
 >(
   'data/fetchNearbyOffers',
-  async (id, { extra: api }) => {
+  async (id, { extra: api, rejectWithValue }) => {
     const requestNearbyOffers = `${APIRoute.Hotels}/${id}/nearby`;
 
-    const { data } = await api.get<Offers>(requestNearbyOffers);
+    try {
+      const { data } = await api.get<Offers>(requestNearbyOffers);
 
-    return data;
+      return data;
+    } catch(error) {
+      return rejectWithValue(error);
+    }
   }
 );

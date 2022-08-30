@@ -4,7 +4,6 @@ import Loading from '../loading/loading';
 import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
 import { NavLink } from 'react-router-dom';
-import { Navigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { getFavoriteOffers, getFavoriteOffersStatus } from '../../store/favorites-process/favorites-selector';
 import { useAppSelector, useAppDispatch } from '../../hooks/index';
@@ -27,7 +26,7 @@ function Favorite(): JSX.Element {
   }
 
   if (!cities.length) {
-    return <FavoritesEmpty />
+    return <FavoritesEmpty />;
   }
 
   return (

@@ -10,9 +10,10 @@ import { resetOffers } from '../offers-process/offers-process';
 import { resetOffer } from '../offer-process/offer-process';
 import { resetFavoriteOffers } from '../favorites-process/favorites-process';
 import { resetNearbyOffers } from '../nearby-offers-process/nearby-offers-process';
+import { AxiosError } from 'axios';
 
 export const checkAuthAction = createAsyncThunk<
-  string, undefined,
+  string, void,
   {
     dispatch: AppDispatch,
     state: State,
@@ -27,7 +28,7 @@ export const checkAuthAction = createAsyncThunk<
   );
 
 export const loginAction = createAsyncThunk<
-UserEmail,
+UserEmail | AxiosError,
 AuthData,
   {
     dispatch: AppDispatch,
@@ -36,28 +37,36 @@ AuthData,
   }
 >(
   'user/login',
-  async ({login: email, password}, {extra: api}) => {
-    const { data: {token, email: userEmail} } = await api.post<UserData>(APIRoute.Login, { email, password});
+  async ({login: email, password}, {extra: api, rejectWithValue}) => {
+    try {
+      const { data: { token, email: userEmail } } = await api.post<UserData>(APIRoute.Login, { email, password });
 
-    saveToken(token);
+      saveToken(token);
 
-    return userEmail;
+      return userEmail;
+    } catch (error) {
+      return rejectWithValue(error);
+    }
   }
 );
 
-export const logoutAction = createAsyncThunk<void, undefined, {
+export const logoutAction = createAsyncThunk<void, AxiosError, {
   dispath: AppDispatch,
   state: State,
   extra: AxiosInstance,
 }>(
   'user/logout',
-  async (_arg, {dispatch, extra: api}) => {
-    await api.delete(APIRoute.Logout);
+  async (_arg, {dispatch, extra: api, rejectWithValue}) => {
+    try {
+      await api.delete(APIRoute.Logout);
 
-    dropToken();
-    dispatch(resetOffers());
-    dispatch(resetOffer());
-    dispatch(resetFavoriteOffers());
-    dispatch(resetNearbyOffers());
+      dropToken();
+      dispatch(resetOffers());
+      dispatch(resetOffer());
+      dispatch(resetFavoriteOffers());
+      dispatch(resetNearbyOffers());
+    } catch(error) {
+      return rejectWithValue(error);
+    }
   }
 );
