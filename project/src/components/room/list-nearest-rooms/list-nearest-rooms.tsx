@@ -1,5 +1,7 @@
-import { Offers, Offer } from '../../../types/offers';
 import NearestRoom from '../nearest-room/nearest-room';
+
+import { Offers, Offer } from '../../../types/offers';
+import { memo } from 'react';
 
 type ListNearestRoomsProps = {
   nearbyOffers: Offers,
@@ -20,4 +22,4 @@ function ListNearestRooms({ nearbyOffers }: ListNearestRoomsProps): JSX.Element 
   );
 }
 
-export default ListNearestRooms;
+export default memo(ListNearestRooms);

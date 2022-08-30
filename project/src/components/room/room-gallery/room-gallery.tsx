@@ -1,5 +1,6 @@
 import RoomImage from '../room-image/room-image';
 import { MAX_GALLERY_IMAGES } from '../../../const';
+import { memo } from 'react';
 
 type RoomGalleryProps = {
   images: string[],
@@ -15,4 +16,4 @@ function RoomGallery({ images }: RoomGalleryProps): JSX.Element {
   );
 }
 
-export default RoomGallery;
+export default memo(RoomGallery);

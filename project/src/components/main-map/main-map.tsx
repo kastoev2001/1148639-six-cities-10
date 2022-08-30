@@ -5,27 +5,29 @@ import { Marker, LatLngLiteral, Layer } from 'leaflet';
 import { Offer, Location } from '../../types/offers';
 import { CURRENT_CUSTOM_ICON, ACTIVE_CUSTOM_ICON } from '../../const';
 import { removeMarkers } from '../../utils/commands';
+import { selectorGetLocationCity } from '../../store/selector';
 
 import 'leaflet/dist/leaflet.css';
-import { Offers, LocationCity } from '../../types/offers';
+import { Offers } from '../../types/offers';
 import { ActiveCardRoomId } from '../../types/main';
+import { useAppSelector } from '../../hooks';
 
 type MainMapProps = {
   offers: Offers,
-  activeCity: LocationCity,
   activeCardRoomId?: ActiveCardRoomId,
 };
 
 function MainMap(props: MainMapProps): JSX.Element {
-  const { offers, activeCity, activeCardRoomId } = props;
+  const { offers, activeCardRoomId } = props;
+  const locationCity = useAppSelector(selectorGetLocationCity);
   const mapRef = useRef(null);
-  const map = useMap(mapRef, activeCity);
+  const map = useMap(mapRef, locationCity);
 
   useEffect(() => {
     const markers: Layer[] = [];
-    if (map) {
+    if (map && locationCity) {
       offers.forEach((offer: Offer) => {
-        const { latitude, longitude, zoom } = activeCity.location;
+        const { latitude, longitude, zoom } = locationCity;
         const location: Location = offer.location;
         const markerOptions: LatLngLiteral = {
           lat: location.latitude,

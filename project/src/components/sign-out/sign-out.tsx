@@ -4,9 +4,11 @@ import { NavLink } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { logoutAction } from '../../store/user-process/user-async-action';
 import { getUserEmail } from '../../store/user-process/user-selector';
+import { selectorGetFavoriteCount } from '../../store/selector';
 
 function SignOut(): JSX.Element {
   const userEmail = useAppSelector(getUserEmail);
+  const favoritesCount = useAppSelector(selectorGetFavoriteCount);
 
   const dispatch = useAppDispatch();
 
@@ -24,7 +26,7 @@ function SignOut(): JSX.Element {
             <div className="header__avatar-wrapper user__avatar-wrapper">
             </div>
             <span className="header__user-name user__name">{userEmail}</span>
-            <span className="header__favorite-count">3</span>
+            <span className="header__favorite-count">{favoritesCount}</span>
           </NavLink>
         </li>
         <li className="header__nav-item">

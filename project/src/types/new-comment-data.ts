@@ -1,5 +1,5 @@
 
 export type NewComment = {
-	comment: string,
-	rating: number,
+  comment: string,
+  rating: number,
 };

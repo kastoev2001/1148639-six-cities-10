@@ -1,10 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { FIRST_CITY } from '../../const';
-import { LocationCity } from '../../types/offers';
 import { NameSpace } from '../../const';
 
 type InitialState = {
-  activeCity: LocationCity,
+  activeCity: string,
 };
 
 const initialState: InitialState = {
@@ -16,7 +15,7 @@ export const cityData = createSlice({
   initialState,
   reducers: {
     changeCity: (state, action) => {
-      const city: LocationCity = action.payload;
+      const city: string = action.payload;
       state.activeCity = city;
     },
   },

@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 function StatusRoom(): JSX.Element {
   return (
     <div className="property__mark">
@@ -6,4 +8,4 @@ function StatusRoom(): JSX.Element {
   );
 }
 
-export default StatusRoom;
+export default memo(StatusRoom);

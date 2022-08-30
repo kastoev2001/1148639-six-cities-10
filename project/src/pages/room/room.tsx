@@ -2,14 +2,14 @@ import NotPage from '../not-page/not-page';
 import ListNearestRooms from '../../components/room/list-nearest-rooms/list-nearest-rooms';
 import RoomGallery from '../../components/room/room-gallery/room-gallery';
 import HostRoom from '../../components/room/host-room/host-room';
-import ButtomFavorite from '../../components/room/button-favorite/button-favorite';
+import ButtonFavorite from '../../components/button-favorite/button-favorite';
 import StatusRoom from '../../components/room/status-room/status-room';
 import ListReviews from '../../components/room/list-reviews/list-reviews';
 import Loading from '../loading/loading';
 import MainMap from '../../components/main-map/main-map';
 import Header from '../../components/header/header';
 
-import { AuthorizationStatus } from '../../const';
+import { AuthorizationStatus, ButtonFavoriteConfig } from '../../const';
 import { useParams } from 'react-router-dom';
 import { defineRating } from '../../utils/commands';
 import FormComment from '../../components/room/form-comment/form-comment';
@@ -21,12 +21,11 @@ import { getComments, getIsCommentsLoaded } from '../../store/comments-process/c
 import { getActiveOffer } from '../../store/offer-process/offer-selector';
 import { getIsOfferLoaded } from '../../store/offer-process/offer-selector';
 import { getIsNearbyOffersLoaded, getNearbyOffers } from '../../store/nearby-offers-process/nearby-offers-selector';
-import { getActiveCity } from '../../store/city-data/city-selector';
 import { fetchNearbyOffersAction } from '../../store/nearby-offers-process/nearby-offers-async-action';
 import { getAuthorizationStatus } from '../../store/user-process/user-selector';
 
 function Room(): JSX.Element {
-  const { id } = useParams();
+  const { id: paramsId } = useParams();
   const dispatch = useAppDispatch();
   const comments = useAppSelector(getComments);
   const activeOffer = useAppSelector(getActiveOffer);
@@ -34,16 +33,15 @@ function Room(): JSX.Element {
   const isCommentsLoaded = useAppSelector(getIsCommentsLoaded);
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const isNearbyOffersLoaded = useAppSelector(getIsNearbyOffersLoaded);
-  const activeCity = useAppSelector(getActiveCity);
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchOfferAction(id));
-      dispatch(fetchCommentsAction(id));
-      dispatch(fetchNearbyOffersAction(id));
+    if (paramsId) {
+      dispatch(fetchOfferAction(paramsId));
+      dispatch(fetchCommentsAction(paramsId));
+      dispatch(fetchNearbyOffersAction(paramsId));
     }
-  }, [id]);
+  }, [dispatch, paramsId]);
 
   if (isOfferLoaded && isCommentsLoaded && isNearbyOffersLoaded) {
     return <Loading />;
@@ -51,6 +49,7 @@ function Room(): JSX.Element {
 
   if (activeOffer) {
     const {
+      id,
       title,
       bedrooms,
       isFavorite,
@@ -85,7 +84,9 @@ function Room(): JSX.Element {
                   <h1 className="property__name">
                     {title}
                   </h1>
-                  {isFavorite ? <ButtomFavorite isFavorite /> : <ButtomFavorite />}
+
+                  {isFavorite ? <ButtonFavorite id={id} isFavorite buttonFavorite={ButtonFavoriteConfig.Propety} /> : <ButtonFavorite id={id} isFavorite={false} buttonFavorite={ButtonFavoriteConfig.Propety} />}
+
                 </div>
                 <div className="property__rating rating">
                   <div className="property__stars rating__stars">
@@ -158,7 +159,7 @@ function Room(): JSX.Element {
               </div>
             </div>
             <section className="property__map map">
-              <MainMap offers={nearbyOffers} activeCity={activeCity} />
+              <MainMap offers={nearbyOffers} />
             </section>
           </section>
           <div className="container">

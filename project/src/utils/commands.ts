@@ -2,8 +2,9 @@ import { Map, Layer } from 'leaflet';
 import { AuthorizationStatus } from '../const';
 import { toast } from 'react-toastify';
 import { SortType } from '../const';
-import { Offers, Offer, LocationCity } from '../types/offers';
+import { Offers, Offer } from '../types/offers';
 import { CommentLength } from '../const';
+import { Cities, Room, City } from '../types/cities';
 
 type DefineRating = (rating: number) => number;
 
@@ -61,8 +62,8 @@ export const checkLoginFormValidity = (loginElement: HTMLInputElement, passwordE
   return !errorCount;
 };
 
-export const filterOffersByCity = (city: LocationCity, offers: Offers): Offers => (
-  offers.filter((offer: Offer): boolean => offer.city.name === city.name)
+export const filterOffersByCity = (city: string, offers: Offers): Offers => (
+  offers.filter((offer: Offer): boolean => offer.city.name === city)
 );
 
 export const sortOffers = (sortType: SortType, offers: Offers): Offers => {
@@ -90,4 +91,52 @@ export const checkNewCommentValidity = (commentText: string, rating: number): nu
   }
 
   return errorCount;
+};
+
+export const replaceOffer = (offers: Offers, replaceableOffer: Offer): Offers => {
+  const index = offers.findIndex((offer: Offer) => offer.id === replaceableOffer.id);
+
+  if (~index) {
+    const changedOffers = [...offers.slice(0, index), replaceableOffer, ...offers.slice(index + 1)];
+
+    return changedOffers;
+  }
+
+  return offers;
+};
+
+export const removeOffer = (offers: Offers, removableOffer: Offer): Offers => {
+  const index = offers.findIndex((offer: Offer) => offer.id === removableOffer.id);
+  const removedOffers = [...offers.slice(0, index), ...offers.slice(index + 1)];
+
+  return removedOffers;
+};
+
+export const divideRoomsByCityName = (offers: Offers): Cities => {
+  const offersFiltred = offers.filter((offer: Offer): true | false => offer.isFavorite);
+
+  if (!offersFiltred.length) {
+    return [];
+  }
+
+  const citiesName = offersFiltred.map((offer: Offer): string => offer.city.name)
+    .filter((cityName: string, index: number, arr: string[]): boolean => arr.indexOf(cityName) === index);
+
+  const cities = citiesName.map((cityName: string): City => ({
+    name: cityName[0].toUpperCase() + cityName.substring(1),
+    rooms: offers
+      .filter((offer: Offer): boolean => cityName === offer.city.name)
+      .map((offer: Offer): Room => ({
+        id: offer.id,
+        title: offer.title,
+        price: offer.price,
+        isFavorite: offer.isFavorite,
+        isPremium: offer.isPremium,
+        type: offer.type,
+        previewImage: offer.previewImage,
+        rating: offer.rating,
+      }))
+  }));
+
+  return cities;
 };

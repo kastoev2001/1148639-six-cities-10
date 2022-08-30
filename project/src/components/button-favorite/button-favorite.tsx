@@ -1,20 +1,52 @@
+import { toggleFavoriteAction } from '../../store/favorites-process/favorites-async-action';
+import { AuthorizationStatus, ButtonFavoriteConfig } from '../../const';
+import { getAuthorizationStatus } from '../../store/user-process/user-selector';
+import { useAppDispatch, useAppSelector } from '../../hooks/index';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { memo } from 'react';
+
+type ButtonFavorite = typeof ButtonFavoriteConfig.Card | typeof ButtonFavoriteConfig.Propety;
+
 type ButtonFavoriteProps = {
-  isFavorite?: boolean,
+  id: number
+  isFavorite: boolean,
+  buttonFavorite: ButtonFavorite,
 };
 
-function ButtonFavorite({ isFavorite }: ButtonFavoriteProps): JSX.Element {
+function ButtonFavorite(props: ButtonFavoriteProps): JSX.Element {
+  const { id, isFavorite, buttonFavorite } = props;
+  const { className, size } = buttonFavorite;
+  const [width, height] = size;
   const favoriteActiveClass = isFavorite
-    ? 'place-card__bookmark-button button place-card__bookmark-button--active button'
-    : 'place-card__bookmark-button button';
+    ? `${className}-button button ${className}-button--active button`
+    : `${className}-button button`;
+
+  const dispatch = useAppDispatch();
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const navigate = useNavigate();
+
+  const handlerButtonClick = () => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(toggleFavoriteAction({ offerId: id, status: Number(!isFavorite) }));
+      return;
+    }
+
+    navigate(AppRoute.Login);
+  };
 
   return (
-    <button className={favoriteActiveClass} type="button">
-      <svg className="place-card__bookmark-icon" width="18" height="19">
-        <use xlinkHref="/#icon-bookmark"></use>
+    <button
+      onClick={handlerButtonClick}
+      className={favoriteActiveClass}
+      type="button"
+    >
+      <svg className="place-card__bookmark-icon" width={width} height={height}>
+        <use xlinkHref="#icon-bookmark"></use>
       </svg>
       <span className="visually-hidden">To bookmarks</span>
     </button>
   );
 }
 
-export default ButtonFavorite;
+export default memo(ButtonFavorite);

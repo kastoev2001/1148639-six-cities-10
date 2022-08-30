@@ -1,15 +1,35 @@
 import ListFavorite from '../../components/favorite/list-favorite/list-favorite';
 import Header from '../../components/header/header';
+import Loading from '../loading/loading';
 
-import { AppRoute } from '../../const';
 import { NavLink } from 'react-router-dom';
-import { Offers } from '../../types/offers';
+import { useNavigate } from 'react-router-dom';
+import { AppRoute } from '../../const';
+import { getFavoriteOffers, getFavoriteOffersStatus } from '../../store/favorites-process/favorites-selector';
+import { useAppSelector, useAppDispatch } from '../../hooks/index';
+import { divideRoomsByCityName } from '../../utils/commands';
+import { useEffect } from 'react';
+import { fetchFavoriteOffersAction } from '../../store/favorites-process/favorites-async-action';
 
-type FavoriteProps = {
-  offers: Offers
-}
+function Favorite(): JSX.Element {
+  const favoriteOffers = useAppSelector(getFavoriteOffers);
+  const favoriteOffersStatus = useAppSelector(getFavoriteOffersStatus);
+  const cities = divideRoomsByCityName(favoriteOffers);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-function Favorite({ offers }: FavoriteProps): JSX.Element {
+  useEffect(() => {
+    dispatch(fetchFavoriteOffersAction());
+  }, [dispatch]);
+
+  if (favoriteOffersStatus.isLoaded) {
+    return <Loading />;
+  }
+
+  if (!cities.length) {
+    navigate(AppRoute.FavoritesEmpty);
+  }
+
   return (
     <div className="page">
       <Header />
@@ -19,7 +39,7 @@ function Favorite({ offers }: FavoriteProps): JSX.Element {
           <section className="favorites">
             <h1 className="favorites__title">Saved listing</h1>
 
-            <ListFavorite offers={offers} />
+            <ListFavorite cities={cities} />
 
           </section>
         </div>
