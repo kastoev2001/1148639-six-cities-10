@@ -1,12 +1,12 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 import { APIRoute } from '../../const';
 import { Comments } from '../../types/comments';
 import { NewComment } from '../../types/new-comment-data';
 import { AppDispatch, State } from '../../types/state';
 
 export const postNewCommentAction = createAsyncThunk<
-  Comments,
+  Comments | AxiosError,
   {
     id: number,
     newComment: NewComment
@@ -18,11 +18,15 @@ export const postNewCommentAction = createAsyncThunk<
   }
 >(
   'newComments/postNewComment',
-  async ({ id, newComment }, { extra: api }) => {
+  async ({ id, newComment }, { extra: api, rejectWithValue }) => {
     const requestNewComment = `${APIRoute.Comments}/${id}`;
 
-    const { data } = await api.post<Comments>(requestNewComment, newComment);
+    try {
+      const { data } = await api.post<Comments>(requestNewComment, newComment);
 
-    return data;
+      return data;
+    } catch(error) {
+      return rejectWithValue(error);
+    }
   }
 );

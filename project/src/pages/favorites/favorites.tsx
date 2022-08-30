@@ -1,13 +1,13 @@
 import ListFavorite from '../../components/favorite/list-favorite/list-favorite';
 import Header from '../../components/header/header';
 import Loading from '../loading/loading';
+import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
 import { NavLink } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { getFavoriteOffers, getFavoriteOffersStatus } from '../../store/favorites-process/favorites-selector';
 import { useAppSelector, useAppDispatch } from '../../hooks/index';
-import { divideRoomsByCityName } from '../../utils/commands';
+import { divideRoomsByCityName } from '../../utils/offers';
 import { useEffect } from 'react';
 import { fetchFavoriteOffersAction } from '../../store/favorites-process/favorites-async-action';
 
@@ -16,7 +16,6 @@ function Favorite(): JSX.Element {
   const favoriteOffersStatus = useAppSelector(getFavoriteOffersStatus);
   const cities = divideRoomsByCityName(favoriteOffers);
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(fetchFavoriteOffersAction());
@@ -27,7 +26,7 @@ function Favorite(): JSX.Element {
   }
 
   if (!cities.length) {
-    navigate(AppRoute.FavoritesEmpty);
+    return <FavoritesEmpty />;
   }
 
   return (

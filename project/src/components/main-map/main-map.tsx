@@ -4,7 +4,7 @@ import { useRef, useEffect, memo } from 'react';
 import { Marker, LatLngLiteral, Layer } from 'leaflet';
 import { Offer, Location } from '../../types/offers';
 import { CURRENT_CUSTOM_ICON, ACTIVE_CUSTOM_ICON } from '../../const';
-import { removeMarkers } from '../../utils/commands';
+import { removeMarkers } from '../../utils/map';
 import { selectorGetLocationCity } from '../../store/selector';
 
 import 'leaflet/dist/leaflet.css';
@@ -14,7 +14,7 @@ import { useAppSelector } from '../../hooks';
 
 type MainMapProps = {
   offers: Offers,
-  activeCardRoomId?: ActiveCardRoomId,
+  activeCardRoomId: ActiveCardRoomId,
 };
 
 function MainMap(props: MainMapProps): JSX.Element {

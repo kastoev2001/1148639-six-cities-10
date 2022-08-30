@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
+import { AxiosError } from 'axios';
 import { NameSpace } from '../../const';
+import { notifyUserOfAnError } from '../../utils/user';
 import { postNewCommentAction } from './new-comment-async-aciton';
 
 type InitialState = {
@@ -34,8 +36,12 @@ export const newCommentProcess = createSlice({
         state.newCommentStatus.isSuccessed = true;
         state.newCommentStatus.isLoaded = false;
       })
-      .addCase(postNewCommentAction.rejected, (state) => {
+      .addCase(postNewCommentAction.rejected, (state, action) => {
+        const error = action.payload as AxiosError;
+
         state.newCommentStatus.isRejected = true;
+
+        notifyUserOfAnError(error);
       });
   },
 });

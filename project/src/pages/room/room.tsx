@@ -11,7 +11,7 @@ import Header from '../../components/header/header';
 
 import { AuthorizationStatus, ButtonFavoriteConfig } from '../../const';
 import { useParams } from 'react-router-dom';
-import { defineRating } from '../../utils/commands';
+import { defineRating } from '../../utils/offers';
 import FormComment from '../../components/room/form-comment/form-comment';
 import { useEffect } from 'react';
 import { fetchOfferAction } from '../../store/offer-process/offer-async-action';
@@ -159,7 +159,9 @@ function Room(): JSX.Element {
               </div>
             </div>
             <section className="property__map map">
-              <MainMap offers={nearbyOffers} />
+
+              <MainMap offers={[...nearbyOffers, activeOffer]} activeCardRoomId={id} />
+
             </section>
           </section>
           <div className="container">

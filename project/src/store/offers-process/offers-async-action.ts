@@ -1,19 +1,23 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { AppDispatch } from '../../types/state';
 import { Offers } from '../../types/offers';
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 import { State } from '../../types/state';
 import { APIRoute } from '../../const';
 
-export const fetchOffersAction = createAsyncThunk<Offers, undefined, {
+export const fetchOffersAction = createAsyncThunk<Offers, AxiosError, {
   dispatch: AppDispatch,
   state: State,
   extra: AxiosInstance,
 }>(
   'data/fetchOffers',
-  async (_arg, {extra: api}) => {
-    const { data } = await api.get<Offers>(APIRoute.Hotels);
+  async (_arg, {extra: api, rejectWithValue}) => {
+    try {
+      const { data } = await api.get<Offers>(APIRoute.Hotels);
 
-    return data;
+      return data;
+    } catch(error) {
+      return rejectWithValue(error);
+    }
   }
 );

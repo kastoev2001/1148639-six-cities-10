@@ -3,6 +3,8 @@ import { NameSpace } from '../../const';
 import { Offer } from '../../types/offers';
 import { fetchOfferAction } from './offer-async-action';
 import { toggleFavoriteAction } from '../favorites-process/favorites-async-action';
+import { notifyUserOfAnError } from '../../utils/user';
+import { AxiosError } from 'axios';
 
 type ActiveOffer = Offer | null;
 
@@ -34,14 +36,18 @@ export const offerProcess = createSlice({
         state.isOfferLoaded = true;
       })
       .addCase(fetchOfferAction.fulfilled, (state, action) => {
-        const offer = action.payload;
+        const offer = action.payload as Offer;
 
         state.activeOffer = offer;
         state.isOfferLoaded = false;
       })
-      .addCase(fetchOfferAction.rejected, (state) => {
+      .addCase(fetchOfferAction.rejected, (state, action) => {
+        const error = action.payload as AxiosError;
+
         state.activeOffer = null;
         state.isOfferLoaded = false;
+
+        notifyUserOfAnError(error);
       })
       .addCase(toggleFavoriteAction.fulfilled, (state) => {
         const activeOffer = state.activeOffer;

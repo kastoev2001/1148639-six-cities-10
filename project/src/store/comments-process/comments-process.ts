@@ -1,8 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { NameSpace } from '../../const';
+import { NameSpace, MAX_COMMENT } from '../../const';
 import { Comments } from '../../types/comments';
 import { fetchCommentsAction } from './comments-async-action';
 import { postNewCommentAction } from '../new-comment-process/new-comment-async-aciton';
+import { commentsSortHighTolow } from '../../utils/comments';
+import { AxiosError } from 'axios';
+import { notifyUserOfAnError } from '../../utils/user';
 
 type CommentsState = {
   comments: Comments,
@@ -24,17 +27,26 @@ export const commentsProcess = createSlice({
         state.isCommentsLoaded = true;
       })
       .addCase(fetchCommentsAction.fulfilled, (state, action) => {
-        const comments = action.payload;
-        state.comments = comments;
+        const comments = action.payload as Comments;
+        const commentsSorted = comments.sort(commentsSortHighTolow);
+        const commentsSliced = commentsSorted.slice(0, MAX_COMMENT);
+
+        state.comments = commentsSliced;
       })
-      .addCase(fetchCommentsAction.rejected, (state) => {
+      .addCase(fetchCommentsAction.rejected, (state, action) => {
+        const error = action.payload as AxiosError;
+
         state.comments = [];
         state.isCommentsLoaded = false;
+
+        notifyUserOfAnError(error);
       })
       .addCase(postNewCommentAction.fulfilled, (state, action) => {
-        const newComments = action.payload;
+        const newComments = action.payload as Comments;
+        const newCommentsSorted = newComments.sort(commentsSortHighTolow);
+        const newCommentsSliced = newCommentsSorted.slice(0, MAX_COMMENT);
 
-        state.comments = newComments;
+        state.comments = newCommentsSliced;
       });
   },
 });

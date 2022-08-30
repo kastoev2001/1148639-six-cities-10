@@ -1,4 +1,15 @@
 import { Icon } from 'leaflet';
+import { StatusCodes } from 'http-status-codes';
+
+export const MAX_RATING = 5;
+
+export const StateCodeMapping: Record<number, boolean> = {
+  [StatusCodes.BAD_REQUEST]: true,
+  [StatusCodes.UNAUTHORIZED]: true,
+  [StatusCodes.NOT_FOUND]: true,
+};
+
+export const MAX_COMMENT = 10;
 
 export const ButtonFavoriteConfig = {
   Card: {
@@ -14,7 +25,6 @@ export const ButtonFavoriteConfig = {
 export enum AppRoute {
   Root = '/',
   Favorites = '/favorites',
-  FavoritesEmpty = '/not-favorites',
   Login = '/login',
   Offer = '/offer',
 }

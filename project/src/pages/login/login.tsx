@@ -1,20 +1,14 @@
 import { AppRoute, AuthorizationStatus } from '../../const';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Navigate } from 'react-router-dom';
 import { AuthData } from '../../types/auth-data';
 import { FormEvent, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { loginAction } from '../../store/user-process/user-async-action';
-import { checkLoginFormValidity } from '../../utils/commands';
-import { useNavigate } from 'react-router-dom';
+import { checkLoginFormValidity } from '../../utils/user';
 import { getAuthorizationStatus } from '../../store/user-process/user-selector';
 
 function LoginScreen(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
-  const navigate = useNavigate();
-
-  if (authorizationStatus === AuthorizationStatus.Auth) {
-    navigate(AppRoute.Root);
-  }
 
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
@@ -43,6 +37,10 @@ function LoginScreen(): JSX.Element {
 
     }
   };
+
+  if (authorizationStatus === AuthorizationStatus.Auth) {
+    return <Navigate to={AppRoute.Root} />;
+  }
 
   return (
     <div className="page page--gray page--login">
