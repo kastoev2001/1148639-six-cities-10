@@ -1,7 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { AxiosError } from 'axios';
 import { NameSpace } from '../../const';
-import { notifyUserOfAnError } from '../../utils/user';
 import { postNewCommentAction } from './new-comment-async-aciton';
 
 type InitialState = {
