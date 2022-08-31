@@ -3,7 +3,7 @@ import { AxiosError, AxiosInstance } from 'axios';
 import { APIRoute } from '../../const';
 import { Offer, Offers } from '../../types/offers';
 import { AppDispatch, State } from '../../types/state';
-
+import { notifyUserOfAnError } from '../../utils/user';
 
 export const toggleFavoriteAction = createAsyncThunk<
   Offer | AxiosError,
@@ -25,7 +25,8 @@ export const toggleFavoriteAction = createAsyncThunk<
       const { data } = await api.post<Offer>(requestFavorite);
 
       return data;
-    } catch(error) {
+    } catch (error) {
+      notifyUserOfAnError(error as AxiosError);
       return rejectWithValue(error);
     }
   }
@@ -41,13 +42,14 @@ export const fetchFavoriteOffersAction = createAsyncThunk<
   }
 >(
   'favorite/fetchFavoriteOffers',
-  async (_arg, {extra: api, rejectWithValue}) => {
+  async (_arg, { extra: api, rejectWithValue }) => {
 
     try {
       const { data } = await api.get<Offers>(APIRoute.Favorite);
 
       return data;
-    } catch(error) {
+    } catch (error) {
+      notifyUserOfAnError(error as AxiosError);
       return rejectWithValue(error);
     }
   }

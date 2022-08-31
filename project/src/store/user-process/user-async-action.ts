@@ -11,6 +11,7 @@ import { resetOffer } from '../offer-process/offer-process';
 import { resetFavoriteOffers } from '../favorites-process/favorites-process';
 import { resetNearbyOffers } from '../nearby-offers-process/nearby-offers-process';
 import { AxiosError } from 'axios';
+import { notifyUserOfAnError } from '../../utils/user';
 
 export const checkAuthAction = createAsyncThunk<
   string, void,
@@ -28,8 +29,8 @@ export const checkAuthAction = createAsyncThunk<
   );
 
 export const loginAction = createAsyncThunk<
-UserEmail | AxiosError,
-AuthData,
+  UserEmail | AxiosError,
+  AuthData,
   {
     dispatch: AppDispatch,
     state: State,
@@ -37,7 +38,7 @@ AuthData,
   }
 >(
   'user/login',
-  async ({login: email, password}, {extra: api, rejectWithValue}) => {
+  async ({ login: email, password }, { extra: api, rejectWithValue }) => {
     try {
       const { data: { token, email: userEmail } } = await api.post<UserData>(APIRoute.Login, { email, password });
 
@@ -45,6 +46,7 @@ AuthData,
 
       return userEmail;
     } catch (error) {
+      notifyUserOfAnError(error as AxiosError);
       return rejectWithValue(error);
     }
   }
@@ -56,7 +58,7 @@ export const logoutAction = createAsyncThunk<void | AxiosError, undefined, {
   extra: AxiosInstance,
 }>(
   'user/logout',
-  async (_arg, {dispatch, extra: api, rejectWithValue}) => {
+  async (_arg, { dispatch, extra: api, rejectWithValue }) => {
     try {
       await api.delete(APIRoute.Logout);
 
@@ -65,7 +67,7 @@ export const logoutAction = createAsyncThunk<void | AxiosError, undefined, {
       dispatch(resetOffer());
       dispatch(resetFavoriteOffers());
       dispatch(resetNearbyOffers());
-    } catch(error) {
+    } catch (error) {
       return rejectWithValue(error);
     }
   }

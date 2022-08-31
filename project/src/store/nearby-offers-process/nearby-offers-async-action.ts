@@ -1,12 +1,13 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 import { APIRoute } from '../../const';
 import { Offers } from '../../types/offers';
 import { AppDispatch } from '../../types/state';
 import { State } from '../../types/state';
+import { notifyUserOfAnError } from '../../utils/user';
 
 export const fetchNearbyOffersAction = createAsyncThunk<
-  Offers | AxiosInstance,
+  Offers | AxiosError,
   string,
   {
     dispatch: AppDispatch,
@@ -22,7 +23,8 @@ export const fetchNearbyOffersAction = createAsyncThunk<
       const { data } = await api.get<Offers>(requestNearbyOffers);
 
       return data;
-    } catch(error) {
+    } catch (error) {
+      notifyUserOfAnError(error as AxiosError);
       return rejectWithValue(error);
     }
   }

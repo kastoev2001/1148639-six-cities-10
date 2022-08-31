@@ -3,26 +3,16 @@ import { NameSpace } from '../../const';
 import { Offer, Offers } from '../../types/offers';
 import { fetchFavoriteOffersAction, toggleFavoriteAction } from './favorites-async-action';
 import { removeOffer } from '../../utils/offers';
-import { notifyUserOfAnError } from '../../utils/user';
-import { AxiosError } from 'axios';
 
 
 type InitialState = {
   favoriteOffers: Offers,
-  favoriteOffersStatus: {
-    isLoaded: boolean,
-    isRejected: boolean,
-    isSuccessed: boolean,
-  }
+  isFavoriteOffersLoaded: boolean,
 }
 
 const initialState: InitialState = {
   favoriteOffers: [],
-  favoriteOffersStatus: {
-    isLoaded: false,
-    isRejected: false,
-    isSuccessed: false,
-  },
+  isFavoriteOffersLoaded: false,
 };
 
 export const favoritesProcess = createSlice({
@@ -39,17 +29,13 @@ export const favoritesProcess = createSlice({
         const favoriteOffers = action.payload as Offers;
 
         state.favoriteOffers = favoriteOffers;
-        state.favoriteOffersStatus.isLoaded = false;
+        state.isFavoriteOffersLoaded = false;
       })
       .addCase(fetchFavoriteOffersAction.pending, (state) => {
-        state.favoriteOffersStatus.isLoaded = true;
+        state.isFavoriteOffersLoaded = true;
       })
-      .addCase(fetchFavoriteOffersAction.rejected, (state, action) => {
-        const error = action.payload as AxiosError;
-
-        state.favoriteOffersStatus.isLoaded = false;
-
-        notifyUserOfAnError(error);
+      .addCase(fetchFavoriteOffersAction.rejected, (state) => {
+        state.isFavoriteOffersLoaded = false;
       })
       .addCase(toggleFavoriteAction.fulfilled, (state, action) => {
         const { favoriteOffers } = state;
@@ -57,11 +43,6 @@ export const favoritesProcess = createSlice({
         const replacedesOffers = removeOffer(favoriteOffers, replaceableOffer);
 
         state.favoriteOffers = replacedesOffers;
-      })
-      .addCase(toggleFavoriteAction.rejected, (_arg, action) => {
-        const error = action.payload as AxiosError;
-
-        notifyUserOfAnError(error);
       });
   },
 });

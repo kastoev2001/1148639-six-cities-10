@@ -4,6 +4,7 @@ import { APIRoute } from '../../const';
 import { Comments } from '../../types/comments';
 import { NewComment } from '../../types/new-comment-data';
 import { AppDispatch, State } from '../../types/state';
+import { notifyUserOfAnError } from '../../utils/user';
 
 export const postNewCommentAction = createAsyncThunk<
   Comments | AxiosError,
@@ -25,7 +26,8 @@ export const postNewCommentAction = createAsyncThunk<
       const { data } = await api.post<Comments>(requestNewComment, newComment);
 
       return data;
-    } catch(error) {
+    } catch (error) {
+      notifyUserOfAnError(error as AxiosError);
       return rejectWithValue(error);
     }
   }

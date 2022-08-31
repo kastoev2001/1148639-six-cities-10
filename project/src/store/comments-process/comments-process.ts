@@ -4,8 +4,6 @@ import { Comments } from '../../types/comments';
 import { fetchCommentsAction } from './comments-async-action';
 import { postNewCommentAction } from '../new-comment-process/new-comment-async-aciton';
 import { commentsSortHighTolow } from '../../utils/comments';
-import { AxiosError } from 'axios';
-import { notifyUserOfAnError } from '../../utils/user';
 
 type CommentsState = {
   comments: Comments,
@@ -32,14 +30,11 @@ export const commentsProcess = createSlice({
         const commentsSliced = commentsSorted.slice(0, MAX_COMMENT);
 
         state.comments = commentsSliced;
+        state.isCommentsLoaded = false;
       })
-      .addCase(fetchCommentsAction.rejected, (state, action) => {
-        const error = action.payload as AxiosError;
-
+      .addCase(fetchCommentsAction.rejected, (state) => {
         state.comments = [];
         state.isCommentsLoaded = false;
-
-        notifyUserOfAnError(error);
       })
       .addCase(postNewCommentAction.fulfilled, (state, action) => {
         const newComments = action.payload as Comments;

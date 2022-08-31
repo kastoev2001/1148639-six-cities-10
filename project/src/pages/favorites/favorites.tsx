@@ -5,7 +5,7 @@ import FavoritesEmpty from '../favorites-empty/favorites-empty';
 
 import { NavLink } from 'react-router-dom';
 import { AppRoute } from '../../const';
-import { getFavoriteOffers, getFavoriteOffersStatus } from '../../store/favorites-process/favorites-selector';
+import { getFavoriteOffers, getIsFavoriteOffersLoaded } from '../../store/favorites-process/favorites-selector';
 import { useAppSelector, useAppDispatch } from '../../hooks/index';
 import { divideRoomsByCityName } from '../../utils/offers';
 import { useEffect } from 'react';
@@ -13,7 +13,7 @@ import { fetchFavoriteOffersAction } from '../../store/favorites-process/favorit
 
 function Favorite(): JSX.Element {
   const favoriteOffers = useAppSelector(getFavoriteOffers);
-  const favoriteOffersStatus = useAppSelector(getFavoriteOffersStatus);
+  const isFavoriteOffersLoaded = useAppSelector(getIsFavoriteOffersLoaded);
   const cities = divideRoomsByCityName(favoriteOffers);
   const dispatch = useAppDispatch();
 
@@ -21,7 +21,7 @@ function Favorite(): JSX.Element {
     dispatch(fetchFavoriteOffersAction());
   }, [dispatch]);
 
-  if (favoriteOffersStatus.isLoaded) {
+  if (isFavoriteOffersLoaded) {
     return <Loading />;
   }
 

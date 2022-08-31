@@ -4,6 +4,7 @@ import { AppDispatch } from '../../types/state';
 import { State } from '../../types/state';
 import { AxiosError, AxiosInstance } from 'axios';
 import { APIRoute } from '../../const';
+import { notifyUserOfAnError } from '../../utils/user';
 
 export const fetchCommentsAction = createAsyncThunk<
   Comments | AxiosError,
@@ -23,6 +24,7 @@ export const fetchCommentsAction = createAsyncThunk<
 
         return data;
       } catch (error) {
+        notifyUserOfAnError(error as AxiosError);
         return rejectWithValue(error);
       }
     }
