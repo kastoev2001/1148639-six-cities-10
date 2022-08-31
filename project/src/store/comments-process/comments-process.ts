@@ -32,6 +32,7 @@ export const commentsProcess = createSlice({
         const commentsSliced = commentsSorted.slice(0, MAX_COMMENT);
 
         state.comments = commentsSliced;
+        state.isCommentsLoaded = false;
       })
       .addCase(fetchCommentsAction.rejected, (state, action) => {
         const error = action.payload as AxiosError;

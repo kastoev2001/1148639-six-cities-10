@@ -49,15 +49,17 @@ export const offerProcess = createSlice({
 
         notifyUserOfAnError(error);
       })
-      .addCase(toggleFavoriteAction.fulfilled, (state) => {
-        const activeOffer = state.activeOffer;
+      .addCase(toggleFavoriteAction.fulfilled, (state, action) => {
+        const offer = action.payload as Offer;
+        const { activeOffer } = state;
 
         if (activeOffer) {
-          const {isFavorite} = activeOffer;
+          if (offer.id === activeOffer.id) {
+            const { isFavorite } = activeOffer;
 
-          activeOffer.isFavorite = !isFavorite;
+            activeOffer.isFavorite = !isFavorite;
+          }
         }
-
       });
   },
 });

@@ -1,3 +1,4 @@
+
 import NotPage from '../not-page/not-page';
 import ListNearestRooms from '../../components/room/list-nearest-rooms/list-nearest-rooms';
 import RoomGallery from '../../components/room/room-gallery/room-gallery';
@@ -43,7 +44,7 @@ function Room(): JSX.Element {
     }
   }, [dispatch, paramsId]);
 
-  if (isOfferLoaded && isCommentsLoaded && isNearbyOffersLoaded) {
+  if (isOfferLoaded || isCommentsLoaded || isNearbyOffersLoaded) {
     return <Loading />;
   }
 
