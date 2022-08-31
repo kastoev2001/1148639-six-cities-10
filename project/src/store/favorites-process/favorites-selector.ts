@@ -3,5 +3,5 @@ import { State } from '../../types/state';
 export const getFavoriteOffers = (state: State) =>
   state.favorites.favoriteOffers;
 
-export const getFavoriteOffersStatus = (state: State) =>
-  state.favorites.favoriteOffersStatus;
+export const getIsFavoriteOffersLoaded = (state: State) =>
+  state.favorites.isFavoriteOffersLoaded;

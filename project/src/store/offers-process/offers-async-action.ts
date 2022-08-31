@@ -4,6 +4,7 @@ import { Offers } from '../../types/offers';
 import { AxiosError, AxiosInstance } from 'axios';
 import { State } from '../../types/state';
 import { APIRoute } from '../../const';
+import { notifyUserOfAnError } from '../../utils/user';
 
 export const fetchOffersAction = createAsyncThunk<
   Offers | AxiosError,
@@ -19,6 +20,7 @@ export const fetchOffersAction = createAsyncThunk<
 
         return data;
       } catch (error) {
+        notifyUserOfAnError(error as AxiosError);
         return rejectWithValue(error);
       }
     }

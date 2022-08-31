@@ -3,8 +3,6 @@ import { AuthorizationStatus } from '../../const';
 import { UserEmail } from '../../types/state';
 import { NameSpace } from '../../const';
 import { checkAuthAction, loginAction, logoutAction } from './user-async-action';
-import { notifyUserOfAnError } from '../../utils/user';
-import { AxiosError } from 'axios';
 
 type InitialState = {
   authorizationStatus: AuthorizationStatus,
@@ -42,19 +40,9 @@ export const userProcess = createSlice({
         state.userEmail = userEmail;
         state.authorizationStatus = AuthorizationStatus.Auth;
       })
-      .addCase(loginAction.rejected, (_arg, action) => {
-        const error = action.payload as AxiosError;
-
-        notifyUserOfAnError(error);
-      })
       .addCase(logoutAction.fulfilled, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
         state.userEmail = '';
-      })
-      .addCase(logoutAction.rejected, (_arg, action) => {
-        const error = action.payload as AxiosError;
-
-        notifyUserOfAnError(error);
       });
   }
 });

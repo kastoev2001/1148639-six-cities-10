@@ -36,12 +36,8 @@ export const newCommentProcess = createSlice({
         state.newCommentStatus.isSuccessed = true;
         state.newCommentStatus.isLoaded = false;
       })
-      .addCase(postNewCommentAction.rejected, (state, action) => {
-        const error = action.payload as AxiosError;
-
+      .addCase(postNewCommentAction.rejected, (state) => {
         state.newCommentStatus.isRejected = true;
-
-        notifyUserOfAnError(error);
       });
   },
 });
