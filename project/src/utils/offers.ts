@@ -81,3 +81,7 @@ export const divideRoomsByCityName = (offers: Offers): Cities => {
 
   return cities;
 };
+
+export const changePoreptyIsFavorite = (offer: Offer) => ({
+	...offer
+})
