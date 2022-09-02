@@ -1,4 +1,4 @@
-import { postNewCommentAction } from './new-comment-async-aciton';
+import { postNewCommentAction } from './new-comment-async-action';
 import { newCommentProcess } from './new-comment-process';
 
 describe('Reducer: newCommentProcess.', () => {

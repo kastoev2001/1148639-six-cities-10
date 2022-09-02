@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace, MAX_COMMENT } from '../../const';
 import { Comments } from '../../types/comments';
 import { fetchCommentsAction } from './comments-async-action';
-import { postNewCommentAction } from '../new-comment-process/new-comment-async-aciton';
+import { postNewCommentAction } from '../new-comment-process/new-comment-async-action';
 import { commentsSortHighTolow } from '../../utils/comments';
 
 type CommentsState = {

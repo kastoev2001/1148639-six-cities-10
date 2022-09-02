@@ -1,4 +1,5 @@
 import { date, datatype, internet, name, random, address, image } from 'faker';
+import { AuthData } from '../types/auth-data';
 import { UserEmail } from '../types/state';
 
 export const getFakeComments = () =>
@@ -54,3 +55,14 @@ export const getFakeOffers = () =>
 
 	export const getFakeUserEmail = (): UserEmail => 
 	internet.email();
+
+	export const getFakeNewComment = () => ({
+		comment: random.words(25),
+		rating: datatype.number(5),
+	});
+	
+export const getFakeAuthData = (): AuthData => ({
+		login: internet.email(),
+		password: `${random.words(2)}${datatype.number(10)}`
+	});
+	

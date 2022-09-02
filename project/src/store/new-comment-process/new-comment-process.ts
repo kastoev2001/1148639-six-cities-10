@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { NameSpace } from '../../const';
-import { postNewCommentAction } from './new-comment-async-aciton';
+import { postNewCommentAction } from './new-comment-async-action';
 
 type InitialState = {
   newCommentStatus: {

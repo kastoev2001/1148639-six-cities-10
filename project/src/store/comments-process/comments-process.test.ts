@@ -1,7 +1,7 @@
 import { commentsProcess } from './comments-process';
 import { getFakeComments } from '../../utils/mocks';
 import { fetchCommentsAction } from './comments-async-action';
-import { postNewCommentAction } from '../new-comment-process/new-comment-async-aciton';
+import { postNewCommentAction } from '../new-comment-process/new-comment-async-action';
 
 const mockComments = getFakeComments();
 
