@@ -19,12 +19,12 @@ function Main(): JSX.Element {
   const countRooms = offersSorted.length;
   const offersSortedCount = offersSorted.length;
 
-  const displatch = useAppDispatch();
+  const dispatch = useAppDispatch();
   const [activeCardRoomId, setActiveCardRoomId] = useState<ActiveCardRoomId>(null);
 
   const onChangeCity = useCallback((city: string): void => {
-    displatch(changeCity(city));
-  }, []);
+    dispatch(changeCity(city));
+  }, [dispatch]);
 
   const onCardRoomActive = useCallback((id: ActiveCardRoomId) => {
     setActiveCardRoomId(id);
