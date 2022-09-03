@@ -33,6 +33,13 @@ describe('Component: FormComent', () => {
       </Provider>
     );
 
-    expect(screen.getAllByTestId(/input/i)).toHaveLength(5);
+    const ratings: HTMLInputElement[] = screen.getAllByTestId(/input/i);
+    const textareaElement: HTMLTextAreaElement = screen.getByDisplayValue('');
+    const buttonElement: HTMLButtonElement = screen.getByText(/Submit/);
+
+    expect(textareaElement).toBeInTheDocument();
+    expect(ratings).toHaveLength(5);
+    expect(buttonElement.disabled).toBe(true);
+
   });
 });

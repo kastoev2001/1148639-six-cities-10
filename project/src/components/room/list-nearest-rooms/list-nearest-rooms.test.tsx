@@ -28,8 +28,12 @@ describe('Component: listNearestRooms', () => {
       </Provider>
     );
 
-    expect(screen.getByText(new RegExp(`${firstOffer.title}`, 'i'))).toBeInTheDocument();
-    expect(screen.getByText(new RegExp(`${secondOffer.title}`, 'i'))).toBeInTheDocument();
-    expect(screen.getByText(new RegExp(`${thirdOffer.title}`, 'i'))).toBeInTheDocument();
+    const firstOfferElement = screen.getByText(new RegExp(`${firstOffer.title}`, 'i'));
+    const secondOfferElement = screen.getByText(new RegExp(`${secondOffer.title}`, 'i'));
+    const thirdOfferElement = screen.getByText(new RegExp(`${thirdOffer.title}`, 'i'));
+
+    expect(firstOfferElement).toBeInTheDocument();
+    expect(secondOfferElement).toBeInTheDocument();
+    expect(thirdOfferElement).toBeInTheDocument();
   });
 });

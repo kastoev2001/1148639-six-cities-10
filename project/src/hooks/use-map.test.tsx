@@ -4,19 +4,20 @@ import useMap from './use-map';
 import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import {renderHook, act} from '@testing-library/react';
+import { renderHook } from '@testing-library/react';
 import { getFakeOffers } from '../utils/mocks';
 import { Map } from 'leaflet';
+import { MutableRefObject } from 'react';
 
 const mockOffers = getFakeOffers();
-const mockOffer = mockOffers[2]
+const mockOffer = mockOffers[2];
 
 const mockStore = configureMockStore();
 
 describe('Component: Header', () => {
-  it('Should render currently', async () => {		
-		const activeCardRoomId = 2;
-		const location = mockOffer.city.location
+  it('Should render currently', async () => {
+    const activeCardRoomId = 2;
+    const location = mockOffer.city.location;
     const store = mockStore({
       offers: { offers: mockOffers },
       city: { activeCity: 'Paris' },
@@ -24,24 +25,18 @@ describe('Component: Header', () => {
 
     render(
       <Provider store={store} >
-          <MainMap activeCardRoomId={activeCardRoomId} offers={mockOffers}/>
+        <MainMap activeCardRoomId={activeCardRoomId} offers={mockOffers} />
       </Provider>
     );
 
-		const mapRef = {
-			current: screen.getByTestId('map-container'),
-		};
-		const {result} = renderHook(async () => useMap(mapRef, location));
+    const mapRef: MutableRefObject<HTMLDivElement> = {
+      current: screen.getByTestId('map-container'),
+    };
+    const { result } = renderHook(async () => useMap(mapRef, location));
 
-		const map = await result.current;
+    const map = await result.current as Map;
 
-		if (map) {
-			expect(map.getZoom()).toBe(location.zoom);
-			expect(map.getCenter()).toEqual({lat: location.latitude, lng: location.longitude});
-
-			return;
-		}
-    
-		expect(map).toBeNull();
+    expect(map.getZoom()).toBe(location.zoom);
+    expect(map.getCenter()).toEqual({ lat: location.latitude, lng: location.longitude });
   });
 });

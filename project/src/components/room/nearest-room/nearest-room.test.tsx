@@ -27,6 +27,8 @@ describe('Component: NearestRoom', () => {
       </Provider>
     );
 
-    expect(screen.getByText(new RegExp(`${nearbyOffer.title}`, 'i'))).toBeInTheDocument();
+    const naerbyOfferElement = screen.getByText(new RegExp(`${nearbyOffer.title}`, 'i'));
+
+    expect(naerbyOfferElement).toBeInTheDocument();
   });
 });

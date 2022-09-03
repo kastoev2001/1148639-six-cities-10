@@ -20,14 +20,14 @@ type MainMapProps = {
 function MainMap(props: MainMapProps): JSX.Element {
   const { offers, activeCardRoomId } = props;
   const locationCity = useAppSelector(selectorGetLocationCity);
-  const mapRef = useRef(null);
+  const mapRef = useRef<HTMLDivElement | null>(null);
   const map = useMap(mapRef, locationCity);
 
   useEffect(() => {
     const markers: Layer[] = [];
     map
-      .then((map) => {
-        if (map && locationCity) {
+      .then((mapInstanse) => {
+        if (mapInstanse && locationCity) {
           offers.forEach((offer: Offer) => {
             const { latitude, longitude, zoom } = locationCity;
             const location: Location = offer.location;
@@ -39,22 +39,22 @@ function MainMap(props: MainMapProps): JSX.Element {
             const customIcon = offer.id === activeCardRoomId
               ? ACTIVE_CUSTOM_ICON
               : CURRENT_CUSTOM_ICON;
-    
+
             markers.push(marker);
-    
+
             marker.setIcon(customIcon);
-    
-            map.flyTo({ lat: latitude, lng: longitude }, zoom);
-            marker.addTo(map);
+
+            mapInstanse.flyTo({ lat: latitude, lng: longitude }, zoom);
+            marker.addTo(mapInstanse);
           });
         }
-    
+
         return () => {
-          if (map) {
-            removeMarkers(map, markers);
+          if (mapInstanse) {
+            removeMarkers(mapInstanse, markers);
           }
         };
-      })
+      });
   });
 
   return (

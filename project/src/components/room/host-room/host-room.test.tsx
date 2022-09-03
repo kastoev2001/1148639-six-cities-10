@@ -13,7 +13,9 @@ describe('Component: HostRoom', () => {
 
     render(<HostRoom host={host} description={description} />);
 
-    expect(screen.getByText(new RegExp(`${description}`, 'i'))).toBeInTheDocument();
+    const descriptionElement = screen.getByText(new RegExp(`${description}`, 'i'));
+
+    expect(descriptionElement).toBeInTheDocument();
     expect(screen.getByText(/Meet the host/i)).toBeInTheDocument();
   });
 });

@@ -20,7 +20,7 @@ describe('Component: MainMap', () => {
 
     render(
       <Provider store={store} >
-          <MainMap offers={mockOffers} activeCardRoomId={activeCardRoomId} />
+        <MainMap offers={mockOffers} activeCardRoomId={activeCardRoomId} />
       </Provider>
     );
 
