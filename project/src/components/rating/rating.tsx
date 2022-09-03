@@ -9,9 +9,10 @@ function Rating({ rating }: RatingProps): JSX.Element {
 
   return (
     <span
-		style={{ width: `${definedRating}%` }}
-		data-testid="rating"
-		></span>
+      style={{ width: `${definedRating}%` }}
+      data-testid="rating"
+    >
+    </span>
   );
 }
 

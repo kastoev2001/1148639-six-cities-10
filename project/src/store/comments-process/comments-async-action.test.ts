@@ -11,35 +11,35 @@ import thunk, { ThunkDispatch } from 'redux-thunk';
 const api = createAPI();
 const mockAPI = new MockAdapter(api);
 const mockComments = getFakeComments();
-const middleweres = [thunk.withExtraArgument(api)]
+const middleweres = [thunk.withExtraArgument(api)];
 
 const mockStore = configureMockStore<
-	State,
-	Action,
-	ThunkDispatch<State, typeof api, Action>
+  State,
+  Action,
+  ThunkDispatch<State, typeof api, Action>
 >(middleweres);
 
 describe('Async actions.', () => {
 
 
-	it('Should update propety comments when server return 200.', async () => {
-		const store = mockStore();
-		const mokeOfferId = String(mockComments[1].id)
-		const requestComments = `${APIRoute.Comments}/${mokeOfferId}`;
+  it('Should update propety comments when server return 200.', async () => {
+    const store = mockStore();
+    const mokeOfferId = String(mockComments[1].id);
+    const requestComments = `${APIRoute.Comments}/${mokeOfferId}`;
 
-		mockAPI
-			.onGet(requestComments)
-			.reply(200, { data: mockComments });
+    mockAPI
+      .onGet(requestComments)
+      .reply(200, { data: mockComments });
 
-		expect(store.getActions()).toEqual([]);
+    expect(store.getActions()).toEqual([]);
 
-		await store.dispatch(fetchCommentsAction(mokeOfferId));
+    await store.dispatch(fetchCommentsAction(mokeOfferId));
 
-		const actions = store.getActions().map(({ type }) => type);
+    const actions = store.getActions().map(({ type }) => type);
 
-		expect(actions).toEqual([
-			fetchCommentsAction.pending.type,
-			fetchCommentsAction.fulfilled.type,
-		])
-	});
+    expect(actions).toEqual([
+      fetchCommentsAction.pending.type,
+      fetchCommentsAction.fulfilled.type,
+    ]);
+  });
 });

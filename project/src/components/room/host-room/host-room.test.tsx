@@ -8,12 +8,12 @@ const mockOffer = mockOffers[8];
 
 
 describe('Component: HostRoom', () => {
-	it('Should render currently', () => {
-		const {host, description} = mockOffer;
+  it('Should render currently', () => {
+    const { host, description } = mockOffer;
 
-		render(<HostRoom host={host} description={description} />);
+    render(<HostRoom host={host} description={description} />);
 
-		expect(screen.getByText(new RegExp(`${description}`, 'i'))).toBeInTheDocument();
-		expect(screen.getByText(/Meet the host/i)).toBeInTheDocument();
-	})
-})
+    expect(screen.getByText(new RegExp(`${description}`, 'i'))).toBeInTheDocument();
+    expect(screen.getByText(/Meet the host/i)).toBeInTheDocument();
+  });
+});

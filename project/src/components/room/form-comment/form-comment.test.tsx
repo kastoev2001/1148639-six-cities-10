@@ -12,25 +12,27 @@ const mockOffer = mockOffers[3];
 const mockStore = configureMockStore();
 
 describe('Component: FormComent', () => {
-	it('Should render currently', () => {
-		const offerId = mockOffer.id;
-		const store = mockStore({
-			newComment: { newCommentStatus: {
-				isloaded: false,
-				isSuccessed: false,
-				isRejected: false
-			} },
-			offers: { offers: mockOffers }
-		})
+  it('Should render currently', () => {
+    const offerId = mockOffer.id;
+    const store = mockStore({
+      newComment: {
+        newCommentStatus: {
+          isloaded: false,
+          isSuccessed: false,
+          isRejected: false
+        }
+      },
+      offers: { offers: mockOffers },
+    });
 
-		render(
-			<Provider store={store} >
-				<BrowserRouter>
-					<FormComent offerId={offerId}/>
-				</BrowserRouter>
-			</Provider>
-		);
+    render(
+      <Provider store={store} >
+        <BrowserRouter>
+          <FormComent offerId={offerId} />
+        </BrowserRouter>
+      </Provider>
+    );
 
-		expect(screen.getAllByTestId(/input/i)).toHaveLength(5);
-	})
-})
+    expect(screen.getAllByTestId(/input/i)).toHaveLength(5);
+  });
+});

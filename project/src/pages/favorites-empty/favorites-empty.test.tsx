@@ -14,22 +14,22 @@ const mockStore = configureMockStore();
 
 
 describe('Component: FavoritesEmpty', () => {
-	it('Should render currently', () => {
-		const store = mockStore({
-			user: { authorizationStatus: AuthorizationStatus.Auth },
-			offers: { offers: mockOffers }
-		});
+  it('Should render currently', () => {
+    const store = mockStore({
+      user: { authorizationStatus: AuthorizationStatus.Auth },
+      offers: { offers: mockOffers }
+    });
 
-		render(
-			<Provider store={store} >
-				<BrowserRouter>
-					<FavoritesEmpty />
-				</BrowserRouter>
-			</Provider>
-		);
+    render(
+      <Provider store={store} >
+        <BrowserRouter>
+          <FavoritesEmpty />
+        </BrowserRouter>
+      </Provider>
+    );
 
-		expect(screen.getByText(/Save properties to narrow down search or plan your future trips/i)).toBeInTheDocument();
-		expect(screen.getByText(/Nothing yet saved./i)).toBeInTheDocument();
-		expect(screen.getByText(/Sign Out/i)).toBeInTheDocument();
-	})
-})
+    expect(screen.getByText(/Save properties to narrow down search or plan your future trips/i)).toBeInTheDocument();
+    expect(screen.getByText(/Nothing yet saved./i)).toBeInTheDocument();
+    expect(screen.getByText(/Sign Out/i)).toBeInTheDocument();
+  });
+});

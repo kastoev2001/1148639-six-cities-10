@@ -14,31 +14,31 @@ const middleweres = [thunk.withExtraArgument(api)];
 const mockOffers = getFakeOffers();
 
 const mockStore = configureMockStore<
-	State,
-	Action,
-	ThunkDispatch<State, typeof api, Action>
+  State,
+  Action,
+  ThunkDispatch<State, typeof api, Action>
 >(middleweres);
 
 describe('Async action.', () => {
-	it('Should update propety nearbyOffers when server return 200.', async () => {
-		const store = mockStore();
-		const offerId = String(mockOffers[0].id);
-		const requestNearbyOffers = `${APIRoute.Hotels}/${offerId}/nearby`;
+  it('Should update propety nearbyOffers when server return 200.', async () => {
+    const store = mockStore();
+    const offerId = String(mockOffers[0].id);
+    const requestNearbyOffers = `${APIRoute.Hotels}/${offerId}/nearby`;
 
-		mockAPI
-			.onGet(requestNearbyOffers)
-			.reply(200, { date: mockOffers });
+    mockAPI
+      .onGet(requestNearbyOffers)
+      .reply(200, { date: mockOffers });
 
-		expect(store.getActions()).toEqual([]);
+    expect(store.getActions()).toEqual([]);
 
-		await store.dispatch(fetchNearbyOffersAction(offerId));
+    await store.dispatch(fetchNearbyOffersAction(offerId));
 
-		const actions = store.getActions().map(({ type }) => type);
+    const actions = store.getActions().map(({ type }) => type);
 
-		expect(actions)
-			.toEqual([
-				fetchNearbyOffersAction.pending.type,
-				fetchNearbyOffersAction.fulfilled.type,
-			]);
-	});
+    expect(actions)
+      .toEqual([
+        fetchNearbyOffersAction.pending.type,
+        fetchNearbyOffersAction.fulfilled.type,
+      ]);
+  });
 });

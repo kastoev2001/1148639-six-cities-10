@@ -1,6 +1,6 @@
 type RoomImageProps = {
   image: string,
-	id: number
+  id: number
 };
 
 function RoomImage(props: RoomImageProps): JSX.Element {

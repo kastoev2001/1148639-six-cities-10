@@ -13,34 +13,34 @@ const mockAPI = new MockAdapter(api);
 const mockOffer = getFakeOffers()[0];
 const mockNewComment = getFakeNewComment();
 const mockComments = getFakeComments();
-const middleweres = [thunk.withExtraArgument(api)]
+const middleweres = [thunk.withExtraArgument(api)];
 
 const mockStore = configureMockStore<
-	State,
-	Action,
-	ThunkDispatch<State, typeof api, Action>
+  State,
+  Action,
+  ThunkDispatch<State, typeof api, Action>
 >(middleweres);
 
 describe('Async action.', () => {
-	it('Should update propety newCommentLoaded when server status 200.', async () => {
-		const store = mockStore();
-		const offerId = mockOffer.id;
+  it('Should update propety newCommentLoaded when server status 200.', async () => {
+    const store = mockStore();
+    const offerId = mockOffer.id;
 
     const requestNewComment = `${APIRoute.Comments}/${offerId}`;
 
-		mockAPI
-			.onPost(requestNewComment, mockNewComment)
-			.reply(200, { data: mockComments});
+    mockAPI
+      .onPost(requestNewComment, mockNewComment)
+      .reply(200, { data: mockComments });
 
-		expect(store.getActions()).toEqual([]);
+    expect(store.getActions()).toEqual([]);
 
-		await store.dispatch(postNewCommentAction({id: offerId, newComment: mockNewComment}));
+    await store.dispatch(postNewCommentAction({ id: offerId, newComment: mockNewComment }));
 
-		const actions = store.getActions().map(({type}) => type);
+    const actions = store.getActions().map(({ type }) => type);
 
-		expect(actions).toEqual([
-			postNewCommentAction.pending.type,
-			postNewCommentAction.fulfilled.type,
-		]);
-	});
+    expect(actions).toEqual([
+      postNewCommentAction.pending.type,
+      postNewCommentAction.fulfilled.type,
+    ]);
+  });
 });

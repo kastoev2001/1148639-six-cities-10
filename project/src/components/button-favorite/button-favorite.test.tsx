@@ -9,45 +9,45 @@ import { AuthorizationStatus, ButtonFavoriteConfig } from '../../const';
 const mockStore = configureMockStore();
 
 describe('Component: ButtonFavorite.', () => {
-	it('Should render correctly if needed for the card', () => {
-		const store = mockStore({
-			user: {authorizationStatus: AuthorizationStatus.Auth},
-		});
-		const buttonCardClass = `${ButtonFavoriteConfig.Card.className}-button`
+  it('Should render correctly if needed for the card', () => {
+    const store = mockStore({
+      user: { authorizationStatus: AuthorizationStatus.Auth },
+    });
+    const buttonCardClass = `${ButtonFavoriteConfig.Card.className}-button`;
 
-		render(
-			<Provider store={store}>
-				<BrowserRouter>
-					<ButtonFavorite
-						id={1}
-						isFavorite={false}
-						buttonFavorite={ButtonFavoriteConfig.Card}
-					/>
-				</BrowserRouter>
-			</Provider>
-		);
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <ButtonFavorite
+            id={1}
+            isFavorite={false}
+            buttonFavorite={ButtonFavoriteConfig.Card}
+          />
+        </BrowserRouter>
+      </Provider>
+    );
 
-		expect(screen.getByRole('button').classList.contains(buttonCardClass));
-	});
+    expect(screen.getByRole('button').classList.contains(buttonCardClass)).toBe(true);
+  });
 
-	it('Should render correctly if needed for the propety.', () => {
-		const store = mockStore({
-			user: {authorizationStatus: AuthorizationStatus.Auth},
-		});
-		const buttonPropetyClass = `${ButtonFavoriteConfig.Propety.className}-button`
+  it('Should render correctly if needed for the propety.', () => {
+    const store = mockStore({
+      user: { authorizationStatus: AuthorizationStatus.Auth },
+    });
+    const buttonPropetyClass = `${ButtonFavoriteConfig.Propety.className}-button`;
 
-		render(
-			<Provider store={store}>
-				<BrowserRouter>
-					<ButtonFavorite
-						id={1}
-						isFavorite={false}
-						buttonFavorite={ButtonFavoriteConfig.Propety}
-					/>
-				</BrowserRouter>
-			</Provider>
-		);
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <ButtonFavorite
+            id={1}
+            isFavorite={false}
+            buttonFavorite={ButtonFavoriteConfig.Propety}
+          />
+        </BrowserRouter>
+      </Provider>
+    );
 
-		expect(screen.getByRole('button').classList.contains(buttonPropetyClass));
-	});
+    expect(screen.getByRole('button').classList.contains(buttonPropetyClass)).toBe(true);
+  });
 });

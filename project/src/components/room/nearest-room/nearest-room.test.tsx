@@ -13,20 +13,20 @@ const nearbyOffer = mockOffers[2];
 const mockStore = configureMockStore();
 
 describe('Component: NearestRoom', () => {
-	it('Should render currently', () => {
-		const store = mockStore({
-			user: { authorizationStatus: AuthorizationStatus.Auth },
-			offers: { offers: mockOffers }
-		})
+  it('Should render currently', () => {
+    const store = mockStore({
+      user: { authorizationStatus: AuthorizationStatus.Auth },
+      offers: { offers: mockOffers },
+    });
 
-		render(
-			<Provider store={store} >
-				<BrowserRouter>
-					<NearestRoom nearbyOffer={nearbyOffer} />
-				</BrowserRouter>
-			</Provider>
-		);
+    render(
+      <Provider store={store} >
+        <BrowserRouter>
+          <NearestRoom nearbyOffer={nearbyOffer} />
+        </BrowserRouter>
+      </Provider>
+    );
 
-		expect(screen.getByText(new RegExp(`${nearbyOffer.title}`, 'i'))).toBeInTheDocument();
-	})
-})
+    expect(screen.getByText(new RegExp(`${nearbyOffer.title}`, 'i'))).toBeInTheDocument();
+  });
+});

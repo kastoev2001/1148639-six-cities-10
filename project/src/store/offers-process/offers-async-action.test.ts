@@ -14,28 +14,28 @@ const mockOffers = getFakeOffers();
 const middleweres = [thunk.withExtraArgument(api)];
 
 const mockStore = configureMockStore<
-	State,
-	Action,
-	ThunkDispatch<State, typeof api, Action>
+  State,
+  Action,
+  ThunkDispatch<State, typeof api, Action>
 >(middleweres);
 
 describe('Async actions.', () => {
-	it('Should update propety offers when server return 200.', async () => {
-		const store = mockStore();
+  it('Should update propety offers when server return 200.', async () => {
+    const store = mockStore();
 
-		mockAPI
-			.onGet(APIRoute.Hotels)
-			.reply(200, { data: mockOffers });
+    mockAPI
+      .onGet(APIRoute.Hotels)
+      .reply(200, { data: mockOffers });
 
-		expect(store.getActions()).toEqual([]);
+    expect(store.getActions()).toEqual([]);
 
-		await store.dispatch(fetchOffersAction());
+    await store.dispatch(fetchOffersAction());
 
-		const actions = store.getActions().map(({ type }) => type);
+    const actions = store.getActions().map(({ type }) => type);
 
-		expect(actions).toEqual([
-			fetchOffersAction.pending.type,
-			fetchOffersAction.fulfilled.type,
-		]);
-	});
+    expect(actions).toEqual([
+      fetchOffersAction.pending.type,
+      fetchOffersAction.fulfilled.type,
+    ]);
+  });
 });

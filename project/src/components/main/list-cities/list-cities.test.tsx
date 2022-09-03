@@ -11,25 +11,25 @@ const mockOffers = getFakeOffers();
 const mockStore = configureMockStore();
 
 describe('Component: ListCities', () => {
-	it('Should render currently', () => {
-		const activeCityClass = 'tabs__item--active';
-		const [firstCity, secondCity, thirdCity] = CITIES;
-		const store = mockStore({
-			user: { authorizationStatus: AuthorizationStatus.Auth },
-			offers: { offers: mockOffers }
-		})
+  it('Should render currently', () => {
+    const activeCityClass = 'tabs__item--active';
+    const [firstCity, secondCity, thirdCity] = CITIES;
+    const store = mockStore({
+      user: { authorizationStatus: AuthorizationStatus.Auth },
+      offers: { offers: mockOffers },
+    });
 
-		render(
-			<Provider store={store} >
-				<BrowserRouter>
-					<ListCities activeCity={firstCity} onCity={jest.fn()}/>
-				</BrowserRouter>
-			</Provider>
-		);
+    render(
+      <Provider store={store} >
+        <BrowserRouter>
+          <ListCities activeCity={firstCity} onCity={jest.fn()} />
+        </BrowserRouter>
+      </Provider>
+    );
 
-		expect(screen.getByText(new RegExp(`${firstCity}`, 'i'))).toBeInTheDocument();
-		expect(screen.getByText(new RegExp(`${secondCity}`, 'i'))).toBeInTheDocument();
-		expect(screen.getByText(new RegExp(`${thirdCity}`, 'i'))).toBeInTheDocument();
-		expect(screen.getAllByRole('link').some((link) => link.classList.contains(activeCityClass))).toBe(true);
-	})
-})
+    expect(screen.getByText(new RegExp(`${firstCity}`, 'i'))).toBeInTheDocument();
+    expect(screen.getByText(new RegExp(`${secondCity}`, 'i'))).toBeInTheDocument();
+    expect(screen.getByText(new RegExp(`${thirdCity}`, 'i'))).toBeInTheDocument();
+    expect(screen.getAllByRole('link').some((link) => link.classList.contains(activeCityClass))).toBe(true);
+  });
+});

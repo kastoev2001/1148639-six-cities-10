@@ -14,19 +14,19 @@ const city = cities[0];
 const mockStore = configureMockStore();
 
 describe('Component: ListFavoriteRoomsCity.', () => {
-	it('Should render currently.', () => {
-		const store = mockStore({
-			user: {authorizationStatus: AuthorizationStatus.Auth},
-		});
-		
-		render(
-			<Provider store={store}>
-				<BrowserRouter>
-				<ListFavoriteRoomsCity city={city}/>
-				</BrowserRouter>
-			</Provider>
-		);
-	
-		expect(screen.getByText(new RegExp(`${city.name}`, 'i'))).toBeInTheDocument();
-	});
+  it('Should render currently.', () => {
+    const store = mockStore({
+      user: { authorizationStatus: AuthorizationStatus.Auth },
+    });
+
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <ListFavoriteRoomsCity city={city} />
+        </BrowserRouter>
+      </Provider>
+    );
+
+    expect(screen.getByText(new RegExp(`${city.name}`, 'i'))).toBeInTheDocument();
+  });
 });

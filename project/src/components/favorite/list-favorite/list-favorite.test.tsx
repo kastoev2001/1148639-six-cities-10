@@ -14,21 +14,21 @@ const [firstCity, secondCity, thirdCity] = cities;
 const mockStore = configureMockStore();
 
 describe('Component: ListFavorite.', () => {
-	it('Should render currently.', () => {
-		const store = mockStore({
-			user: {authorizationStatus: AuthorizationStatus.Auth},
-		});
-		
-		render(
-			<Provider store={store}>
-				<BrowserRouter>
-				<ListFavorite cities={cities}/>
-				</BrowserRouter>
-			</Provider>
-		);
-	
-		expect(screen.getByText(new RegExp(`${firstCity.name}`, 'i'))).toBeInTheDocument();
-		expect(screen.getByText(new RegExp(`${secondCity.name}`, 'i'))).toBeInTheDocument();
-		expect(screen.getByText(new RegExp(`${thirdCity.name}`, 'i'))).toBeInTheDocument();
-	});
+  it('Should render currently.', () => {
+    const store = mockStore({
+      user: { authorizationStatus: AuthorizationStatus.Auth },
+    });
+
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <ListFavorite cities={cities} />
+        </BrowserRouter>
+      </Provider>
+    );
+
+    expect(screen.getByText(new RegExp(`${firstCity.name}`, 'i'))).toBeInTheDocument();
+    expect(screen.getByText(new RegExp(`${secondCity.name}`, 'i'))).toBeInTheDocument();
+    expect(screen.getByText(new RegExp(`${thirdCity.name}`, 'i'))).toBeInTheDocument();
+  });
 });
