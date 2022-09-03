@@ -37,9 +37,9 @@ export const getFakeOffers = () =>
 			name: name.title(),
 		},
 		id: ++index,
-		images: new Array(4).fill(null).map(() => image.image()),
+		images: new Array(8).fill(null).map((_arg, index:number) => `${index}${image.image()}`),
 		isFavorite: true,
-		isPremium: datatype.boolean(),
+		isPremium: true,
 		location: {
 			latitude: +address.latitude(),
 			longitude: +address.longitude(),
@@ -65,4 +65,3 @@ export const getFakeAuthData = (): AuthData => ({
 		login: internet.email(),
 		password: `${random.words(2)}${datatype.number(10)}`
 	});
-	

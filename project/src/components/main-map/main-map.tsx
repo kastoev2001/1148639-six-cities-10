@@ -6,11 +6,11 @@ import { Offer, Location } from '../../types/offers';
 import { CURRENT_CUSTOM_ICON, ACTIVE_CUSTOM_ICON } from '../../const';
 import { removeMarkers } from '../../utils/map';
 import { selectorGetLocationCity } from '../../store/selector';
-
-import 'leaflet/dist/leaflet.css';
 import { Offers } from '../../types/offers';
 import { ActiveCardRoomId } from '../../types/main';
 import { useAppSelector } from '../../hooks';
+
+import 'leaflet/dist/leaflet.css';
 
 type MainMapProps = {
   offers: Offers,
@@ -55,7 +55,11 @@ function MainMap(props: MainMapProps): JSX.Element {
   });
 
   return (
-    <div ref={mapRef} style={{ width: '100%', height: '100%' }}></div>
+    <div
+		ref={mapRef}
+		style={{ width: '100%', height: '100%' }}
+		data-testid="map-container"
+		></div>
   );
 }
 
