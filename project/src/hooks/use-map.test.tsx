@@ -1,18 +1,24 @@
-import MainMap from './main-map';
+import MainMap from '../components/main-map/main-map';
 
 import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import { getFakeOffers } from '../../utils/mocks';
+import {renderHook, act} from '@testing-library/react';
+import { getFakeOffers } from '../utils/mocks';
+import { MainMap } from 
 
 const mockOffers = getFakeOffers();
 
 
 const mockStore = configureMockStore();
 
-describe('Component: MainMap', () => {
+describe('Component: Header', () => {
   it('Should render currently', () => {
-    const activeCardRoomId = 2;
+		const {result} = renderHook(() =>{
+
+		})
+		
+		const activeCardRoomId = 2;
     const store = mockStore({
       offers: { offers: mockOffers },
       city: { activeCity: 'Paris' },
@@ -20,12 +26,10 @@ describe('Component: MainMap', () => {
 
     render(
       <Provider store={store} >
-          <MainMap offers={mockOffers} activeCardRoomId={activeCardRoomId} />
+          <MainMap activeCardRoomId={activeCardRoomId} offers={mockOffers}/>
       </Provider>
     );
 
-    const mapContainerElement = screen.getByTestId('map-container');
-
-    expect(mapContainerElement).toBeInTheDocument();
+    expect(screen.getByText(/Sign Out/i)).toBeInTheDocument();
   });
 });

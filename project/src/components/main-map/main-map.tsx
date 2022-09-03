@@ -1,4 +1,4 @@
-import useMap from '../../hooks/useMap';
+import useMap from '../../hooks/use-map';
 
 import { useRef, useEffect, memo } from 'react';
 import { Marker, LatLngLiteral, Layer } from 'leaflet';
