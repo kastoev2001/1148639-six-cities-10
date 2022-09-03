@@ -33,7 +33,7 @@ function FormComment({ offerId }: FormCommentProps): JSX.Element {
     setUserCommentText(() => comment);
   };
 
-	const handleInputChange = (ratingStatus: number) => () => setUserRating(() => ratingStatus)
+  const handleInputChange = (ratingStatus: number) => () => setUserRating(() => ratingStatus);
 
   const onSubmit = (newComment: NewComment): void => {
     dispath(postNewCommentAction({ id: offerId, newComment, }));
@@ -71,7 +71,7 @@ function FormComment({ offerId }: FormCommentProps): JSX.Element {
               id={`${ratingStatus}-stars`}
               type="radio"
               disabled={newCommentStatus.isLoaded}
-							data-testid="input"
+              data-testid="input"
             />
             <label
               htmlFor={`${ratingStatus}-stars`}

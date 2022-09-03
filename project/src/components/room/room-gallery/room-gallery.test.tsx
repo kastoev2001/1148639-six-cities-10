@@ -8,10 +8,10 @@ const mockOffers = getFakeOffers();
 const mockOffer = mockOffers[8];
 
 describe('Component: RoomGallery', () => {
-	it('Should render currently', () => {
+  it('Should render currently', () => {
 
-		render(<RoomGallery images={mockOffer.images}/>);
+    render(<RoomGallery images={mockOffer.images} />);
 
-		expect(screen.getAllByAltText(/Room/i)).toHaveLength(MAX_GALLERY_IMAGES);
-	})
-})
+    expect(screen.getAllByAltText(/Room/i)).toHaveLength(MAX_GALLERY_IMAGES);
+  });
+});

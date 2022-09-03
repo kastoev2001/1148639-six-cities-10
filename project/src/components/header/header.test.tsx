@@ -14,20 +14,20 @@ const mockUserEmail = getFakeUserEmail();
 const mockStore = configureMockStore();
 
 describe('Component: Header', () => {
-	it('Should render currently', () => {
-		const store = mockStore({
-			user: { authorizationStatus: AuthorizationStatus.Auth, userEmail: mockUserEmail },
-			offers: { offers: mockOffers }
-		})
+  it('Should render currently', () => {
+    const store = mockStore({
+      user: { authorizationStatus: AuthorizationStatus.Auth, userEmail: mockUserEmail },
+      offers: { offers: mockOffers },
+    });
 
-		render(
-			<Provider store={store} >
-				<BrowserRouter>
-					<Header />
-				</BrowserRouter>
-			</Provider>
-		);
+    render(
+      <Provider store={store} >
+        <BrowserRouter>
+          <Header />
+        </BrowserRouter>
+      </Provider>
+    );
 
-		expect(screen.getByText(/Sign Out/i)).toBeInTheDocument();
-	})
-})
+    expect(screen.getByText(/Sign Out/i)).toBeInTheDocument();
+  });
+});

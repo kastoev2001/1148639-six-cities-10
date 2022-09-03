@@ -19,71 +19,71 @@ const mackAuthData = getFakeAuthData();
 const middleweres = [thunk.withExtraArgument(api)];
 
 const mockStore = configureMockStore<
-	State,
-	Action,
-	ThunkDispatch<State, typeof api, Action>
+  State,
+  Action,
+  ThunkDispatch<State, typeof api, Action>
 >(middleweres);
 
 describe('Async actions.', () => {
-	it('Should check auth when server return 200.', async () => {
-		const store = mockStore();
+  it('Should check auth when server return 200.', async () => {
+    const store = mockStore();
 
-		mockAPI
-			.onGet(APIRoute.Login)
-			.reply(200, { data: mockUserEmail });
+    mockAPI
+      .onGet(APIRoute.Login)
+      .reply(200, { data: mockUserEmail });
 
-		expect(store.getActions()).toEqual([]);
+    expect(store.getActions()).toEqual([]);
 
-		await store.dispatch(checkAuthAction());
+    await store.dispatch(checkAuthAction());
 
-		const actions = store.getActions().map(({ type }) => type);
+    const actions = store.getActions().map(({ type }) => type);
 
-		expect(actions).toEqual([
-			checkAuthAction.pending.type,
-			checkAuthAction.fulfilled.type,
-		]);
-	});
+    expect(actions).toEqual([
+      checkAuthAction.pending.type,
+      checkAuthAction.fulfilled.type,
+    ]);
+  });
 
-	it('Should update propety userEmail when server return 200.', async () => {
-		const store = mockStore();
-		const {login, password } = mackAuthData;
-		
-		mockAPI
-			.onPost(APIRoute.Login, {email: login, password})
-			.reply(200, { data: mockUserEmail });
+  it('Should update propety userEmail when server return 200.', async () => {
+    const store = mockStore();
+    const { login, password } = mackAuthData;
 
-		expect(store.getActions()).toEqual([]);
+    mockAPI
+      .onPost(APIRoute.Login, { email: login, password })
+      .reply(200, { data: mockUserEmail });
 
-		await store.dispatch(loginAction(mackAuthData));
+    expect(store.getActions()).toEqual([]);
 
-		const actions = store.getActions().map(({ type }) => type);
+    await store.dispatch(loginAction(mackAuthData));
 
-		expect(actions).toEqual([
-			loginAction.pending.type,
-			loginAction.fulfilled.type,
-		]);
-	});
+    const actions = store.getActions().map(({ type }) => type);
 
-	it('Should logout app when server return 204.', async () => {
-		const store = mockStore();
+    expect(actions).toEqual([
+      loginAction.pending.type,
+      loginAction.fulfilled.type,
+    ]);
+  });
 
-		mockAPI
-			.onDelete(APIRoute.Logout)
-			.reply(204);
+  it('Should logout app when server return 204.', async () => {
+    const store = mockStore();
 
-		expect(store.getActions()).toEqual([]);
+    mockAPI
+      .onDelete(APIRoute.Logout)
+      .reply(204);
 
-		await store.dispatch(logoutAction());
+    expect(store.getActions()).toEqual([]);
 
-		const actions = store.getActions().map(({ type }) => type);
+    await store.dispatch(logoutAction());
 
-		expect(actions).toEqual([
-			logoutAction.pending.type,
-			resetOffers.toString(),
-			resetOffer.toString(),
-			resetFavoriteOffers.toString(),
-			resetNearbyOffers.toString(),
-			logoutAction.fulfilled.type,
-		]);
-	});
+    const actions = store.getActions().map(({ type }) => type);
+
+    expect(actions).toEqual([
+      logoutAction.pending.type,
+      resetOffers.toString(),
+      resetOffer.toString(),
+      resetFavoriteOffers.toString(),
+      resetNearbyOffers.toString(),
+      logoutAction.fulfilled.type,
+    ]);
+  });
 });

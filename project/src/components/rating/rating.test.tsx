@@ -6,16 +6,14 @@ import { getFakeOffers } from '../../utils/mocks';
 const mockOffers = getFakeOffers();
 const mockOffer = mockOffers[0];
 
-
-
 describe('Component: Rating', () => {
-	it('Should render currently', () => {
-		const { rating } = mockOffer
+  it('Should render currently', () => {
+    const { rating } = mockOffer;
 
-		render(<Rating rating={rating} />);
+    render(<Rating rating={rating} />);
 
-		const ratingElement = screen.getByTestId('rating');
+    const ratingElement = screen.getByTestId('rating');
 
-		expect(ratingElement).toBeInTheDocument();
-	})
-})
+    expect(ratingElement).toBeInTheDocument();
+  });
+});

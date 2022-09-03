@@ -9,21 +9,19 @@ import { BrowserRouter } from 'react-router-dom';
 const mockStore = configureMockStore();
 
 describe('Component: PrivateRoute', () => {
-	it('Should render currently', () => {
-		const store = mockStore({
-			user: { authorizationStatus: AuthorizationStatus.Auth},
-		})
+  it('Should render currently', () => {
+    const store = mockStore({
+      user: { authorizationStatus: AuthorizationStatus.Auth },
+    });
 
-		render(
-			<Provider store={store} >
-				<BrowserRouter>
-					<PrivateRoute>
-						<>Page is Favorite</>
-					</PrivateRoute>
-				</BrowserRouter>
-			</Provider>
-		);
+    render(
+      <Provider store={store} >
+        <BrowserRouter>
+          <PrivateRoute><p>Page is Favorite</p></PrivateRoute>
+        </BrowserRouter>
+      </Provider>
+    );
 
-		expect(screen.getByText(/Page is Favorite/i)).toBeInTheDocument();
-	})
-})
+    expect(screen.getByText(/Page is Favorite/i)).toBeInTheDocument();
+  });
+});

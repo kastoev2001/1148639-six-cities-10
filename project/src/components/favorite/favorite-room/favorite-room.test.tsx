@@ -11,36 +11,36 @@ const mockOffer = getFakeOffers()[0];
 const mockStore = configureMockStore();
 
 describe('Component: FavoriteRoom.', () => {
-	it('Should render ButtonFavorite', () => {
-		const store = mockStore({
-			user: {authorizationStatus: AuthorizationStatus.Auth},
-		});
-		const buttonCardClass = `${ButtonFavoriteConfig.Card.className}-button`
+  it('Should render ButtonFavorite', () => {
+    const store = mockStore({
+      user: { authorizationStatus: AuthorizationStatus.Auth },
+    });
+    const buttonCardClass = `${ButtonFavoriteConfig.Card.className}-button`;
 
-		render(
-			<Provider store={store}>
-				<BrowserRouter>
-					<FavoriteRoom room={mockOffer}/>
-				</BrowserRouter>
-			</Provider>
-		);
-		
-		expect(screen.getByRole('button').classList.contains(buttonCardClass));
-	});
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <FavoriteRoom room={mockOffer} />
+        </BrowserRouter>
+      </Provider>
+    );
 
-	it('Should render StatusRoom.', () => {
-		const store = mockStore({
-			user: {authorizationStatus: AuthorizationStatus.Auth},
-		});
+    expect(screen.getByRole('button').classList.contains(buttonCardClass)).toBe(true);
+  });
 
-		render(
-			<Provider store={store}>
-				<BrowserRouter>
-				<FavoriteRoom room={mockOffer}/>
-				</BrowserRouter>
-			</Provider>
-		);
+  it('Should render StatusRoom.', () => {
+    const store = mockStore({
+      user: { authorizationStatus: AuthorizationStatus.Auth },
+    });
 
-		expect(screen.getByText(/Premium/i)).toBeInTheDocument;
-	});
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <FavoriteRoom room={mockOffer} />
+        </BrowserRouter>
+      </Provider>
+    );
+
+    expect(screen.getByText(/Premium/i)).toBeInTheDocument();
+  });
 });

@@ -9,21 +9,21 @@ import { SortType } from '../../../const';
 const mockStore = configureMockStore();
 
 describe('Component: SortForm', () => {
-	it('Should render currently', () => {
-		const activeSortClass = 'places__option--active';
-		const store = mockStore({
-			main: { currentSortType: SortType.PriceHighToLow },
-		})
+  it('Should render currently', () => {
+    const activeSortClass = 'places__option--active';
+    const store = mockStore({
+      main: { currentSortType: SortType.PriceHighToLow },
+    });
 
-		render(
-			<Provider store={store} >
-				<SortForm />
-			</Provider>
-		);
+    render(
+      <Provider store={store} >
+        <SortForm />
+      </Provider>
+    );
 
-		const isActivePriceHighToLow = screen.getAllByText(new RegExp(`${SortType.PriceHighToLow}`, 'i'))
-			.some((element) => element.classList.contains(activeSortClass))
+    const isActivePriceHighToLow = screen.getAllByText(new RegExp(`${SortType.PriceHighToLow}`, 'i'))
+      .some((element) => element.classList.contains(activeSortClass));
 
-		expect(isActivePriceHighToLow).toBe(true);
-	})
-})
+    expect(isActivePriceHighToLow).toBe(true);
+  });
+});
