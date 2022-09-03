@@ -1,24 +1,22 @@
 import MainMap from '../components/main-map/main-map';
+import useMap from './use-map';
 
 import { Provider } from 'react-redux';
 import { render, screen } from '@testing-library/react';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import {renderHook, act} from '@testing-library/react';
 import { getFakeOffers } from '../utils/mocks';
-import { MainMap } from 
+import { Map } from 'leaflet';
 
 const mockOffers = getFakeOffers();
-
+const mockOffer = mockOffers[2]
 
 const mockStore = configureMockStore();
 
 describe('Component: Header', () => {
-  it('Should render currently', () => {
-		const {result} = renderHook(() =>{
-
-		})
-		
+  it('Should render currently', async () => {		
 		const activeCardRoomId = 2;
+		const location = mockOffer.city.location
     const store = mockStore({
       offers: { offers: mockOffers },
       city: { activeCity: 'Paris' },
@@ -30,6 +28,20 @@ describe('Component: Header', () => {
       </Provider>
     );
 
-    expect(screen.getByText(/Sign Out/i)).toBeInTheDocument();
+		const mapRef = {
+			current: screen.getByTestId('map-container'),
+		};
+		const {result} = renderHook(async () => useMap(mapRef, location));
+
+		const map = await result.current;
+
+		if (map) {
+			expect(map.getZoom()).toBe(location.zoom);
+			expect(map.getCenter()).toEqual({lat: location.latitude, lng: location.longitude});
+
+			return;
+		}
+    
+		expect(map).toBeNull();
   });
 });

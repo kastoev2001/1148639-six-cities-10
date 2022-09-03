@@ -5,7 +5,7 @@ import { Location } from '../types/offers';
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
   location: Location | null
-): Map | null {
+): Promise<Map | null> {
   const [map, setMap] = useState<Map | null>(null);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ function useMap(
     }
   }, [map, mapRef, location]);
 
-  return map;
+  return Promise.resolve(map);
 }
 
 export default useMap;

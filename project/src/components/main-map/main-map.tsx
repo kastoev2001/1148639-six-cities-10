@@ -25,33 +25,36 @@ function MainMap(props: MainMapProps): JSX.Element {
 
   useEffect(() => {
     const markers: Layer[] = [];
-    if (map && locationCity) {
-      offers.forEach((offer: Offer) => {
-        const { latitude, longitude, zoom } = locationCity;
-        const location: Location = offer.location;
-        const markerOptions: LatLngLiteral = {
-          lat: location.latitude,
-          lng: location.longitude,
+    map
+      .then((map) => {
+        if (map && locationCity) {
+          offers.forEach((offer: Offer) => {
+            const { latitude, longitude, zoom } = locationCity;
+            const location: Location = offer.location;
+            const markerOptions: LatLngLiteral = {
+              lat: location.latitude,
+              lng: location.longitude,
+            };
+            const marker = new Marker(markerOptions);
+            const customIcon = offer.id === activeCardRoomId
+              ? ACTIVE_CUSTOM_ICON
+              : CURRENT_CUSTOM_ICON;
+    
+            markers.push(marker);
+    
+            marker.setIcon(customIcon);
+    
+            map.flyTo({ lat: latitude, lng: longitude }, zoom);
+            marker.addTo(map);
+          });
+        }
+    
+        return () => {
+          if (map) {
+            removeMarkers(map, markers);
+          }
         };
-        const marker = new Marker(markerOptions);
-        const customIcon = offer.id === activeCardRoomId
-          ? ACTIVE_CUSTOM_ICON
-          : CURRENT_CUSTOM_ICON;
-
-        markers.push(marker);
-
-        marker.setIcon(customIcon);
-
-        map.flyTo({ lat: latitude, lng: longitude }, zoom);
-        marker.addTo(map);
-      });
-    }
-
-    return () => {
-      if (map) {
-        removeMarkers(map, markers);
-      }
-    };
+      })
   });
 
   return (
