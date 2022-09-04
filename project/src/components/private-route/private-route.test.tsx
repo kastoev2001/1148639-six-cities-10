@@ -44,4 +44,5 @@ describe('Component: PrivateRoute', () => {
     expect(screen.getByPlaceholderText(/Email/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/Password/i)).toBeInTheDocument();
   });
+
 });

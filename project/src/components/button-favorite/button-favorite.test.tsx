@@ -31,6 +31,7 @@ describe('Component: ButtonFavorite.', () => {
     const isButtonCard = buttonElement.classList.contains(buttonCardClass);
 
     expect(isButtonCard).toBe(true);
+
   });
 
   it('Should render correctly if needed for the propety.', () => {
@@ -55,5 +56,6 @@ describe('Component: ButtonFavorite.', () => {
     const isButtonPropety = buttonElement.classList.contains(buttonPropetyClass);
 
     expect(isButtonPropety).toBe(true);
+
   });
 });

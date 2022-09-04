@@ -31,6 +31,7 @@ describe('Component: cardRoom', () => {
     const isButtonCard = buttonElement.classList.contains(buttonCardClass);
 
     expect(isButtonCard).toBe(true);
+
     expect(screen.getByText(/Premium/i)).toBeInTheDocument();
 
   });

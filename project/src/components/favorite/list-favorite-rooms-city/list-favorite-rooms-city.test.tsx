@@ -54,4 +54,5 @@ describe('Component: ListFavoriteRoomsCity.', () => {
 
     expect(screen.getByText(/Page is Main/i)).toBeInTheDocument();
   });
+
 });

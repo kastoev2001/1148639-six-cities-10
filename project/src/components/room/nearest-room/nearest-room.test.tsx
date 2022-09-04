@@ -30,5 +30,6 @@ describe('Component: NearestRoom', () => {
     const naerbyOfferElement = screen.getByText(new RegExp(`${nearbyOffer.title}`, 'i'));
 
     expect(naerbyOfferElement).toBeInTheDocument();
+
   });
 });

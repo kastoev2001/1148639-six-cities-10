@@ -14,6 +14,7 @@ describe('Component: Reivew', () => {
     const commentElement = screen.getByText(new RegExp(`${mockComment.comment}`, 'i'));
 
     expect(commentElement).toBeInTheDocument();
+
     expect(screen.getByText(new RegExp(/Rating/i))).toBeInTheDocument();
   });
 });

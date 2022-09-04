@@ -29,6 +29,7 @@ describe('Component: FavoriteRoom.', () => {
     const isButtonCard = buttonElement.classList.contains(buttonCardClass);
 
     expect(isButtonCard).toBe(true);
+
   });
 
   it('Should render StatusRoom.', () => {

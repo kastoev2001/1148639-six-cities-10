@@ -28,7 +28,6 @@ describe('Component: ListCities', () => {
       </Provider>
     );
 
-
     const cityLinks = screen.getAllByRole('link');
     const isCityAction = cityLinks.some((link) => link.classList.contains(activeCityClass));
 
@@ -69,5 +68,6 @@ describe('Component: ListCities', () => {
     expect(screen.getByText(new RegExp(`${firstCity}`, 'i'))).toBeInTheDocument();
     expect(screen.getByText(new RegExp(`${secondCity}`, 'i'))).toBeInTheDocument();
     expect(screen.getByText(new RegExp(`${thirdCity}`, 'i'))).toBeInTheDocument();
+
   });
 });

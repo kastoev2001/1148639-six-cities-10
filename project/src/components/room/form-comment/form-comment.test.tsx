@@ -40,6 +40,5 @@ describe('Component: FormComent', () => {
     expect(textareaElement).toBeInTheDocument();
     expect(ratings).toHaveLength(5);
     expect(buttonElement.disabled).toBe(true);
-
   });
 });

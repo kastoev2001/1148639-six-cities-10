@@ -24,6 +24,7 @@ describe('Component: SortForm', () => {
 
     const PriceHighToLows = screen.getAllByText(new RegExp(`${SortType.PriceHighToLow}`, 'i'));
     const isActivePriceHighToLow = PriceHighToLows
+
       .some((element) => element.classList.contains(activeSortClass));
 
     expect(isActivePriceHighToLow).toBe(true);
@@ -63,4 +64,5 @@ describe('Component: SortForm', () => {
     expect(isActiveListSortType).toBe(false);
 
   });
+
 });
