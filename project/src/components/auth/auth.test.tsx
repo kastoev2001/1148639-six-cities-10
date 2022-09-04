@@ -1,11 +1,12 @@
 import Auth from './auth';
 
 import { Provider } from 'react-redux';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import { AuthorizationStatus } from '../../const';
+import { AppRoute, AuthorizationStatus } from '../../const';
 import { render, screen } from '@testing-library/react';
 import { getFakeUserEmail, getFakeOffers } from '../../utils/mocks';
+import userEvent from '@testing-library/user-event';
 
 const mockStore = configureMockStore();
 const mockUserEmail = getFakeUserEmail();
@@ -44,5 +45,31 @@ describe('Component: Auth.', () => {
     );
 
     expect(screen.getByText(/Sign in/i)).toBeInTheDocument();
+  });
+
+  it('Should redirect by page "Favorites" when user click by link Avatar.', async () => {
+    const store = mockStore({
+      user: { authorizationStatus: AuthorizationStatus.Auth, userEmail: mockUserEmail },
+      offers: { offers: mockOffers, isOffersLaoded: false },
+    });
+
+    render(
+      <Provider store={store}>
+        <BrowserRouter>
+          <Routes>
+            <Route path={AppRoute.Favorites} element={<p>Page is Favorites</p>} />
+            <Route path={AppRoute.Favorites} element={<p>Page is Main</p>} />
+          </Routes>
+          <Auth />
+        </BrowserRouter>
+      </Provider>
+    );
+
+    expect(screen.getByText(new RegExp(`${mockUserEmail}`, 'i'))).toBeInTheDocument();
+    expect(screen.getByText(/Sign out/i)).toBeInTheDocument();
+
+    await userEvent.click(screen.getByTestId('avatar'));
+
+    expect(screen.getByText(/Page is Favorites/i)).toBeInTheDocument();
   });
 });

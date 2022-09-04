@@ -1,4 +1,4 @@
-import useMap from '../../hooks/useMap';
+import useMap from '../../hooks/use-map';
 
 import { useRef, useEffect, memo } from 'react';
 import { Marker, LatLngLiteral, Layer } from 'leaflet';
@@ -20,38 +20,41 @@ type MainMapProps = {
 function MainMap(props: MainMapProps): JSX.Element {
   const { offers, activeCardRoomId } = props;
   const locationCity = useAppSelector(selectorGetLocationCity);
-  const mapRef = useRef(null);
+  const mapRef = useRef<HTMLDivElement | null>(null);
   const map = useMap(mapRef, locationCity);
 
   useEffect(() => {
     const markers: Layer[] = [];
-    if (map && locationCity) {
-      offers.forEach((offer: Offer) => {
-        const { latitude, longitude, zoom } = locationCity;
-        const location: Location = offer.location;
-        const markerOptions: LatLngLiteral = {
-          lat: location.latitude,
-          lng: location.longitude,
+    map
+      .then((mapInstanse) => {
+        if (mapInstanse && locationCity) {
+          offers.forEach((offer: Offer) => {
+            const { latitude, longitude, zoom } = locationCity;
+            const location: Location = offer.location;
+            const markerOptions: LatLngLiteral = {
+              lat: location.latitude,
+              lng: location.longitude,
+            };
+            const marker = new Marker(markerOptions);
+            const customIcon = offer.id === activeCardRoomId
+              ? ACTIVE_CUSTOM_ICON
+              : CURRENT_CUSTOM_ICON;
+
+            markers.push(marker);
+
+            marker.setIcon(customIcon);
+
+            mapInstanse.flyTo({ lat: latitude, lng: longitude }, zoom);
+            marker.addTo(mapInstanse);
+          });
+        }
+
+        return () => {
+          if (mapInstanse) {
+            removeMarkers(mapInstanse, markers);
+          }
         };
-        const marker = new Marker(markerOptions);
-        const customIcon = offer.id === activeCardRoomId
-          ? ACTIVE_CUSTOM_ICON
-          : CURRENT_CUSTOM_ICON;
-
-        markers.push(marker);
-
-        marker.setIcon(customIcon);
-
-        map.flyTo({ lat: latitude, lng: longitude }, zoom);
-        marker.addTo(map);
       });
-    }
-
-    return () => {
-      if (map) {
-        removeMarkers(map, markers);
-      }
-    };
   });
 
   return (

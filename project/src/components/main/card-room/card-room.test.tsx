@@ -27,7 +27,11 @@ describe('Component: cardRoom', () => {
       </Provider>
     );
 
-    expect(screen.getByRole('button').classList.contains(buttonCardClass)).toBe(true);
+    const buttonElement = screen.getByRole('button');
+    const isButtonCard = buttonElement.classList.contains(buttonCardClass);
+
+    expect(isButtonCard).toBe(true);
+
     expect(screen.getByText(/Premium/i)).toBeInTheDocument();
 
   });

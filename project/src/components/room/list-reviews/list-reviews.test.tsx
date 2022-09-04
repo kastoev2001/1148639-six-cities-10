@@ -11,8 +11,12 @@ describe('Component: ListReviews', () => {
 
     render(<ListReviews comments={mockComments} />);
 
-    expect(screen.getByText(new RegExp(`${firstComment.comment}`, 'i'))).toBeInTheDocument();
-    expect(screen.getByText(new RegExp(`${secondComment.comment}`, 'i'))).toBeInTheDocument();
-    expect(screen.getByText(new RegExp(`${thirdComment.comment}`, 'i'))).toBeInTheDocument();
+    const firstCommentElement = screen.getByText(new RegExp(`${firstComment.comment}`, 'i'));
+    const secondCommentElement = screen.getByText(new RegExp(`${secondComment.comment}`, 'i'));
+    const thirdCommentElement = screen.getByText(new RegExp(`${thirdComment.comment}`, 'i'));
+
+    expect(firstCommentElement).toBeInTheDocument();
+    expect(secondCommentElement).toBeInTheDocument();
+    expect(thirdCommentElement).toBeInTheDocument();
   });
 });

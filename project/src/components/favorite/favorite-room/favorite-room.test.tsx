@@ -25,7 +25,11 @@ describe('Component: FavoriteRoom.', () => {
       </Provider>
     );
 
-    expect(screen.getByRole('button').classList.contains(buttonCardClass)).toBe(true);
+    const buttonElement = screen.getByRole('button');
+    const isButtonCard = buttonElement.classList.contains(buttonCardClass);
+
+    expect(isButtonCard).toBe(true);
+
   });
 
   it('Should render StatusRoom.', () => {
