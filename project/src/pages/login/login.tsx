@@ -7,7 +7,7 @@ import { loginAction } from '../../store/user-process/user-async-action';
 import { checkLoginFormValidity } from '../../utils/user';
 import { getAuthorizationStatus } from '../../store/user-process/user-selector';
 
-function LoginScreen(): JSX.Element {
+function Login(): JSX.Element {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   const loginRef = useRef<HTMLInputElement | null>(null);
@@ -90,4 +90,4 @@ function LoginScreen(): JSX.Element {
   );
 }
 
-export default LoginScreen;
+export default Login;

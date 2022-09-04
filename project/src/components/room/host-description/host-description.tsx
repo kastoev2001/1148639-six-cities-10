@@ -1,8 +1,8 @@
-type UserDescriptionProps = {
+type HostDescriptionProps = {
   description: string,
 }
 
-function UserDescription({ description }: UserDescriptionProps): JSX.Element {
+function HostDescription({ description }: HostDescriptionProps): JSX.Element {
   return (
     <div className="property__description">
       <p className="property__text">
@@ -12,4 +12,4 @@ function UserDescription({ description }: UserDescriptionProps): JSX.Element {
   );
 }
 
-export default UserDescription;
+export default HostDescription;

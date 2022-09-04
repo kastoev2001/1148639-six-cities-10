@@ -28,7 +28,7 @@ function NearestRoom({ nearbyOffer }: NearestRoomProps): JSX.Element {
     <article className="near-places__card place-card">
       {isPremium ? <StatusRoom /> : null}
       <div className="near-places__image-wrapper place-card__image-wrapper">
-        <img className="place-card__image" src={previewImage} width="260" height="200" alt="Place image" />
+        <img className="place-card__image" src={previewImage} width="260" height="200" alt={`Room ${id}`} />
       </div>
       <div className="place-card__info">
         <div className="place-card__price-wrapper">

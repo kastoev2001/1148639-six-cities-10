@@ -103,3 +103,5 @@ export const CommentLength = {
   MAX: 300,
   MIN: 50,
 };
+
+export const logoActiveClass = 'header__logo-link--active';

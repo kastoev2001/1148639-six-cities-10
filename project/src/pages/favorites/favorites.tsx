@@ -11,7 +11,7 @@ import { divideRoomsByCityName } from '../../utils/offers';
 import { useEffect } from 'react';
 import { fetchFavoriteOffersAction } from '../../store/favorites-process/favorites-async-action';
 
-function Favorite(): JSX.Element {
+function Favorites(): JSX.Element {
   const favoriteOffers = useAppSelector(getFavoriteOffers);
   const isFavoriteOffersLoaded = useAppSelector(getIsFavoriteOffersLoaded);
   const cities = divideRoomsByCityName(favoriteOffers);
@@ -52,4 +52,4 @@ function Favorite(): JSX.Element {
   );
 }
 
-export default Favorite;
+export default Favorites;

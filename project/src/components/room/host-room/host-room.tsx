@@ -1,5 +1,5 @@
 import UserStatus from '../user-status/user-status';
-import UserDescription from '../user-description/user-description';
+import HostDescription from '../host-description/host-description';
 
 import { Host } from '../../../types/offers';
 import { memo } from 'react';
@@ -28,7 +28,7 @@ function HostRoom({ host, description }: HostRoomProps): JSX.Element {
         </span>
         {isPro ? <UserStatus /> : null}
       </div>
-      {<UserDescription description={description} />}
+      {<HostDescription description={description} />}
     </div>
   );
 }

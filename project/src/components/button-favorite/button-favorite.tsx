@@ -6,12 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { memo } from 'react';
 
-type ButtonFavorite = typeof ButtonFavoriteConfig.Card | typeof ButtonFavoriteConfig.Propety;
-
 type ButtonFavoriteProps = {
   id: number
   isFavorite: boolean,
-  buttonFavorite: ButtonFavorite,
+  buttonFavorite: typeof ButtonFavoriteConfig.Card | typeof ButtonFavoriteConfig.Propety,
 };
 
 function ButtonFavorite(props: ButtonFavoriteProps): JSX.Element {

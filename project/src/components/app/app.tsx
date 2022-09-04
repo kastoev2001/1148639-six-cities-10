@@ -1,12 +1,12 @@
 import Main from '../../pages/main/main';
 import Login from '../../pages/login/login';
-import Favorite from '../../pages/favorites/favorites';
+import Favorites from '../../pages/favorites/favorites';
 import Room from '../../pages/room/room';
 import NotPage from '../../pages/not-page/not-page';
 import PrivateRoute from '../private-route/private-route';
 import Loading from '../../pages/loading/loading';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/index';
 import { isCheckedAuth } from '../../utils/user';
@@ -22,20 +22,18 @@ function App(): JSX.Element {
   }
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path={AppRoute.Root}>
-          <Route index element={<Main />} />
-          <Route path={AppRoute.Login} element={<Login />} />
-          <Route path={AppRoute.Favorites} element={<PrivateRoute><Favorite /></PrivateRoute>} />
-          <Route path={AppRoute.Offer}>
-            <Route index element={<NotPage />} />
-            <Route path=':id' element={<Room />} />
-          </Route>
-          <Route path='*' element={<NotPage />} />
+    <Routes>
+      <Route path={AppRoute.Root}>
+        <Route index element={<Main />} />
+        <Route path={AppRoute.Login} element={<Login />} />
+        <Route path={AppRoute.Favorites} element={<PrivateRoute><Favorites /></PrivateRoute>} />
+        <Route path={AppRoute.Offer}>
+          <Route index element={<NotPage />} />
+          <Route path=':id' element={<Room />} />
         </Route>
-      </Routes>
-    </BrowserRouter>
+        <Route path='*' element={<NotPage />} />
+      </Route>
+    </Routes>
   );
 }
 

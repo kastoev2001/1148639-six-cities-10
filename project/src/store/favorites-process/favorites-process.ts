@@ -35,6 +35,7 @@ export const favoritesProcess = createSlice({
         state.isFavoriteOffersLoaded = true;
       })
       .addCase(fetchFavoriteOffersAction.rejected, (state) => {
+        state.favoriteOffers = [];
         state.isFavoriteOffersLoaded = false;
       })
       .addCase(toggleFavoriteAction.fulfilled, (state, action) => {

@@ -2,7 +2,7 @@ import { ChangeEvent, useState, FormEvent, useEffect } from 'react';
 import { RatingStatus, FIRST_STATE_RATING, CommentLength } from '../../../const';
 import { NewComment } from '../../../types/new-comment-data';
 import { checkNewCommentValidity } from '../../../utils/user';
-import { postNewCommentAction } from '../../../store/new-comment-process/new-comment-async-aciton';
+import { postNewCommentAction } from '../../../store/new-comment-process/new-comment-async-action';
 import { useAppDispatch, useAppSelector } from '../../../hooks';
 import { getNewCommentStatus } from '../../../store/new-comment-process/new-comment-selector';
 import { Fragment } from 'react';
@@ -33,6 +33,8 @@ function FormComment({ offerId }: FormCommentProps): JSX.Element {
     setUserCommentText(() => comment);
   };
 
+  const handleInputChange = (ratingStatus: number) => () => setUserRating(() => ratingStatus);
+
   const onSubmit = (newComment: NewComment): void => {
     dispath(postNewCommentAction({ id: offerId, newComment, }));
   };
@@ -61,7 +63,7 @@ function FormComment({ offerId }: FormCommentProps): JSX.Element {
         {ratingStatusesSorted.map((ratingStatus, index) => (
           <Fragment key={ratingStatus}>
             <input
-              onChange={() => setUserRating(() => +ratingStatus)}
+              onChange={handleInputChange(+ratingStatus)}
               checked={+ratingStatus === userRating}
               className="form__rating-input visually-hidden"
               name="rating"
@@ -69,6 +71,7 @@ function FormComment({ offerId }: FormCommentProps): JSX.Element {
               id={`${ratingStatus}-stars`}
               type="radio"
               disabled={newCommentStatus.isLoaded}
+              data-testid="input"
             />
             <label
               htmlFor={`${ratingStatus}-stars`}

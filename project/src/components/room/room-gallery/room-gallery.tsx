@@ -10,7 +10,13 @@ function RoomGallery({ images }: RoomGalleryProps): JSX.Element {
   return (
     <div className="property__gallery-container container">
       <div className="property__gallery">
-        {images.slice(0, MAX_GALLERY_IMAGES).map((image: string): JSX.Element => <RoomImage key={image} image={image} />)}
+        {images.slice(0, MAX_GALLERY_IMAGES).map((image: string, index: number): JSX.Element => (
+          <RoomImage
+            key={image}
+            image={image}
+            id={index}
+          />
+        ))}
       </div>
     </div>
   );
