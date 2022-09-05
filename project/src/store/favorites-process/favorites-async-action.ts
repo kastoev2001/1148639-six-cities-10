@@ -17,7 +17,7 @@ export const toggleFavoriteAction = createAsyncThunk<
     extra: AxiosInstance,
   }
 >(
-  'favorite/toggleFavorite',
+  'data/toggleFavorite',
   async ({ offerId, status }, { extra: api, rejectWithValue }) => {
     const requestFavorite = `${APIRoute.Favorite}/${offerId}/${status}`;
 
@@ -41,7 +41,7 @@ export const fetchFavoriteOffersAction = createAsyncThunk<
     extra: AxiosInstance,
   }
 >(
-  'favorite/fetchFavoriteOffers',
+  'data/fetchFavoriteOffers',
   async (_arg, { extra: api, rejectWithValue }) => {
 
     try {

@@ -1,6 +1,7 @@
 import { date, datatype, internet, name, random, address, image } from 'faker';
 import { AuthData } from '../types/auth-data';
 import { UserEmail } from '../types/state';
+import { getRundomCity } from '../utils/city';
 
 export const getFakeComments = () =>
   new Array(7).fill(null).map((_arg, index: number) => ({
@@ -18,7 +19,7 @@ export const getFakeComments = () =>
 
 
 export const getFakeOffers = () =>
-  new Array(10).fill(null).map((_arg, index: number) => ({
+  new Array(25).fill(null).map((_arg, index: number) => ({
     bedrooms: datatype.number(5),
     city: {
       location: {
@@ -26,7 +27,7 @@ export const getFakeOffers = () =>
         longitude: datatype.number(),
         zoom: datatype.number(10),
       },
-      name: address.cityName(),
+      name: getRundomCity(),
     },
     description: random.words(25),
     goods: new Array(4).fill(null).map(() => random.word()),

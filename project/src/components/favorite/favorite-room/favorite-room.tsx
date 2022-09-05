@@ -26,7 +26,10 @@ function FavoriteRoom({ room }: FavoriteRoomProps): JSX.Element {
   const definedRating = defineRating(rating);
 
   return (
-    <article className="favorites__card place-card">
+    <article
+      className="favorites__card place-card"
+      data-testid="favorite-card"
+    >
       {isPremium ? <StatusRoom /> : null}
       <div className="favorites__image-wrapper place-card__image-wrapper">
         <img className="place-card__image" src={previewImage} width="150" height="110" alt={`Room ${id}`} />

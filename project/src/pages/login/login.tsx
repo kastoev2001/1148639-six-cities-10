@@ -48,7 +48,11 @@ function Login(): JSX.Element {
         <div className="container">
           <div className="header__wrapper">
             <div className="header__left">
-              <NavLink to={AppRoute.Root} className="header__logo-link">
+              <NavLink
+                to={AppRoute.Root}
+                className="header__logo-link"
+                data-testid="logo"
+              >
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
               </NavLink>
             </div>

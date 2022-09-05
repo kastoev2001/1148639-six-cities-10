@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { getFakeOffers } from '../../utils/mocks';
 import { AppRoute, AuthorizationStatus, SortType } from '../../const';
-import { render, screen } from '../../utils/test';
+import { render, screen } from '../../utils/test-router';
 
 const mockOffers = getFakeOffers();
 

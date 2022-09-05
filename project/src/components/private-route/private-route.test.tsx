@@ -3,7 +3,7 @@ import Favorites from '../../pages/favorites/favorites';
 import Login from '../../pages/login/login';
 
 import { Provider } from 'react-redux';
-import { render, screen } from '../../utils/test';
+import { render, screen } from '../../utils/test-router';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { Route, Routes } from 'react-router-dom';
@@ -44,5 +44,4 @@ describe('Component: PrivateRoute', () => {
     expect(screen.getByPlaceholderText(/Email/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/Password/i)).toBeInTheDocument();
   });
-
 });

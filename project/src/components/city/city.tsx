@@ -1,11 +1,9 @@
 import { NavLink } from 'react-router-dom';
-import { CITIES, AppRoute, FIRST_CITY } from '../../const';
-
+import { AppRoute, FIRST_CITY } from '../../const';
+import { getRundomCity } from '../../utils/city';
 
 function City(): JSX.Element {
-  const citiesCount = CITIES.length;
-  const rundomNumber = Math.floor(Math.random() * citiesCount);
-  const rundomCity = CITIES[rundomNumber];
+  const rundomCity = getRundomCity();
   const pathnameRoot = FIRST_CITY === rundomCity ? AppRoute.Root : `${AppRoute.Root}${rundomCity}`;
 
   return (
