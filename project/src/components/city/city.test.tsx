@@ -20,9 +20,9 @@ describe('Component: City.', () => {
     render(
       <Routes>
         <Route path={AppRoute.Root}>
-				<Route path=":city" element={<p>Page is Main</p>} />
-        <Route path={AppRoute.Login} element={<City />} />
-				</Route>
+          <Route path=":city" element={<p>Page is Main</p>} />
+          <Route path={AppRoute.Login} element={<City />} />
+        </Route>
       </Routes>,
       [AppRoute.Login]
     );
