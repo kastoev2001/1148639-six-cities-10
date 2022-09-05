@@ -16,7 +16,7 @@ describe('Application Routing.', () => {
     const store = mockStore({
       user: { authorizationStatus: AuthorizationStatus.Auth },
       offers: { offers: [], isOffersLoaded: false },
-      city: { aciveCity: 'Paris' },
+      city: { activeCity: 'Paris' },
       main: { currentSortType: SortType.Popular }
     });
 
@@ -35,7 +35,7 @@ describe('Application Routing.', () => {
     const store = mockStore({
       user: { authorizationStatus: AuthorizationStatus.NoAuth },
       offers: { offers: mockOffers, isOffersLoaded: false },
-      city: { aciveCity: 'Paris' },
+      city: { activeCity: 'Paris' },
       main: { currentSortType: SortType.Popular }
     });
 
@@ -46,16 +46,20 @@ describe('Application Routing.', () => {
       [AppRoute.Login]
     );
 
+    const labalEmailElement = screen.getByPlaceholderText(/Email/i);
+    const labalSignInElement = screen.getByPlaceholderText(/password/i);
+
+    expect(labalEmailElement).toBeInTheDocument();
+    expect(labalSignInElement).toBeInTheDocument();
 
     expect(screen.getAllByText(/Sign in/i)).toHaveLength(2);
-    expect(screen.getByText(/Amsterdam/i)).toBeInTheDocument();
   });
 
   it('Should render "NotPage" when user navigate to "/offer"', () => {
     const store = mockStore({
       user: { authorizationStatus: AuthorizationStatus.Auth },
       offers: { offers: mockOffers, isOffersLoaded: false },
-      city: { aciveCity: 'Paris' },
+      city: { activeCity: 'Paris' },
       main: { currentSortType: SortType.Popular },
       favorites: { favoriteOffers: mockOffers, isFavoriteOffersLoaded: false }
     });
@@ -65,23 +69,6 @@ describe('Application Routing.', () => {
         <App />
       </Provider>,
       [AppRoute.Offer]
-    );
-
-
-    expect(screen.getByText(/Перейти к главной странице/i)).toBeInTheDocument();
-  });
-
-  it('Should render "NotPage" when user navigate to wrong route"', () => {
-    const store = mockStore({
-      user: { authorizationStatus: AuthorizationStatus.Auth },
-      offers: { offers: mockOffers, isOffersLoaded: false },
-    });
-
-    render(
-      <Provider store={store}>
-        <App />
-      </Provider>,
-      [`${AppRoute.Root}qwerqwerqwerqwer`]
     );
 
 

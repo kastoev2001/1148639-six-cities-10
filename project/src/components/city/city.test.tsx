@@ -17,11 +17,12 @@ describe('Component: City.', () => {
   });
 
   it('Should redirect by page "Main" when user click by link city.', async () => {
-    const pathnameRoot = `${AppRoute.Root}/:id`;
     render(
       <Routes>
-        <Route path={pathnameRoot} element={<p>Page is Main</p>} />
+        <Route path={AppRoute.Root}>
+				<Route path=":city" element={<p>Page is Main</p>} />
         <Route path={AppRoute.Login} element={<City />} />
+				</Route>
       </Routes>,
       [AppRoute.Login]
     );

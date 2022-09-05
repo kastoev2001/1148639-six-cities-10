@@ -1,3 +1,5 @@
+import City from '../../components/city/city';
+
 import { AppRoute, AuthorizationStatus } from '../../const';
 import { NavLink, Navigate } from 'react-router-dom';
 import { AuthData } from '../../types/auth-data';
@@ -49,8 +51,7 @@ function Login(): JSX.Element {
           <div className="header__wrapper">
             <div className="header__left">
               <NavLink
-                to={AppRoute.Root}
-                className="header__logo-link"
+                to={AppRoute.Root} className="header__logo-link"
                 data-testid="logo"
               >
                 <img className="header__logo" src="img/logo.svg" alt="6 cities logo" width="81" height="41" />
@@ -83,9 +84,9 @@ function Login(): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <NavLink to={AppRoute.Root} className="locations__item-link">
-                <span>Amsterdam</span>
-              </NavLink>
+
+              <City />
+
             </div>
           </section>
         </div>

@@ -25,13 +25,14 @@ function App(): JSX.Element {
     <Routes>
       <Route path={AppRoute.Root}>
         <Route index element={<Main />} />
+        <Route path=":city" element={<Main />} />
         <Route path={AppRoute.Login} element={<Login />} />
         <Route path={AppRoute.Favorites} element={<PrivateRoute><Favorites /></PrivateRoute>} />
         <Route path={AppRoute.Offer}>
           <Route index element={<NotPage />} />
-          <Route path=':id' element={<Room />} />
+          <Route path=":id" element={<Room />} />
         </Route>
-        <Route path='*' element={<NotPage />} />
+        <Route path="*" element={<NotPage />} />
       </Route>
     </Routes>
   );

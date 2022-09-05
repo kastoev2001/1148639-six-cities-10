@@ -18,7 +18,10 @@ export const cityData = createSlice({
       const city: string = action.payload;
       state.activeCity = city;
     },
+    resetCity: (state) => {
+      state.activeCity = FIRST_CITY;
+    }
   },
 });
 
-export const { changeCity } = cityData.actions;
+export const { changeCity, resetCity } = cityData.actions;
