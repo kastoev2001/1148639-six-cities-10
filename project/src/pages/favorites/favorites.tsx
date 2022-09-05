@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { getFavoriteOffers, getIsFavoriteOffersLoaded } from '../../store/favorites-process/favorites-selector';
 import { useAppSelector, useAppDispatch } from '../../hooks/index';
-import { divideRoomsByCityName } from '../../utils/offers';
+import { divideRoomsByCityName } from '../../utils/offers/offers';
 import { useEffect } from 'react';
 import { fetchFavoriteOffersAction } from '../../store/favorites-process/favorites-async-action';
 

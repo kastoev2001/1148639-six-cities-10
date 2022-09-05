@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 
-import { Comment } from '../types/comments';
+import { Comment } from '../../types/comments';
 
 export const commentsSortHighTolow = (commentA: Comment, commentB: Comment): number => {
   const dateA = dayjs(commentA.date);

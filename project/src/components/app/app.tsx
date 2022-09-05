@@ -9,7 +9,7 @@ import Loading from '../../pages/loading/loading';
 import { Routes, Route } from 'react-router-dom';
 import { AppRoute } from '../../const';
 import { useAppSelector } from '../../hooks/index';
-import { isCheckedAuth } from '../../utils/user';
+import { isCheckedAuth } from '../../utils/user/user';
 import { getIsOffersLoaded } from '../../store/offers-process/offers-selector';
 import { getAuthorizationStatus } from '../../store/user-process/user-selector';
 

@@ -1,6 +1,6 @@
-import { Offers, Offer } from '../types/offers';
-import { MAX_RATING, SortType } from '../const';
-import { Cities, Room, City } from '../types/cities';
+import { Offers, Offer } from '../../types/offers';
+import { MAX_RATING, SortType } from '../../const';
+import { Cities, Room, City } from '../../types/cities';
 
 const offersSortHighTolow = (offerA: Offer, offerB: Offer): number =>
   offerB.price - offerA.price;

@@ -12,7 +12,7 @@ import Header from '../../components/header/header';
 
 import { AuthorizationStatus, ButtonFavoriteConfig } from '../../const';
 import { useParams } from 'react-router-dom';
-import { defineRating } from '../../utils/offers';
+import { defineRating } from '../../utils/offers/offers';
 import FormComment from '../../components/room/form-comment/form-comment';
 import { useEffect } from 'react';
 import { fetchOfferAction } from '../../store/offer-process/offer-async-action';

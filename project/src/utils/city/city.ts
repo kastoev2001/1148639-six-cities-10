@@ -1,4 +1,4 @@
-import { CITIES } from '../const';
+import { CITIES } from '../../const';
 
 export const getRundomCity = (): string =>
   CITIES[Math.floor(CITIES.length * Math.random())];

@@ -4,7 +4,7 @@ import { APIRoute } from '../../const';
 import { Comments } from '../../types/comments';
 import { NewComment } from '../../types/new-comment-data';
 import { AppDispatch, State } from '../../types/state';
-import { notifyUserOfAnError } from '../../utils/user';
+import { notifyUserOfAnError } from '../../utils/user/user';
 
 export const postNewCommentAction = createAsyncThunk<
   Comments | AxiosError,

@@ -1,8 +1,8 @@
 import { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
-import { AuthorizationStatus, CommentLength } from '../const';
-import { isLoginCheck, isPasswordCheck } from './commands';
-import { StateCodeMapping } from '../const';
+import { AuthorizationStatus, CommentLength } from '../../const';
+import { isLoginCheck, isPasswordCheck } from '../commands/commands';
+import { StateCodeMapping } from '../../const';
 
 export const chouldDisplayError = (response: AxiosResponse): boolean => StateCodeMapping[response.status];
 

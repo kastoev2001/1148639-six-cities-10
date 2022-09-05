@@ -1,7 +1,7 @@
 import { favoritesProcess, resetFavoriteOffers } from './favorites-process';
 import { getFakeOffers } from '../../utils/mocks';
 import { fetchFavoriteOffersAction, toggleFavoriteAction } from './favorites-async-action';
-import { removeOffer, replaceOffer } from '../../utils/offers';
+import { removeOffer, replaceOffer } from '../../utils/offers/offers';
 import { Offer } from '../../types/offers';
 
 const mockFavoriteOffers = getFakeOffers().map((offer: Offer) => {

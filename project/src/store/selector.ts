@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 import { State } from '../types/state';
 import { Offers, Offer, } from '../types/offers';
-import { filterOffersByCity, sortOffers } from '../utils/offers';
+import { filterOffersByCity, sortOffers } from '../utils/offers/offers';
 
 export const selectorGetLocationCity = createSelector(
   (state: State) => state,

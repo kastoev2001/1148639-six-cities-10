@@ -6,7 +6,7 @@ import { AuthData } from '../../types/auth-data';
 import { FormEvent, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../hooks/index';
 import { loginAction } from '../../store/user-process/user-async-action';
-import { checkLoginFormValidity } from '../../utils/user';
+import { checkLoginFormValidity } from '../../utils/user/user';
 import { getAuthorizationStatus } from '../../store/user-process/user-selector';
 
 function Login(): JSX.Element {

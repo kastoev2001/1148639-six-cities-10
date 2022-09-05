@@ -2,7 +2,7 @@ import ListFavoriteRoomsCity from './list-favorite-rooms-city';
 
 import { render, screen } from '@testing-library/react';
 import { AppRoute, AuthorizationStatus } from '../../../const';
-import { divideRoomsByCityName } from '../../../utils/offers';
+import { divideRoomsByCityName } from '../../../utils/offers/offers';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { configureMockStore } from '@jedmao/redux-mock-store';

@@ -4,7 +4,7 @@ import { useRef, useEffect, memo } from 'react';
 import { Marker, LatLngLiteral, Layer } from 'leaflet';
 import { Offer, Location } from '../../types/offers';
 import { CURRENT_CUSTOM_ICON, ACTIVE_CUSTOM_ICON } from '../../const';
-import { removeMarkers } from '../../utils/map';
+import { removeMarkers } from '../../utils/map/map';
 import { selectorGetLocationCity } from '../../store/selector';
 import { Offers } from '../../types/offers';
 import { ActiveCardRoomId } from '../../types/main';

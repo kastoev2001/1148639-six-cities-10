@@ -3,7 +3,7 @@ import { NameSpace } from '../../const';
 import { Offers, Offer } from '../../types/offers';
 import { fetchNearbyOffersAction } from './nearby-offers-async-action';
 import { toggleFavoriteAction } from '../favorites-process/favorites-async-action';
-import { replaceOffer } from '../../utils/offers';
+import { replaceOffer } from '../../utils/offers/offers';
 
 type InitialState = {
   nearbyOffers: Offers,

@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { AppRoute, FIRST_CITY } from '../../const';
-import { getRundomCity } from '../../utils/city';
+import { getRundomCity } from '../../utils/city/city';
 
 function City(): JSX.Element {
   const rundomCity = getRundomCity();

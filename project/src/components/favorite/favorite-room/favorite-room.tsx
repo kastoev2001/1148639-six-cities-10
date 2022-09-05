@@ -4,7 +4,7 @@ import StatusRoom from '../status-room/status-room';
 import { NavLink } from 'react-router-dom';
 import { AppRoute, ButtonFavoriteConfig } from '../../../const';
 import { Room } from '../../../types/cities';
-import { defineRating } from '../../../utils/offers';
+import { defineRating } from '../../../utils/offers/offers';
 
 type FavoriteRoomProps = {
   room: Room,

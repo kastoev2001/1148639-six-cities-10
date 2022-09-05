@@ -4,7 +4,7 @@ import { APIRoute } from '../../const';
 import { Offers } from '../../types/offers';
 import { AppDispatch } from '../../types/state';
 import { State } from '../../types/state';
-import { notifyUserOfAnError } from '../../utils/user';
+import { notifyUserOfAnError } from '../../utils/user/user';
 
 export const fetchNearbyOffersAction = createAsyncThunk<
   Offers | AxiosError,

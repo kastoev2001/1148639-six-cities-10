@@ -13,7 +13,7 @@ import { getActiveCity } from '../../store/city-data/city-selector';
 import { ActiveCardRoomId } from '../../types/main';
 import { useParams } from 'react-router-dom';
 import { FIRST_CITY } from '../../const';
-import { findCity } from '../../utils/city';
+import { findCity } from '../../utils/city/city';
 import NotPage from '../not-page/not-page';
 
 

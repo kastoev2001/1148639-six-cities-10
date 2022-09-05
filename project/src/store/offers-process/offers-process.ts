@@ -3,7 +3,7 @@ import { Offer, Offers } from '../../types/offers';
 import { NameSpace } from '../../const';
 import { fetchOffersAction } from './offers-async-action';
 import { toggleFavoriteAction } from '../favorites-process/favorites-async-action';
-import { replaceOffer } from '../../utils/offers';
+import { replaceOffer } from '../../utils/offers/offers';
 type InitialState = {
   offers: Offers,
   isOffersLoaded: boolean,

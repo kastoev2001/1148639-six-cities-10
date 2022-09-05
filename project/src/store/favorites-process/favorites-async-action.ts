@@ -3,7 +3,7 @@ import { AxiosError, AxiosInstance } from 'axios';
 import { APIRoute } from '../../const';
 import { Offer, Offers } from '../../types/offers';
 import { AppDispatch, State } from '../../types/state';
-import { notifyUserOfAnError } from '../../utils/user';
+import { notifyUserOfAnError } from '../../utils/user/user';
 
 export const toggleFavoriteAction = createAsyncThunk<
   Offer | AxiosError,

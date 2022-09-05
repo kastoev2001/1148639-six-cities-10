@@ -6,7 +6,7 @@ import { getFakeOffers } from '../../../utils/mocks';
 import { Provider } from 'react-redux';
 import { AuthorizationStatus } from '../../../const';
 import { BrowserRouter } from 'react-router-dom';
-import { divideRoomsByCityName } from '../../../utils/offers';
+import { divideRoomsByCityName } from '../../../utils/offers/offers';
 
 const mockOffers = getFakeOffers();
 const cities = divideRoomsByCityName(mockOffers);

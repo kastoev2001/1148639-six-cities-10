@@ -4,7 +4,7 @@ import { Offers } from '../../types/offers';
 import { AxiosError, AxiosInstance } from 'axios';
 import { State } from '../../types/state';
 import { APIRoute } from '../../const';
-import { notifyUserOfAnError } from '../../utils/user';
+import { notifyUserOfAnError } from '../../utils/user/user';
 
 export const fetchOffersAction = createAsyncThunk<
   Offers | AxiosError,

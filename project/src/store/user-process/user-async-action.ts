@@ -11,7 +11,7 @@ import { resetOffer } from '../offer-process/offer-process';
 import { resetFavoriteOffers } from '../favorites-process/favorites-process';
 import { resetNearbyOffers } from '../nearby-offers-process/nearby-offers-process';
 import { AxiosError } from 'axios';
-import { notifyUserOfAnError } from '../../utils/user';
+import { notifyUserOfAnError } from '../../utils/user/user';
 
 export const checkAuthAction = createAsyncThunk<
   string, void,

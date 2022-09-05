@@ -2,7 +2,7 @@ import { nearbyOffersProcess, resetNearbyOffers } from './nearby-offers-process'
 import { getFakeOffers } from '../../utils/mocks';
 import { fetchNearbyOffersAction } from './nearby-offers-async-action';
 import { toggleFavoriteAction } from '../favorites-process/favorites-async-action';
-import { replaceOffer } from '../../utils/offers';
+import { replaceOffer } from '../../utils/offers/offers';
 import { Offer } from '../../types/offers';
 
 const mockOffers = getFakeOffers();
