@@ -1,7 +1,7 @@
 import SignIn from './sign-in';
 
-import { render, screen } from '@testing-library/react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { render, screen } from '../../utils/test-router';
+import { Routes, Route } from 'react-router-dom';
 import { } from '@jedmao/redux-mock-store';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import Login from '../../pages/login/login';
@@ -15,9 +15,7 @@ describe('Component: SignIn.', () => {
   it('Should render correctly', () => {
 
     render(
-      <BrowserRouter>
-        <SignIn />
-      </BrowserRouter>
+      <SignIn />
     );
 
     expect(screen.getByText(/Sign in/i)).toBeInTheDocument();
@@ -30,13 +28,12 @@ describe('Component: SignIn.', () => {
 
     render(
       <Provider store={store}>
-        <BrowserRouter>
-          <Routes>
-            <Route path={AppRoute.Login} element={<Login />} />
-          </Routes>
-          <SignIn />
-        </BrowserRouter>
-      </Provider>
+        <Routes>
+          <Route path={AppRoute.Login} element={<Login />} />
+          <Route path={AppRoute.Root} element={<SignIn />} />
+        </Routes>,
+      </Provider>,
+      [AppRoute.Root]
     );
 
     const linkElement = screen.getByText(/Sign in/i);

@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import { render, screen, renderHook } from '@testing-library/react';
 import { configureMockStore } from '@jedmao/redux-mock-store';
 import { getFakeOffers } from '../utils/mocks';
-import { Map } from 'leaflet';
 import { MutableRefObject } from 'react';
 
 const mockOffers = getFakeOffers();
@@ -35,6 +34,6 @@ describe('Component: Header', () => {
 
     const map = await result.current as null;
 
-    expect(map).toBeNull();;
+    expect(map).toBeNull();
   });
 });

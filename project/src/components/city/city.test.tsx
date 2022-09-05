@@ -2,16 +2,14 @@ import City from './city';
 
 import userEvent from '@testing-library/user-event';
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { render, screen } from '@testing-library/react';
+import { Routes, Route } from 'react-router-dom';
+import { render, screen } from '../../utils//test-router';
 import { AppRoute } from '../../const';
 
 describe('Component: City.', () => {
   it('Should render currently.', () => {
     render(
-      <BrowserRouter>
-        <City />
-      </BrowserRouter>
+      <City />
     );
     const linkCityElement = screen.getByTestId(/link-city/i);
 
@@ -21,12 +19,11 @@ describe('Component: City.', () => {
   it('Should redirect by page "Main" when user click by link city.', async () => {
     const pathnameRoot = `${AppRoute.Root}/:id`;
     render(
-      <BrowserRouter>
-        <Routes>
-          <Route path={pathnameRoot} element={<p>Page is Main</p>} />
-        </Routes>
-        <City />
-      </BrowserRouter>
+      <Routes>
+        <Route path={pathnameRoot} element={<p>Page is Main</p>} />
+        <Route path={AppRoute.Login} element={<City />} />
+      </Routes>,
+      [AppRoute.Login]
     );
 
     const linkCityElement = screen.getByTestId(/link-city/i);

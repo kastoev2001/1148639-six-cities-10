@@ -23,9 +23,9 @@ describe('Component: MainEmpty.', () => {
       </Provider>
     );
 
-    expect(screen.getByText(/Cities/i)).toBe(true);
-    expect(screen.getByText(/No places to stay available/i)).toBe(true);
-    expect(screen.getByText(/We could not find any property available at the moment in Dusseldorf/i)).toBe(true);
+    expect(screen.getByText(/Cities/i)).toBeInTheDocument();
+    expect(screen.getByText(/No places to stay available/i)).toBeInTheDocument();
+    expect(screen.getByText(/We could not find any property available at the moment in Dusseldorf/i)).toBeInTheDocument();
   });
 
   it('Should redirect by page "main" when user click by link avatar.', async () => {
@@ -43,9 +43,9 @@ describe('Component: MainEmpty.', () => {
       [AppRoute.Root]
     );
 
-    expect(screen.getByText(/Cities/i)).toBe(true);
-    expect(screen.getByText(/No places to stay available/i)).toBe(true);
-    expect(screen.getByText(/We could not find any property available at the moment in Dusseldorf/i)).toBe(true);
+    expect(screen.getByText(/Cities/i)).toBeInTheDocument();
+    expect(screen.getByText(/No places to stay available/i)).toBeInTheDocument();
+    expect(screen.getByText(/We could not find any property available at the moment in Dusseldorf/i)).toBeInTheDocument();
 
     const avatar = screen.getByText(/Sign in/i);
 
