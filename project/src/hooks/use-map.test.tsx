@@ -2,9 +2,8 @@ import MainMap from '../components/main-map/main-map';
 import useMap from './use-map';
 
 import { Provider } from 'react-redux';
-import { render, screen } from '@testing-library/react';
+import { render, screen, renderHook } from '@testing-library/react';
 import { configureMockStore } from '@jedmao/redux-mock-store';
-import { renderHook } from '@testing-library/react';
 import { getFakeOffers } from '../utils/mocks';
 import { Map } from 'leaflet';
 import { MutableRefObject } from 'react';
@@ -32,11 +31,10 @@ describe('Component: Header', () => {
     const mapRef: MutableRefObject<HTMLDivElement> = {
       current: screen.getByTestId('map-container'),
     };
-    const { result } = renderHook(async () => useMap(mapRef, location));
+    const { result } = renderHook(() => useMap(mapRef, location));
 
-    const map = await result.current as Map;
+    const map = await result.current as null;
 
-    expect(map.getZoom()).toBe(location.zoom);
-    expect(map.getCenter()).toEqual({ lat: location.latitude, lng: location.longitude });
+    expect(map).toBeNull();;
   });
 });
