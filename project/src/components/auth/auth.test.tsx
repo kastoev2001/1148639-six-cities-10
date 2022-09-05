@@ -58,7 +58,7 @@ describe('Component: Auth.', () => {
         <BrowserRouter>
           <Routes>
             <Route path={AppRoute.Favorites} element={<p>Page is Favorites</p>} />
-            <Route path={AppRoute.Favorites} element={<p>Page is Main</p>} />
+            <Route path={AppRoute.Root} element={<p>Page is Main</p>} />
           </Routes>
           <Auth />
         </BrowserRouter>
